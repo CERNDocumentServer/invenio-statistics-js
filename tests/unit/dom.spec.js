@@ -21,10 +21,16 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+ import { test_DOM } from '../../src/index.js';
+
 'use strict';
 
-describe('Mock testing', function() {
+describe('DOM testing', function() {
   var flag;
+
+  beforeEach(function() {
+    var el = test_DOM();
+  });
 
   it('should always be true', function() {
     flag = true;

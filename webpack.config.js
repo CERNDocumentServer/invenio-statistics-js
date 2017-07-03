@@ -8,19 +8,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/src'
   },
-  // plugins: [
-  //   new webpack.HotModuleReplacementPlugin() // Enable HMR
-  // ],
-  // devServer: {
-    // hot: true, // Use HMR while serving
-    // contentBase: path.resolve(__dirname, 'dist'),
-    // publicPath: '/src'
-  // },
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -37,6 +30,15 @@ module.exports = {
           } , {
             loader: 'sass-loader' // compiles Sass to CSS
           }]
+        },
+        {
+          test: /\.js$/,
+          enforce: 'post',
+          use: {
+            loader: 'istanbul-instrumenter-loader',
+            options: { esModules: true }
+          },
+          exclude: /node_modules|\.spec\.js$/,
         }
       ]
     }

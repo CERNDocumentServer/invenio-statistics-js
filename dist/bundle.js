@@ -68,39 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-__webpack_require__(1);
-
-var _d = __webpack_require__(6);
-
-var d3 = _interopRequireWildcard(_d);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-/* test DOM manipulation */
-function test_DOM() {
-  var el = document.getElementsByTagName('body')[0];
-  var para = document.createElement('p');
-  para.appendChild(document.createTextNode('This is a test'));
-  el.appendChild(para);
-  return el;
-}
-
-/* test D3.js */
-function test_d3() {
-  var svg = d3.select('.test').append('svg').attr('width', 100).attr('height', 50).append('circle').attr('cx', 50).attr('cy', 30).attr('r', 10).attr('fill', 'orange');
-
-  return svg;
-}
-
-test_DOM();
-test_d3();
-
-module.exports = {
-  test_DOM: test_DOM,
-  test_d3: test_d3
-};
+var cov_226e6em2=function(){var path='/home/gandrou/Desktop/invenio-statistics-js/src/index.js',hash='32248cc897304e5ce0aa4ee87196418d186efab9',global=new Function('return this')(),gcv='__coverage__',coverageData={path:'/home/gandrou/Desktop/invenio-statistics-js/src/index.js',statementMap:{'0':{start:{line:3,column:0},end:{line:3,column:24}},'1':{start:{line:5,column:9},end:{line:5,column:22}},'2':{start:{line:7,column:9},end:{line:7,column:36}},'3':{start:{line:9,column:40},end:{line:9,column:267}},'4':{start:{line:9,column:69},end:{line:9,column:80}},'5':{start:{line:9,column:103},end:{line:9,column:105}},'6':{start:{line:9,column:107},end:{line:9,column:228}},'7':{start:{line:9,column:126},end:{line:9,column:226}},'8':{start:{line:9,column:149},end:{line:9,column:224}},'9':{start:{line:9,column:201},end:{line:9,column:224}},'10':{start:{line:9,column:229},end:{line:9,column:250}},'11':{start:{line:9,column:251},end:{line:9,column:265}},'12':{start:{line:13,column:11},end:{line:13,column:51}},'13':{start:{line:14,column:13},end:{line:14,column:40}},'14':{start:{line:15,column:2},end:{line:15,column:62}},'15':{start:{line:16,column:2},end:{line:16,column:23}},'16':{start:{line:17,column:2},end:{line:17,column:12}},'17':{start:{line:22,column:12},end:{line:22,column:166}},'18':{start:{line:24,column:2},end:{line:24,column:13}},'19':{start:{line:27,column:0},end:{line:30,column:2}}},fnMap:{'0':{name:'_interopRequireWildcard',decl:{start:{line:9,column:9},end:{line:9,column:32}},loc:{start:{line:9,column:38},end:{line:9,column:269}},line:9},'1':{name:'test_DOM',decl:{start:{line:12,column:9},end:{line:12,column:17}},loc:{start:{line:12,column:20},end:{line:18,column:1}},line:12},'2':{name:'test_d3',decl:{start:{line:21,column:9},end:{line:21,column:16}},loc:{start:{line:21,column:19},end:{line:25,column:1}},line:21}},branchMap:{'0':{loc:{start:{line:9,column:40},end:{line:9,column:267}},type:'if',locations:[{start:{line:9,column:40},end:{line:9,column:267}},{start:{line:9,column:40},end:{line:9,column:267}}],line:9},'1':{loc:{start:{line:9,column:44},end:{line:9,column:65}},type:'binary-expr',locations:[{start:{line:9,column:44},end:{line:9,column:47}},{start:{line:9,column:51},end:{line:9,column:65}}],line:9},'2':{loc:{start:{line:9,column:107},end:{line:9,column:228}},type:'if',locations:[{start:{line:9,column:107},end:{line:9,column:228}},{start:{line:9,column:107},end:{line:9,column:228}}],line:9},'3':{loc:{start:{line:9,column:149},end:{line:9,column:224}},type:'if',locations:[{start:{line:9,column:149},end:{line:9,column:224}},{start:{line:9,column:149},end:{line:9,column:224}}],line:9}},s:{'0':0,'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'11':0,'12':0,'13':0,'14':0,'15':0,'16':0,'17':0,'18':0,'19':0},f:{'0':0,'1':0,'2':0},b:{'0':[0,0],'1':[0,0],'2':[0,0],'3':[0,0]},inputSourceMap:{version:3,sources:['src/index.js'],names:['d3','test_DOM','el','document','getElementsByTagName','para','createElement','appendChild','createTextNode','test_d3','svg','select','append','attr','module','exports'],mappings:';;AAAA;;AACA;;IAAYA,E;;;;AAEZ;AACA,SAASC,QAAT,GAAoB;AAClB,MAAIC,KAAKC,SAASC,oBAAT,CAA8B,MAA9B,EAAsC,CAAtC,CAAT;AACA,MAAIC,OAAOF,SAASG,aAAT,CAAuB,GAAvB,CAAX;AACAD,OAAKE,WAAL,CAAiBJ,SAASK,cAAT,CAAwB,gBAAxB,CAAjB;AACAN,KAAGK,WAAH,CAAeF,IAAf;AACA,SAAOH,EAAP;AACD;;AAED;AACA,SAASO,OAAT,GAAmB;AACjB,MAAIC,MAAMV,GAAGW,MAAH,CAAU,OAAV,EACPC,MADO,CACA,KADA,EAEPC,IAFO,CAEF,OAFE,EAEO,GAFP,EAGPA,IAHO,CAGF,QAHE,EAGQ,EAHR,EAILD,MAJK,CAIE,QAJF,EAKLC,IALK,CAKA,IALA,EAKM,EALN,EAMLA,IANK,CAMA,IANA,EAMM,EANN,EAOLA,IAPK,CAOA,GAPA,EAOK,EAPL,EAQLA,IARK,CAQA,MARA,EAQQ,QARR,CAAV;;AAUA,SAAOH,GAAP;AACD;;AAEDI,OAAOC,OAAP,GAAiB;AACfd,YAAWA,QADI;AAEfQ,WAAUA;AAFK,CAAjB',file:'index.js',sourceRoot:'/home/gandrou/Desktop/invenio-statistics-js',sourcesContent:['import \'./style.scss\'\nimport * as d3 from "d3";\n\n/* test DOM manipulation */\nfunction test_DOM() {\n  var el = document.getElementsByTagName(\'body\')[0];\n  var para = document.createElement(\'p\');\n  para.appendChild(document.createTextNode(\'This is a test\'));\n  el.appendChild(para);\n  return el;\n}\n\n/* test D3.js */\nfunction test_d3() {\n  var svg = d3.select(\'.test\')\n    .append(\'svg\')\n    .attr(\'width\', 100)\n    .attr(\'height\', 50)\n      .append(\'circle\')\n      .attr(\'cx\', 50)\n      .attr(\'cy\', 30)\n      .attr(\'r\', 10)\n      .attr(\'fill\', \'orange\')\n\n  return svg;\n}\n\nmodule.exports = {\n  test_DOM : test_DOM,\n  test_d3 : test_d3\n};\n']},_coverageSchema:'332fd63041d2c1bcb487cc26dd0d5f7d97098a6c'},coverage=global[gcv]||(global[gcv]={});if(coverage[path]&&coverage[path].hash===hash){return coverage[path];}coverageData.hash=hash;return coverage[path]=coverageData;}();++cov_226e6em2.s[0];__webpack_require__(1);var _d=(++cov_226e6em2.s[1],__webpack_require__(6));var d3=(++cov_226e6em2.s[2],_interopRequireWildcard(_d));function _interopRequireWildcard(obj){++cov_226e6em2.f[0];++cov_226e6em2.s[3];if((++cov_226e6em2.b[1][0],obj)&&(++cov_226e6em2.b[1][1],obj.__esModule)){++cov_226e6em2.b[0][0];++cov_226e6em2.s[4];return obj;}else{++cov_226e6em2.b[0][1];var newObj=(++cov_226e6em2.s[5],{});++cov_226e6em2.s[6];if(obj!=null){++cov_226e6em2.b[2][0];++cov_226e6em2.s[7];for(var key in obj){++cov_226e6em2.s[8];if(Object.prototype.hasOwnProperty.call(obj,key)){++cov_226e6em2.b[3][0];++cov_226e6em2.s[9];newObj[key]=obj[key];}else{++cov_226e6em2.b[3][1];}}}else{++cov_226e6em2.b[2][1];}++cov_226e6em2.s[10];newObj.default=obj;++cov_226e6em2.s[11];return newObj;}}/* test DOM manipulation */function test_DOM(){++cov_226e6em2.f[1];var el=(++cov_226e6em2.s[12],document.getElementsByTagName('body')[0]);var para=(++cov_226e6em2.s[13],document.createElement('p'));++cov_226e6em2.s[14];para.appendChild(document.createTextNode('This is a test'));++cov_226e6em2.s[15];el.appendChild(para);++cov_226e6em2.s[16];return el;}/* test D3.js */function test_d3(){++cov_226e6em2.f[2];var svg=(++cov_226e6em2.s[17],d3.select('.test').append('svg').attr('width',100).attr('height',50).append('circle').attr('cx',50).attr('cy',30).attr('r',10).attr('fill','orange'));++cov_226e6em2.s[18];return svg;}++cov_226e6em2.s[19];module.exports={test_DOM:test_DOM,test_d3:test_d3};
 
 /***/ }),
 /* 1 */
@@ -17557,3 +17525,4 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

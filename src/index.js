@@ -25,9 +25,6 @@ function test_d3() {
   return svg;
 }
 
-test_DOM();
-test_d3();
-
 module.exports = {
   test_DOM : test_DOM,
   test_d3 : test_d3

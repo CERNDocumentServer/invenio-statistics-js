@@ -1,6 +1,7 @@
 // Karma configuration
 // Generated on Fri Jun 30 2017 15:41:14 GMT+0200 (CEST)
 var webpackConfig = require('./webpack.config.js');
+const path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -15,15 +16,16 @@ module.exports = function(config) {
     plugins: [
       'karma-webpack',
       'karma-jasmine',
-      'karma-chrome-launcher',
       'karma-phantomjs-launcher',
-      'karma-coverage'
+      'karma-sourcemap-loader',
+      'karma-coverage',
+      'karma-coverage-istanbul-reporter'
     ],
 
     // list of files / patterns to load in the browser
     files: [
       { pattern: 'node_modules/d3/build/d3.js', watched: false},
-      { pattern: 'tests/**/*.spec.js', watched: false}
+      { pattern: 'tests/index.js', watched: false}
     ],
 
     // list of files to exclude
@@ -33,8 +35,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'dist/*.js': ['coverage'],
-      'tests/**/*.spec.js': ['webpack']
+      'tests/index.js': ['webpack', 'sourcemap']
     },
 
     // webpack config
@@ -43,7 +44,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage-istanbul'],
 
     // web server port
     port: 9876,
@@ -60,7 +61,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -76,9 +77,16 @@ module.exports = function(config) {
     },
 
     // Configure the reporter
-    coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
+    coverageIstanbulReporter: {
+      reports: ['html', 'lcovonly'],
+      dir: path.join(__dirname, 'coverage'),
+      fixWebpackSourcePaths: true,
+      skipFilesWithNoCoverage: true,
+      'report-config': {
+        html: {
+          subdir: 'html'
+        }
+      }
     }
   })
 }

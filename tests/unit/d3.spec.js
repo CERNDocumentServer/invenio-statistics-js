@@ -21,7 +21,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import {test_d3} from '../../src/index.js';
+import { test_d3 } from '../../src/index.js';
 
 'use strict';
 
