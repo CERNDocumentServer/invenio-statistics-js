@@ -1,0 +1,42 @@
+$linecolor: #4682b4;
+$axiscolor: #808080;
+$gridcolor: #d3d3d3;
+
+body {
+  font: 14px Roboto;
+}
+
+.line {
+  fill: none;
+  stroke: $linecolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.axis {
+  path,
+  line {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: axiscolor;
+    stroke-width: 1px;
+  }
+}
+
+.grid {
+  path {
+    stroke-width: 0;
+  }
+
+  line {
+    shape-rendering: crispEdges;
+    stroke: $gridcolor;
+  }
+
+  .tick {
+    opacity: .7;
+    stroke: $gridcolor;
+  }
+
+}

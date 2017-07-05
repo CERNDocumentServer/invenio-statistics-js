@@ -60,599 +60,11 @@
 /******/ 	__webpack_require__.p = "/src";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var cov_226e6em2=function(){var path='/home/gandrou/Desktop/invenio-statistics-js/src/index.js',hash='32248cc897304e5ce0aa4ee87196418d186efab9',global=new Function('return this')(),gcv='__coverage__',coverageData={path:'/home/gandrou/Desktop/invenio-statistics-js/src/index.js',statementMap:{'0':{start:{line:3,column:0},end:{line:3,column:24}},'1':{start:{line:5,column:9},end:{line:5,column:22}},'2':{start:{line:7,column:9},end:{line:7,column:36}},'3':{start:{line:9,column:40},end:{line:9,column:267}},'4':{start:{line:9,column:69},end:{line:9,column:80}},'5':{start:{line:9,column:103},end:{line:9,column:105}},'6':{start:{line:9,column:107},end:{line:9,column:228}},'7':{start:{line:9,column:126},end:{line:9,column:226}},'8':{start:{line:9,column:149},end:{line:9,column:224}},'9':{start:{line:9,column:201},end:{line:9,column:224}},'10':{start:{line:9,column:229},end:{line:9,column:250}},'11':{start:{line:9,column:251},end:{line:9,column:265}},'12':{start:{line:13,column:11},end:{line:13,column:51}},'13':{start:{line:14,column:13},end:{line:14,column:40}},'14':{start:{line:15,column:2},end:{line:15,column:62}},'15':{start:{line:16,column:2},end:{line:16,column:23}},'16':{start:{line:17,column:2},end:{line:17,column:12}},'17':{start:{line:22,column:12},end:{line:22,column:166}},'18':{start:{line:24,column:2},end:{line:24,column:13}},'19':{start:{line:27,column:0},end:{line:30,column:2}}},fnMap:{'0':{name:'_interopRequireWildcard',decl:{start:{line:9,column:9},end:{line:9,column:32}},loc:{start:{line:9,column:38},end:{line:9,column:269}},line:9},'1':{name:'test_DOM',decl:{start:{line:12,column:9},end:{line:12,column:17}},loc:{start:{line:12,column:20},end:{line:18,column:1}},line:12},'2':{name:'test_d3',decl:{start:{line:21,column:9},end:{line:21,column:16}},loc:{start:{line:21,column:19},end:{line:25,column:1}},line:21}},branchMap:{'0':{loc:{start:{line:9,column:40},end:{line:9,column:267}},type:'if',locations:[{start:{line:9,column:40},end:{line:9,column:267}},{start:{line:9,column:40},end:{line:9,column:267}}],line:9},'1':{loc:{start:{line:9,column:44},end:{line:9,column:65}},type:'binary-expr',locations:[{start:{line:9,column:44},end:{line:9,column:47}},{start:{line:9,column:51},end:{line:9,column:65}}],line:9},'2':{loc:{start:{line:9,column:107},end:{line:9,column:228}},type:'if',locations:[{start:{line:9,column:107},end:{line:9,column:228}},{start:{line:9,column:107},end:{line:9,column:228}}],line:9},'3':{loc:{start:{line:9,column:149},end:{line:9,column:224}},type:'if',locations:[{start:{line:9,column:149},end:{line:9,column:224}},{start:{line:9,column:149},end:{line:9,column:224}}],line:9}},s:{'0':0,'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0,'11':0,'12':0,'13':0,'14':0,'15':0,'16':0,'17':0,'18':0,'19':0},f:{'0':0,'1':0,'2':0},b:{'0':[0,0],'1':[0,0],'2':[0,0],'3':[0,0]},inputSourceMap:{version:3,sources:['src/index.js'],names:['d3','test_DOM','el','document','getElementsByTagName','para','createElement','appendChild','createTextNode','test_d3','svg','select','append','attr','module','exports'],mappings:';;AAAA;;AACA;;IAAYA,E;;;;AAEZ;AACA,SAASC,QAAT,GAAoB;AAClB,MAAIC,KAAKC,SAASC,oBAAT,CAA8B,MAA9B,EAAsC,CAAtC,CAAT;AACA,MAAIC,OAAOF,SAASG,aAAT,CAAuB,GAAvB,CAAX;AACAD,OAAKE,WAAL,CAAiBJ,SAASK,cAAT,CAAwB,gBAAxB,CAAjB;AACAN,KAAGK,WAAH,CAAeF,IAAf;AACA,SAAOH,EAAP;AACD;;AAED;AACA,SAASO,OAAT,GAAmB;AACjB,MAAIC,MAAMV,GAAGW,MAAH,CAAU,OAAV,EACPC,MADO,CACA,KADA,EAEPC,IAFO,CAEF,OAFE,EAEO,GAFP,EAGPA,IAHO,CAGF,QAHE,EAGQ,EAHR,EAILD,MAJK,CAIE,QAJF,EAKLC,IALK,CAKA,IALA,EAKM,EALN,EAMLA,IANK,CAMA,IANA,EAMM,EANN,EAOLA,IAPK,CAOA,GAPA,EAOK,EAPL,EAQLA,IARK,CAQA,MARA,EAQQ,QARR,CAAV;;AAUA,SAAOH,GAAP;AACD;;AAEDI,OAAOC,OAAP,GAAiB;AACfd,YAAWA,QADI;AAEfQ,WAAUA;AAFK,CAAjB',file:'index.js',sourceRoot:'/home/gandrou/Desktop/invenio-statistics-js',sourcesContent:['import \'./style.scss\'\nimport * as d3 from "d3";\n\n/* test DOM manipulation */\nfunction test_DOM() {\n  var el = document.getElementsByTagName(\'body\')[0];\n  var para = document.createElement(\'p\');\n  para.appendChild(document.createTextNode(\'This is a test\'));\n  el.appendChild(para);\n  return el;\n}\n\n/* test D3.js */\nfunction test_d3() {\n  var svg = d3.select(\'.test\')\n    .append(\'svg\')\n    .attr(\'width\', 100)\n    .attr(\'height\', 50)\n      .append(\'circle\')\n      .attr(\'cx\', 50)\n      .attr(\'cy\', 30)\n      .attr(\'r\', 10)\n      .attr(\'fill\', \'orange\')\n\n  return svg;\n}\n\nmodule.exports = {\n  test_DOM : test_DOM,\n  test_d3 : test_d3\n};\n']},_coverageSchema:'332fd63041d2c1bcb487cc26dd0d5f7d97098a6c'},coverage=global[gcv]||(global[gcv]={});if(coverage[path]&&coverage[path].hash===hash){return coverage[path];}coverageData.hash=hash;return coverage[path]=coverageData;}();++cov_226e6em2.s[0];__webpack_require__(1);var _d=(++cov_226e6em2.s[1],__webpack_require__(6));var d3=(++cov_226e6em2.s[2],_interopRequireWildcard(_d));function _interopRequireWildcard(obj){++cov_226e6em2.f[0];++cov_226e6em2.s[3];if((++cov_226e6em2.b[1][0],obj)&&(++cov_226e6em2.b[1][1],obj.__esModule)){++cov_226e6em2.b[0][0];++cov_226e6em2.s[4];return obj;}else{++cov_226e6em2.b[0][1];var newObj=(++cov_226e6em2.s[5],{});++cov_226e6em2.s[6];if(obj!=null){++cov_226e6em2.b[2][0];++cov_226e6em2.s[7];for(var key in obj){++cov_226e6em2.s[8];if(Object.prototype.hasOwnProperty.call(obj,key)){++cov_226e6em2.b[3][0];++cov_226e6em2.s[9];newObj[key]=obj[key];}else{++cov_226e6em2.b[3][1];}}}else{++cov_226e6em2.b[2][1];}++cov_226e6em2.s[10];newObj.default=obj;++cov_226e6em2.s[11];return newObj;}}/* test DOM manipulation */function test_DOM(){++cov_226e6em2.f[1];var el=(++cov_226e6em2.s[12],document.getElementsByTagName('body')[0]);var para=(++cov_226e6em2.s[13],document.createElement('p'));++cov_226e6em2.s[14];para.appendChild(document.createTextNode('This is a test'));++cov_226e6em2.s[15];el.appendChild(para);++cov_226e6em2.s[16];return el;}/* test D3.js */function test_d3(){++cov_226e6em2.f[2];var svg=(++cov_226e6em2.s[17],d3.select('.test').append('svg').attr('width',100).attr('height',50).append('circle').attr('cx',50).attr('cy',30).attr('r',10).attr('fill','orange'));++cov_226e6em2.s[18];return svg;}++cov_226e6em2.s[19];module.exports={test_DOM:test_DOM,test_d3:test_d3};
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(2);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(4)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./style.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".test {\n  color: #2f4f4f; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			memo[selector] = fn.call(this, selector);
-		}
-
-		return memo[selector]
-	};
-})(function (target) {
-	return document.querySelector(target)
-});
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(5);
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton) options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	options.attrs.type = "text/css";
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	options.attrs.type = "text/css";
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = options.transform(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://d3js.org Version 4.9.1. Copyright 2017 Mike Bostock.
@@ -17521,6 +16933,628 @@ exports.zoomIdentity = identity$8;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var cov_226e6em2=function(){var path='/home/gandrou/Desktop/invenio-statistics-js/src/index.js',hash='b5b9f67caf5402c5dbfdb2eef0fef8f0d284d19b',global=new Function('return this')(),gcv='__coverage__',coverageData={path:'/home/gandrou/Desktop/invenio-statistics-js/src/index.js',statementMap:{'0':{start:{line:3,column:12},end:{line:3,column:34}},'1':{start:{line:5,column:13},end:{line:5,column:42}},'2':{start:{line:7,column:0},end:{line:7,column:25}},'3':{start:{line:9,column:39},end:{line:9,column:93}},'4':{start:{line:11,column:13},end:{line:11,column:980}},'5':{start:{line:13,column:16},end:{line:13,column:959}},'6':{start:{line:15,column:13},end:{line:44,column:1}},'7':{start:{line:46,column:12},end:{line:46,column:38}},'8':{start:{line:47,column:0},end:{line:47,column:21}},'9':{start:{line:50,column:2},end:{line:50,column:26}},'10':{start:{line:53,column:0},end:{line:53,column:68}}},fnMap:{'0':{name:'_interopRequireDefault',decl:{start:{line:9,column:9},end:{line:9,column:31}},loc:{start:{line:9,column:37},end:{line:9,column:95}},line:9},'1':{name:'update',decl:{start:{line:49,column:9},end:{line:49,column:15}},loc:{start:{line:49,column:18},end:{line:51,column:1}},line:49}},branchMap:{'0':{loc:{start:{line:9,column:46},end:{line:9,column:92}},type:'cond-expr',locations:[{start:{line:9,column:70},end:{line:9,column:73}},{start:{line:9,column:76},end:{line:9,column:92}}],line:9},'1':{loc:{start:{line:9,column:46},end:{line:9,column:67}},type:'binary-expr',locations:[{start:{line:9,column:46},end:{line:9,column:49}},{start:{line:9,column:53},end:{line:9,column:67}}],line:9}},s:{'0':0,'1':0,'2':0,'3':0,'4':0,'5':0,'6':0,'7':0,'8':0,'9':0,'10':0},f:{'0':0,'1':0},b:{'0':[0,0],'1':[0,0]},inputSourceMap:{version:3,sources:['src/index.js'],names:['myData','date','value','myNewData','config','width','height','margin','top','right','bottom','left','axis','x','scale','label','ticks','visible','y','type','data','tooltip','title','legend','duration','graph','render','update','document','getElementById','addEventListener'],mappings:'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',file:'index.js',sourceRoot:'/home/gandrou/Desktop/invenio-statistics-js',sourcesContent:['import LineGraph from \'./line/line\';\nimport \'./styles.scss\';\n\nconst myData = [{ date: \'1-May-12\', value: 58.13 }, { date: \'30-Apr-12\', value: 53.98 }, { date: \'27-Apr-12\', value: 67 }, { date: \'26-Apr-12\', value: 89.7 }, { date: \'25-Apr-12\', value: 99 }, { date: \'24-Apr-12\', value: 130.28 }, { date: \'23-Apr-12\', value: 166.7 }, { date: \'20-Apr-12\', value: 234.98 }, { date: \'19-Apr-12\', value: 345.44 }, { date: \'18-Apr-12\', value: 443.34 }, { date: \'17-Apr-12\', value: 543.7 }, { date: \'16-Apr-12\', value: 580.13 }, { date: \'13-Apr-12\', value: 605.23 }, { date: \'12-Apr-12\', value: 622.77 }, { date: \'11-Apr-12\', value: 626.2 }, { date: \'10-Apr-12\', value: 628.44 }, { date: \'9-Apr-12\', value: 636.23 }, { date: \'5-Apr-12\', value: 633.68 }, { date: \'4-Apr-12\', value: 624.31 }, { date: \'3-Apr-12\', value: 629.32 }, { date: \'2-Apr-12\', value: 618.63 }, { date: \'30-Mar-12\', value: 599.55 }, { date: \'29-Mar-12\', value: 609.86 }, { date: \'28-Mar-12\', value: 617.62 }, { date: \'27-Mar-12\', value: 614.48 }, { date: \'26-Mar-12\', value: 606.98 }];\n\nconst myNewData = [{ date: \'10-May-12\', value: 99.55 }, { date: \'8-May-12\', value: 76.86 }, { date: \'6-May-12\', value: 67.62 }, { date: \'4-May-12\', value: 64.48 }, { date: \'2-May-12\', value: 60.98 }, { date: \'1-May-12\', value: 58.13 }, { date: \'30-Apr-12\', value: 53.98 }, { date: \'27-Apr-12\', value: 67 }, { date: \'26-Apr-12\', value: 89.7 }, { date: \'25-Apr-12\', value: 99 }, { date: \'24-Apr-12\', value: 90.28 }, { date: \'23-Apr-12\', value: 106.7 }, { date: \'20-Apr-12\', value: 94.98 }, { date: \'19-Apr-12\', value: 85.44 }, { date: \'18-Apr-12\', value: 73.34 }, { date: \'17-Apr-12\', value: 53.7 }, { date: \'16-Apr-12\', value: 50.13 }, { date: \'13-Apr-12\', value: 65.23 }, { date: \'12-Apr-12\', value: 62.77 }, { date: \'11-Apr-12\', value: 66.2 }, { date: \'10-Apr-12\', value: 68.44 }, { date: \'9-Apr-12\', value: 66.23 }, { date: \'5-Apr-12\', value: 63.68 }, { date: \'4-Apr-12\', value: 64.31 }, { date: \'3-Apr-12\', value: 69.32 }, { date: \'2-Apr-12\', value: 61.63 }];\n\nconst config = {\n  width: 800,\n  height: 400,\n  margin: {\n    top: 30,\n    right: 20,\n    bottom: 30,\n    left: 40\n  },\n  axis: {\n    x: {\n      scale: \'time\',\n      label: \'labelX\',\n      ticks: 5,\n      visible: true\n    },\n    y: {\n      scale: \'linear\',\n      label: \'labelY\',\n      ticks: 5,\n      visible: true\n    }\n  },\n  type: \'line\',\n  data: myData,\n  tooltip: false,\n  title: \'Sometitle\',\n  legend: false,\n  duration: 750\n};\n\nconst graph = new LineGraph(config);\ngraph.render(myData);\n\nfunction update() {\n  graph.update(myNewData);\n}\n\ndocument.getElementById(\'option\').addEventListener(\'click\', update);\n']},_coverageSchema:'332fd63041d2c1bcb487cc26dd0d5f7d97098a6c'},coverage=global[gcv]||(global[gcv]={});if(coverage[path]&&coverage[path].hash===hash){return coverage[path];}coverageData.hash=hash;return coverage[path]=coverageData;}();var _line=(++cov_226e6em2.s[0],__webpack_require__(2));var _line2=(++cov_226e6em2.s[1],_interopRequireDefault(_line));++cov_226e6em2.s[2];__webpack_require__(4);function _interopRequireDefault(obj){++cov_226e6em2.f[0];++cov_226e6em2.s[3];return(++cov_226e6em2.b[1][0],obj)&&(++cov_226e6em2.b[1][1],obj.__esModule)?(++cov_226e6em2.b[0][0],obj):(++cov_226e6em2.b[0][1],{default:obj});}var myData=(++cov_226e6em2.s[4],[{date:'1-May-12',value:58.13},{date:'30-Apr-12',value:53.98},{date:'27-Apr-12',value:67},{date:'26-Apr-12',value:89.7},{date:'25-Apr-12',value:99},{date:'24-Apr-12',value:130.28},{date:'23-Apr-12',value:166.7},{date:'20-Apr-12',value:234.98},{date:'19-Apr-12',value:345.44},{date:'18-Apr-12',value:443.34},{date:'17-Apr-12',value:543.7},{date:'16-Apr-12',value:580.13},{date:'13-Apr-12',value:605.23},{date:'12-Apr-12',value:622.77},{date:'11-Apr-12',value:626.2},{date:'10-Apr-12',value:628.44},{date:'9-Apr-12',value:636.23},{date:'5-Apr-12',value:633.68},{date:'4-Apr-12',value:624.31},{date:'3-Apr-12',value:629.32},{date:'2-Apr-12',value:618.63},{date:'30-Mar-12',value:599.55},{date:'29-Mar-12',value:609.86},{date:'28-Mar-12',value:617.62},{date:'27-Mar-12',value:614.48},{date:'26-Mar-12',value:606.98}]);var myNewData=(++cov_226e6em2.s[5],[{date:'10-May-12',value:99.55},{date:'8-May-12',value:76.86},{date:'6-May-12',value:67.62},{date:'4-May-12',value:64.48},{date:'2-May-12',value:60.98},{date:'1-May-12',value:58.13},{date:'30-Apr-12',value:53.98},{date:'27-Apr-12',value:67},{date:'26-Apr-12',value:89.7},{date:'25-Apr-12',value:99},{date:'24-Apr-12',value:90.28},{date:'23-Apr-12',value:106.7},{date:'20-Apr-12',value:94.98},{date:'19-Apr-12',value:85.44},{date:'18-Apr-12',value:73.34},{date:'17-Apr-12',value:53.7},{date:'16-Apr-12',value:50.13},{date:'13-Apr-12',value:65.23},{date:'12-Apr-12',value:62.77},{date:'11-Apr-12',value:66.2},{date:'10-Apr-12',value:68.44},{date:'9-Apr-12',value:66.23},{date:'5-Apr-12',value:63.68},{date:'4-Apr-12',value:64.31},{date:'3-Apr-12',value:69.32},{date:'2-Apr-12',value:61.63}]);var config=(++cov_226e6em2.s[6],{width:800,height:400,margin:{top:30,right:20,bottom:30,left:40},axis:{x:{scale:'time',label:'labelX',ticks:5,visible:true},y:{scale:'linear',label:'labelY',ticks:5,visible:true}},type:'line',data:myData,tooltip:false,title:'Sometitle',legend:false,duration:750});var graph=(++cov_226e6em2.s[7],new _line2.default(config));++cov_226e6em2.s[8];graph.render(myData);function update(){++cov_226e6em2.f[1];++cov_226e6em2.s[9];graph.update(myNewData);}++cov_226e6em2.s[10];document.getElementById('option').addEventListener('click',update);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var cov_22lde3vjzi=function(){var path="/home/gandrou/Desktop/invenio-statistics-js/src/line/line.js",hash="2492cf266ba1b01af81f6b78e2d8dd94fff20809",global=new Function('return this')(),gcv="__coverage__",coverageData={path:"/home/gandrou/Desktop/invenio-statistics-js/src/line/line.js",statementMap:{"0":{start:{line:3,column:0},end:{line:5,column:3}},"1":{start:{line:7,column:19},end:{line:7,column:563}},"2":{start:{line:7,column:76},end:{line:7,column:347}},"3":{start:{line:7,column:134},end:{line:7,column:142}},"4":{start:{line:7,column:144},end:{line:7,column:199}},"5":{start:{line:7,column:200},end:{line:7,column:231}},"6":{start:{line:7,column:232},end:{line:7,column:286}},"7":{start:{line:7,column:259},end:{line:7,column:286}},"8":{start:{line:7,column:287},end:{line:7,column:345}},"9":{start:{line:7,column:350},end:{line:7,column:559}},"10":{start:{line:7,column:407},end:{line:7,column:475}},"11":{start:{line:7,column:423},end:{line:7,column:475}},"12":{start:{line:7,column:476},end:{line:7,column:536}},"13":{start:{line:7,column:493},end:{line:7,column:536}},"14":{start:{line:7,column:537},end:{line:7,column:556}},"15":{start:{line:9,column:11},end:{line:9,column:490}},"16":{start:{line:9,column:54},end:{line:9,column:103}},"17":{start:{line:9,column:75},end:{line:9,column:103}},"18":{start:{line:9,column:115},end:{line:9,column:164}},"19":{start:{line:9,column:166},end:{line:9,column:488}},"20":{start:{line:9,column:205},end:{line:9,column:234}},"21":{start:{line:9,column:236},end:{line:9,column:327}},"22":{start:{line:9,column:259},end:{line:9,column:276}},"23":{start:{line:9,column:286},end:{line:9,column:325}},"24":{start:{line:9,column:335},end:{line:9,column:488}},"25":{start:{line:9,column:358},end:{line:9,column:376}},"26":{start:{line:9,column:399},end:{line:9,column:407}},"27":{start:{line:9,column:409},end:{line:9,column:456}},"28":{start:{line:9,column:437},end:{line:9,column:454}},"29":{start:{line:9,column:457},end:{line:9,column:486}},"30":{start:{line:11,column:9},end:{line:11,column:22}},"31":{start:{line:13,column:9},end:{line:13,column:36}},"32":{start:{line:15,column:13},end:{line:15,column:38}},"33":{start:{line:17,column:14},end:{line:17,column:44}},"34":{start:{line:19,column:39},end:{line:19,column:93}},"35":{start:{line:21,column:40},end:{line:21,column:267}},"36":{start:{line:21,column:69},end:{line:21,column:80}},"37":{start:{line:21,column:103},end:{line:21,column:105}},"38":{start:{line:21,column:107},end:{line:21,column:228}},"39":{start:{line:21,column:126},end:{line:21,column:226}},"40":{start:{line:21,column:149},end:{line:21,column:224}},"41":{start:{line:21,column:201},end:{line:21,column:224}},"42":{start:{line:21,column:229},end:{line:21,column:250}},"43":{start:{line:21,column:251},end:{line:21,column:265}},"44":{start:{line:23,column:50},end:{line:23,column:151}},"45":{start:{line:23,column:92},end:{line:23,column:149}},"46":{start:{line:25,column:50},end:{line:25,column:151}},"47":{start:{line:25,column:63},end:{line:25,column:149}},"48":{start:{line:25,column:152},end:{line:25,column:238}},"49":{start:{line:27,column:43},end:{line:27,column:208}},"50":{start:{line:27,column:106},end:{line:27,column:206}},"51":{start:{line:27,column:209},end:{line:27,column:373}},"52":{start:{line:27,column:374},end:{line:27,column:492}},"53":{start:{line:27,column:390},end:{line:27,column:492}},"54":{start:{line:33,column:16},end:{line:127,column:18}},"55":{start:{line:34,column:2},end:{line:34,column:31}},"56":{start:{line:37,column:4},end:{line:37,column:37}},"57":{start:{line:39,column:16},end:{line:39,column:126}},"58":{start:{line:41,column:4},end:{line:41,column:28}},"59":{start:{line:42,column:4},end:{line:42,column:17}},"60":{start:{line:45,column:2},end:{line:124,column:6}},"61":{start:{line:48,column:16},end:{line:48,column:124}},"62":{start:{line:50,column:14},end:{line:50,column:51}},"63":{start:{line:51,column:14},end:{line:51,column:54}},"64":{start:{line:52,column:17},end:{line:56,column:8}},"65":{start:{line:53,column:8},end:{line:53,column:25}},"66":{start:{line:55,column:8},end:{line:55,column:26}},"67":{start:{line:58,column:6},end:{line:61,column:9}},"68":{start:{line:59,column:8},end:{line:59,column:50}},"69":{start:{line:60,column:8},end:{line:60,column:27}},"70":{start:{line:64,column:23},end:{line:64,column:86}},"71":{start:{line:66,column:23},end:{line:66,column:83}},"72":{start:{line:68,column:6},end:{line:70,column:10}},"73":{start:{line:69,column:8},end:{line:69,column:22}},"74":{start:{line:71,column:6},end:{line:73,column:11}},"75":{start:{line:72,column:8},end:{line:72,column:23}},"76":{start:{line:75,column:18},end:{line:75,column:43}},"77":{start:{line:76,column:18},end:{line:76,column:41}},"78":{start:{line:78,column:6},end:{line:78,column:116}},"79":{start:{line:80,column:6},end:{line:80,column:61}},"80":{start:{line:82,column:6},end:{line:82,column:69}},"81":{start:{line:84,column:6},end:{line:84,column:113}},"82":{start:{line:88,column:6},end:{line:88,column:58}},"83":{start:{line:95,column:14},end:{line:95,column:51}},"84":{start:{line:96,column:14},end:{line:96,column:54}},"85":{start:{line:97,column:17},end:{line:101,column:8}},"86":{start:{line:98,column:8},end:{line:98,column:25}},"87":{start:{line:100,column:8},end:{line:100,column:26}},"88":{start:{line:103,column:6},end:{line:106,column:9}},"89":{start:{line:104,column:8},end:{line:104,column:50}},"90":{start:{line:105,column:8},end:{line:105,column:27}},"91":{start:{line:108,column:6},end:{line:110,column:10}},"92":{start:{line:109,column:8},end:{line:109,column:22}},"93":{start:{line:111,column:6},end:{line:113,column:11}},"94":{start:{line:112,column:8},end:{line:112,column:23}},"95":{start:{line:115,column:18},end:{line:115,column:43}},"96":{start:{line:116,column:18},end:{line:116,column:41}},"97":{start:{line:117,column:16},end:{line:117,column:45}},"98":{start:{line:119,column:6},end:{line:119,column:62}},"99":{start:{line:121,column:6},end:{line:121,column:54}},"100":{start:{line:122,column:6},end:{line:122,column:54}},"101":{start:{line:126,column:2},end:{line:126,column:19}},"102":{start:{line:129,column:0},end:{line:129,column:28}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:7,column:19},end:{line:7,column:20}},loc:{start:{line:7,column:31},end:{line:7,column:561}},line:7},"1":{name:"defineProperties",decl:{start:{line:7,column:42},end:{line:7,column:58}},loc:{start:{line:7,column:74},end:{line:7,column:349}},line:7},"2":{name:"(anonymous_2)",decl:{start:{line:7,column:357},end:{line:7,column:358}},loc:{start:{line:7,column:405},end:{line:7,column:558}},line:7},"3":{name:"get",decl:{start:{line:9,column:20},end:{line:9,column:23}},loc:{start:{line:9,column:52},end:{line:9,column:490}},line:9},"4":{name:"_interopRequireDefault",decl:{start:{line:19,column:9},end:{line:19,column:31}},loc:{start:{line:19,column:37},end:{line:19,column:95}},line:19},"5":{name:"_interopRequireWildcard",decl:{start:{line:21,column:9},end:{line:21,column:32}},loc:{start:{line:21,column:38},end:{line:21,column:269}},line:21},"6":{name:"_classCallCheck",decl:{start:{line:23,column:9},end:{line:23,column:24}},loc:{start:{line:23,column:48},end:{line:23,column:153}},line:23},"7":{name:"_possibleConstructorReturn",decl:{start:{line:25,column:9},end:{line:25,column:35}},loc:{start:{line:25,column:48},end:{line:25,column:240}},line:25},"8":{name:"_inherits",decl:{start:{line:27,column:9},end:{line:27,column:18}},loc:{start:{line:27,column:41},end:{line:27,column:494}},line:27},"9":{name:"(anonymous_9)",decl:{start:{line:33,column:16},end:{line:33,column:17}},loc:{start:{line:33,column:34},end:{line:127,column:1}},line:33},"10":{name:"LineGraph",decl:{start:{line:36,column:11},end:{line:36,column:20}},loc:{start:{line:36,column:29},end:{line:43,column:3}},line:36},"11":{name:"render",decl:{start:{line:47,column:20},end:{line:47,column:26}},loc:{start:{line:47,column:33},end:{line:91,column:5}},line:47},"12":{name:"(anonymous_12)",decl:{start:{line:52,column:53},end:{line:52,column:54}},loc:{start:{line:52,column:66},end:{line:54,column:7}},line:52},"13":{name:"(anonymous_13)",decl:{start:{line:54,column:11},end:{line:54,column:12}},loc:{start:{line:54,column:24},end:{line:56,column:7}},line:54},"14":{name:"(anonymous_14)",decl:{start:{line:58,column:19},end:{line:58,column:20}},loc:{start:{line:58,column:32},end:{line:61,column:7}},line:58},"15":{name:"(anonymous_15)",decl:{start:{line:68,column:31},end:{line:68,column:32}},loc:{start:{line:68,column:44},end:{line:70,column:7}},line:68},"16":{name:"(anonymous_16)",decl:{start:{line:71,column:32},end:{line:71,column:33}},loc:{start:{line:71,column:45},end:{line:73,column:7}},line:71},"17":{name:"update",decl:{start:{line:94,column:20},end:{line:94,column:26}},loc:{start:{line:94,column:33},end:{line:123,column:5}},line:94},"18":{name:"(anonymous_18)",decl:{start:{line:97,column:53},end:{line:97,column:54}},loc:{start:{line:97,column:66},end:{line:99,column:7}},line:97},"19":{name:"(anonymous_19)",decl:{start:{line:99,column:11},end:{line:99,column:12}},loc:{start:{line:99,column:24},end:{line:101,column:7}},line:99},"20":{name:"(anonymous_20)",decl:{start:{line:103,column:19},end:{line:103,column:20}},loc:{start:{line:103,column:32},end:{line:106,column:7}},line:103},"21":{name:"(anonymous_21)",decl:{start:{line:108,column:31},end:{line:108,column:32}},loc:{start:{line:108,column:44},end:{line:110,column:7}},line:108},"22":{name:"(anonymous_22)",decl:{start:{line:111,column:32},end:{line:111,column:33}},loc:{start:{line:111,column:45},end:{line:113,column:7}},line:111}},branchMap:{"0":{loc:{start:{line:7,column:168},end:{line:7,column:198}},type:"binary-expr",locations:[{start:{line:7,column:168},end:{line:7,column:189}},{start:{line:7,column:193},end:{line:7,column:198}}],line:7},"1":{loc:{start:{line:7,column:232},end:{line:7,column:286}},type:"if",locations:[{start:{line:7,column:232},end:{line:7,column:286}},{start:{line:7,column:232},end:{line:7,column:286}}],line:7},"2":{loc:{start:{line:7,column:407},end:{line:7,column:475}},type:"if",locations:[{start:{line:7,column:407},end:{line:7,column:475}},{start:{line:7,column:407},end:{line:7,column:475}}],line:7},"3":{loc:{start:{line:7,column:476},end:{line:7,column:536}},type:"if",locations:[{start:{line:7,column:476},end:{line:7,column:536}},{start:{line:7,column:476},end:{line:7,column:536}}],line:7},"4":{loc:{start:{line:9,column:54},end:{line:9,column:103}},type:"if",locations:[{start:{line:9,column:54},end:{line:9,column:103}},{start:{line:9,column:54},end:{line:9,column:103}}],line:9},"5":{loc:{start:{line:9,column:166},end:{line:9,column:488}},type:"if",locations:[{start:{line:9,column:166},end:{line:9,column:488}},{start:{line:9,column:166},end:{line:9,column:488}}],line:9},"6":{loc:{start:{line:9,column:236},end:{line:9,column:327}},type:"if",locations:[{start:{line:9,column:236},end:{line:9,column:327}},{start:{line:9,column:236},end:{line:9,column:327}}],line:9},"7":{loc:{start:{line:9,column:335},end:{line:9,column:488}},type:"if",locations:[{start:{line:9,column:335},end:{line:9,column:488}},{start:{line:9,column:335},end:{line:9,column:488}}],line:9},"8":{loc:{start:{line:9,column:409},end:{line:9,column:456}},type:"if",locations:[{start:{line:9,column:409},end:{line:9,column:456}},{start:{line:9,column:409},end:{line:9,column:456}}],line:9},"9":{loc:{start:{line:19,column:46},end:{line:19,column:92}},type:"cond-expr",locations:[{start:{line:19,column:70},end:{line:19,column:73}},{start:{line:19,column:76},end:{line:19,column:92}}],line:19},"10":{loc:{start:{line:19,column:46},end:{line:19,column:67}},type:"binary-expr",locations:[{start:{line:19,column:46},end:{line:19,column:49}},{start:{line:19,column:53},end:{line:19,column:67}}],line:19},"11":{loc:{start:{line:21,column:40},end:{line:21,column:267}},type:"if",locations:[{start:{line:21,column:40},end:{line:21,column:267}},{start:{line:21,column:40},end:{line:21,column:267}}],line:21},"12":{loc:{start:{line:21,column:44},end:{line:21,column:65}},type:"binary-expr",locations:[{start:{line:21,column:44},end:{line:21,column:47}},{start:{line:21,column:51},end:{line:21,column:65}}],line:21},"13":{loc:{start:{line:21,column:107},end:{line:21,column:228}},type:"if",locations:[{start:{line:21,column:107},end:{line:21,column:228}},{start:{line:21,column:107},end:{line:21,column:228}}],line:21},"14":{loc:{start:{line:21,column:149},end:{line:21,column:224}},type:"if",locations:[{start:{line:21,column:149},end:{line:21,column:224}},{start:{line:21,column:149},end:{line:21,column:224}}],line:21},"15":{loc:{start:{line:23,column:50},end:{line:23,column:151}},type:"if",locations:[{start:{line:23,column:50},end:{line:23,column:151}},{start:{line:23,column:50},end:{line:23,column:151}}],line:23},"16":{loc:{start:{line:25,column:50},end:{line:25,column:151}},type:"if",locations:[{start:{line:25,column:50},end:{line:25,column:151}},{start:{line:25,column:50},end:{line:25,column:151}}],line:25},"17":{loc:{start:{line:25,column:159},end:{line:25,column:237}},type:"cond-expr",locations:[{start:{line:25,column:226},end:{line:25,column:230}},{start:{line:25,column:233},end:{line:25,column:237}}],line:25},"18":{loc:{start:{line:25,column:159},end:{line:25,column:223}},type:"binary-expr",locations:[{start:{line:25,column:159},end:{line:25,column:163}},{start:{line:25,column:168},end:{line:25,column:192}},{start:{line:25,column:196},end:{line:25,column:222}}],line:25},"19":{loc:{start:{line:27,column:43},end:{line:27,column:208}},type:"if",locations:[{start:{line:27,column:43},end:{line:27,column:208}},{start:{line:27,column:43},end:{line:27,column:208}}],line:27},"20":{loc:{start:{line:27,column:47},end:{line:27,column:102}},type:"binary-expr",locations:[{start:{line:27,column:47},end:{line:27,column:79}},{start:{line:27,column:83},end:{line:27,column:102}}],line:27},"21":{loc:{start:{line:27,column:244},end:{line:27,column:278}},type:"binary-expr",locations:[{start:{line:27,column:244},end:{line:27,column:254}},{start:{line:27,column:258},end:{line:27,column:278}}],line:27},"22":{loc:{start:{line:27,column:374},end:{line:27,column:492}},type:"if",locations:[{start:{line:27,column:374},end:{line:27,column:492}},{start:{line:27,column:374},end:{line:27,column:492}}],line:27},"23":{loc:{start:{line:27,column:390},end:{line:27,column:491}},type:"cond-expr",locations:[{start:{line:27,column:414},end:{line:27,column:457}},{start:{line:27,column:460},end:{line:27,column:491}}],line:27},"24":{loc:{start:{line:39,column:50},end:{line:39,column:105}},type:"binary-expr",locations:[{start:{line:39,column:50},end:{line:39,column:69}},{start:{line:39,column:73},end:{line:39,column:105}}],line:39},"25":{loc:{start:{line:48,column:21},end:{line:48,column:96}},type:"binary-expr",locations:[{start:{line:48,column:21},end:{line:48,column:50}},{start:{line:48,column:54},end:{line:48,column:96}}],line:48}},s:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0},f:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0},b:{"0":[0,0],"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0,0],"19":[0,0],"20":[0,0],"21":[0,0],"22":[0,0],"23":[0,0],"24":[0,0],"25":[0,0]},inputSourceMap:{version:3,sources:["src/line/line.js"],names:["d3","LineGraph","config","console","log","type","data","svg","x","scaleTime","range","width","y","scaleLinear","height","line","curve","curveCardinal","d","date","value","forEach","timeParse","gridlinesX","axisBottom","ticks","tickFormat","tickSize","gridlinesY","axisLeft","domain","extent","max","xAxis","yAxis","append","attr","call","select","transition","duration"],mappings:"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",file:"line.js",sourceRoot:"/home/gandrou/Desktop/invenio-statistics-js",sourcesContent:["import * as d3 from 'd3';\nimport Graph from '../graph/graph';\n\n/**\n * Class representing a line graph.\n * @extends Graph\n */\nexport default class LineGraph extends Graph {\n\n  constructor(config) {\n    super(config);\n    console.log(this.type);\n  }\n\n  render(data) {\n    const svg = super.render();\n\n    const x = d3.scaleTime().range([0, this.width]);\n    const y = d3.scaleLinear().range([this.height, 0]);\n    const line = d3.line()\n      .curve(d3.curveCardinal)\n      .x(d => x(d.date))\n      .y(d => y(d.value));\n\n    data.forEach((d) => {\n      d.date = d3.timeParse('%d-%b-%y')(d.date);\n      d.value = +d.value;\n    });\n\n    // Gridlines\n    const gridlinesX = d3.axisBottom(x)\n      .ticks(5)\n      .tickFormat('')\n      .tickSize(-this.height);\n\n    const gridlinesY = d3.axisLeft(y)\n      .ticks(5)\n      .tickFormat('')\n      .tickSize(-this.width);\n\n    x.domain(d3.extent(data, d => d.date));\n    y.domain([0, d3.max(data, d => d.value)]);\n\n    const xAxis = d3.axisBottom(x).ticks(5);\n    const yAxis = d3.axisLeft(y).ticks(5);\n\n    svg.append('g')\n      .attr('transform', `translate(0, ${this.height})`)\n      .call(gridlinesX)\n      .attr('class', 'grid');\n\n    svg.append('g')\n      .call(gridlinesY)\n      .attr('class', 'grid');\n\n    svg.append('path')\n      .attr('class', 'line')\n      .attr('d', line(data));\n\n    svg.append('g')\n      .attr('transform', `translate(0, ${this.height})`)\n      .call(xAxis)\n      .attr('class', 'x axis');\n      // .select('.domain')\n      // .remove();\n\n    svg.append('g')\n      .call(yAxis)\n      .attr('class', 'y axis');\n      // .select('.domain')\n      // .remove();\n  }\n\n  update(data) {\n    const x = d3.scaleTime().range([0, this.width]);\n    const y = d3.scaleLinear().range([this.height, 0]);\n    const line = d3.line()\n      .curve(d3.curveCardinal)\n      .x(d => x(d.date))\n      .y(d => y(d.value));\n\n    data.forEach((d) => {\n      d.date = d3.timeParse('%d-%b-%y')(d.date);\n      d.value = +d.value;\n    });\n\n    x.domain(d3.extent(data, d => d.date));\n    y.domain([0, d3.max(data, d => d.value)]);\n\n    const xAxis = d3.axisBottom(x).ticks(5);\n    const yAxis = d3.axisLeft(y).ticks(5);\n    const svg = d3.select('svg').transition();\n\n    svg.select('.line')\n      .duration(750)\n      .attr('d', line(data));\n\n    svg.select('.x.axis')\n       .duration(750)\n       .call(xAxis);\n    svg.select('.y.axis')\n       .duration(750)\n       .call(yAxis);\n  }\n}\n"]},_coverageSchema:"332fd63041d2c1bcb487cc26dd0d5f7d97098a6c"},coverage=global[gcv]||(global[gcv]={});if(coverage[path]&&coverage[path].hash===hash){return coverage[path];}coverageData.hash=hash;return coverage[path]=coverageData;}();++cov_22lde3vjzi.s[0];Object.defineProperty(exports,"__esModule",{value:true});var _createClass=(++cov_22lde3vjzi.s[1],function(){++cov_22lde3vjzi.f[0];function defineProperties(target,props){++cov_22lde3vjzi.f[1];++cov_22lde3vjzi.s[2];for(var i=0;i<props.length;i++){var descriptor=(++cov_22lde3vjzi.s[3],props[i]);++cov_22lde3vjzi.s[4];descriptor.enumerable=(++cov_22lde3vjzi.b[0][0],descriptor.enumerable)||(++cov_22lde3vjzi.b[0][1],false);++cov_22lde3vjzi.s[5];descriptor.configurable=true;++cov_22lde3vjzi.s[6];if("value"in descriptor){++cov_22lde3vjzi.b[1][0];++cov_22lde3vjzi.s[7];descriptor.writable=true;}else{++cov_22lde3vjzi.b[1][1];}++cov_22lde3vjzi.s[8];Object.defineProperty(target,descriptor.key,descriptor);}}++cov_22lde3vjzi.s[9];return function(Constructor,protoProps,staticProps){++cov_22lde3vjzi.f[2];++cov_22lde3vjzi.s[10];if(protoProps){++cov_22lde3vjzi.b[2][0];++cov_22lde3vjzi.s[11];defineProperties(Constructor.prototype,protoProps);}else{++cov_22lde3vjzi.b[2][1];}++cov_22lde3vjzi.s[12];if(staticProps){++cov_22lde3vjzi.b[3][0];++cov_22lde3vjzi.s[13];defineProperties(Constructor,staticProps);}else{++cov_22lde3vjzi.b[3][1];}++cov_22lde3vjzi.s[14];return Constructor;};}());++cov_22lde3vjzi.s[15];var _get=function get(object,property,receiver){++cov_22lde3vjzi.f[3];++cov_22lde3vjzi.s[16];if(object===null){++cov_22lde3vjzi.b[4][0];++cov_22lde3vjzi.s[17];object=Function.prototype;}else{++cov_22lde3vjzi.b[4][1];}var desc=(++cov_22lde3vjzi.s[18],Object.getOwnPropertyDescriptor(object,property));++cov_22lde3vjzi.s[19];if(desc===undefined){++cov_22lde3vjzi.b[5][0];var parent=(++cov_22lde3vjzi.s[20],Object.getPrototypeOf(object));++cov_22lde3vjzi.s[21];if(parent===null){++cov_22lde3vjzi.b[6][0];++cov_22lde3vjzi.s[22];return undefined;}else{++cov_22lde3vjzi.b[6][1];++cov_22lde3vjzi.s[23];return get(parent,property,receiver);}}else{++cov_22lde3vjzi.b[5][1];++cov_22lde3vjzi.s[24];if("value"in desc){++cov_22lde3vjzi.b[7][0];++cov_22lde3vjzi.s[25];return desc.value;}else{++cov_22lde3vjzi.b[7][1];var getter=(++cov_22lde3vjzi.s[26],desc.get);++cov_22lde3vjzi.s[27];if(getter===undefined){++cov_22lde3vjzi.b[8][0];++cov_22lde3vjzi.s[28];return undefined;}else{++cov_22lde3vjzi.b[8][1];}++cov_22lde3vjzi.s[29];return getter.call(receiver);}}};var _d=(++cov_22lde3vjzi.s[30],__webpack_require__(0));var d3=(++cov_22lde3vjzi.s[31],_interopRequireWildcard(_d));var _graph=(++cov_22lde3vjzi.s[32],__webpack_require__(3));var _graph2=(++cov_22lde3vjzi.s[33],_interopRequireDefault(_graph));function _interopRequireDefault(obj){++cov_22lde3vjzi.f[4];++cov_22lde3vjzi.s[34];return(++cov_22lde3vjzi.b[10][0],obj)&&(++cov_22lde3vjzi.b[10][1],obj.__esModule)?(++cov_22lde3vjzi.b[9][0],obj):(++cov_22lde3vjzi.b[9][1],{default:obj});}function _interopRequireWildcard(obj){++cov_22lde3vjzi.f[5];++cov_22lde3vjzi.s[35];if((++cov_22lde3vjzi.b[12][0],obj)&&(++cov_22lde3vjzi.b[12][1],obj.__esModule)){++cov_22lde3vjzi.b[11][0];++cov_22lde3vjzi.s[36];return obj;}else{++cov_22lde3vjzi.b[11][1];var newObj=(++cov_22lde3vjzi.s[37],{});++cov_22lde3vjzi.s[38];if(obj!=null){++cov_22lde3vjzi.b[13][0];++cov_22lde3vjzi.s[39];for(var key in obj){++cov_22lde3vjzi.s[40];if(Object.prototype.hasOwnProperty.call(obj,key)){++cov_22lde3vjzi.b[14][0];++cov_22lde3vjzi.s[41];newObj[key]=obj[key];}else{++cov_22lde3vjzi.b[14][1];}}}else{++cov_22lde3vjzi.b[13][1];}++cov_22lde3vjzi.s[42];newObj.default=obj;++cov_22lde3vjzi.s[43];return newObj;}}function _classCallCheck(instance,Constructor){++cov_22lde3vjzi.f[6];++cov_22lde3vjzi.s[44];if(!(instance instanceof Constructor)){++cov_22lde3vjzi.b[15][0];++cov_22lde3vjzi.s[45];throw new TypeError("Cannot call a class as a function");}else{++cov_22lde3vjzi.b[15][1];}}function _possibleConstructorReturn(self,call){++cov_22lde3vjzi.f[7];++cov_22lde3vjzi.s[46];if(!self){++cov_22lde3vjzi.b[16][0];++cov_22lde3vjzi.s[47];throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}else{++cov_22lde3vjzi.b[16][1];}++cov_22lde3vjzi.s[48];return(++cov_22lde3vjzi.b[18][0],call)&&((++cov_22lde3vjzi.b[18][1],typeof call==="object")||(++cov_22lde3vjzi.b[18][2],typeof call==="function"))?(++cov_22lde3vjzi.b[17][0],call):(++cov_22lde3vjzi.b[17][1],self);}function _inherits(subClass,superClass){++cov_22lde3vjzi.f[8];++cov_22lde3vjzi.s[49];if((++cov_22lde3vjzi.b[20][0],typeof superClass!=="function")&&(++cov_22lde3vjzi.b[20][1],superClass!==null)){++cov_22lde3vjzi.b[19][0];++cov_22lde3vjzi.s[50];throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}else{++cov_22lde3vjzi.b[19][1];}++cov_22lde3vjzi.s[51];subClass.prototype=Object.create((++cov_22lde3vjzi.b[21][0],superClass)&&(++cov_22lde3vjzi.b[21][1],superClass.prototype),{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});++cov_22lde3vjzi.s[52];if(superClass){++cov_22lde3vjzi.b[22][0];++cov_22lde3vjzi.s[53];Object.setPrototypeOf?(++cov_22lde3vjzi.b[23][0],Object.setPrototypeOf(subClass,superClass)):(++cov_22lde3vjzi.b[23][1],subClass.__proto__=superClass);}else{++cov_22lde3vjzi.b[22][1];}}/**
+ * Class representing a line graph.
+ * @extends Graph
+ */var LineGraph=(++cov_22lde3vjzi.s[54],function(_Graph){++cov_22lde3vjzi.f[9];++cov_22lde3vjzi.s[55];_inherits(LineGraph,_Graph);function LineGraph(config){++cov_22lde3vjzi.f[10];++cov_22lde3vjzi.s[56];_classCallCheck(this,LineGraph);var _this=(++cov_22lde3vjzi.s[57],_possibleConstructorReturn(this,((++cov_22lde3vjzi.b[24][0],LineGraph.__proto__)||(++cov_22lde3vjzi.b[24][1],Object.getPrototypeOf(LineGraph))).call(this,config)));++cov_22lde3vjzi.s[58];console.log(_this.type);++cov_22lde3vjzi.s[59];return _this;}++cov_22lde3vjzi.s[60];_createClass(LineGraph,[{key:'render',value:function render(data){++cov_22lde3vjzi.f[11];var svg=(++cov_22lde3vjzi.s[61],_get((++cov_22lde3vjzi.b[25][0],LineGraph.prototype.__proto__)||(++cov_22lde3vjzi.b[25][1],Object.getPrototypeOf(LineGraph.prototype)),'render',this).call(this));var x=(++cov_22lde3vjzi.s[62],d3.scaleTime().range([0,this.width]));var y=(++cov_22lde3vjzi.s[63],d3.scaleLinear().range([this.height,0]));var line=(++cov_22lde3vjzi.s[64],d3.line().curve(d3.curveCardinal).x(function(d){++cov_22lde3vjzi.f[12];++cov_22lde3vjzi.s[65];return x(d.date);}).y(function(d){++cov_22lde3vjzi.f[13];++cov_22lde3vjzi.s[66];return y(d.value);}));++cov_22lde3vjzi.s[67];data.forEach(function(d){++cov_22lde3vjzi.f[14];++cov_22lde3vjzi.s[68];d.date=d3.timeParse('%d-%b-%y')(d.date);++cov_22lde3vjzi.s[69];d.value=+d.value;});// Gridlines
+var gridlinesX=(++cov_22lde3vjzi.s[70],d3.axisBottom(x).ticks(5).tickFormat('').tickSize(-this.height));var gridlinesY=(++cov_22lde3vjzi.s[71],d3.axisLeft(y).ticks(5).tickFormat('').tickSize(-this.width));++cov_22lde3vjzi.s[72];x.domain(d3.extent(data,function(d){++cov_22lde3vjzi.f[15];++cov_22lde3vjzi.s[73];return d.date;}));++cov_22lde3vjzi.s[74];y.domain([0,d3.max(data,function(d){++cov_22lde3vjzi.f[16];++cov_22lde3vjzi.s[75];return d.value;})]);var xAxis=(++cov_22lde3vjzi.s[76],d3.axisBottom(x).ticks(5));var yAxis=(++cov_22lde3vjzi.s[77],d3.axisLeft(y).ticks(5));++cov_22lde3vjzi.s[78];svg.append('g').attr('transform','translate(0, '+this.height+')').call(gridlinesX).attr('class','grid');++cov_22lde3vjzi.s[79];svg.append('g').call(gridlinesY).attr('class','grid');++cov_22lde3vjzi.s[80];svg.append('path').attr('class','line').attr('d',line(data));++cov_22lde3vjzi.s[81];svg.append('g').attr('transform','translate(0, '+this.height+')').call(xAxis).attr('class','x axis');// .select('.domain')
+// .remove();
+++cov_22lde3vjzi.s[82];svg.append('g').call(yAxis).attr('class','y axis');// .select('.domain')
+// .remove();
+}},{key:'update',value:function update(data){++cov_22lde3vjzi.f[17];var x=(++cov_22lde3vjzi.s[83],d3.scaleTime().range([0,this.width]));var y=(++cov_22lde3vjzi.s[84],d3.scaleLinear().range([this.height,0]));var line=(++cov_22lde3vjzi.s[85],d3.line().curve(d3.curveCardinal).x(function(d){++cov_22lde3vjzi.f[18];++cov_22lde3vjzi.s[86];return x(d.date);}).y(function(d){++cov_22lde3vjzi.f[19];++cov_22lde3vjzi.s[87];return y(d.value);}));++cov_22lde3vjzi.s[88];data.forEach(function(d){++cov_22lde3vjzi.f[20];++cov_22lde3vjzi.s[89];d.date=d3.timeParse('%d-%b-%y')(d.date);++cov_22lde3vjzi.s[90];d.value=+d.value;});++cov_22lde3vjzi.s[91];x.domain(d3.extent(data,function(d){++cov_22lde3vjzi.f[21];++cov_22lde3vjzi.s[92];return d.date;}));++cov_22lde3vjzi.s[93];y.domain([0,d3.max(data,function(d){++cov_22lde3vjzi.f[22];++cov_22lde3vjzi.s[94];return d.value;})]);var xAxis=(++cov_22lde3vjzi.s[95],d3.axisBottom(x).ticks(5));var yAxis=(++cov_22lde3vjzi.s[96],d3.axisLeft(y).ticks(5));var svg=(++cov_22lde3vjzi.s[97],d3.select('svg').transition());++cov_22lde3vjzi.s[98];svg.select('.line').duration(750).attr('d',line(data));++cov_22lde3vjzi.s[99];svg.select('.x.axis').duration(750).call(xAxis);++cov_22lde3vjzi.s[100];svg.select('.y.axis').duration(750).call(yAxis);}}]);++cov_22lde3vjzi.s[101];return LineGraph;}(_graph2.default));++cov_22lde3vjzi.s[102];exports.default=LineGraph;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var cov_ffio7msx1=function(){var path="/home/gandrou/Desktop/invenio-statistics-js/src/graph/graph.js",hash="f4cacc2c25cc573bcfa3b35035d3fc654389ce94",global=new Function('return this')(),gcv="__coverage__",coverageData={path:"/home/gandrou/Desktop/invenio-statistics-js/src/graph/graph.js",statementMap:{"0":{start:{line:3,column:0},end:{line:5,column:3}},"1":{start:{line:7,column:19},end:{line:7,column:563}},"2":{start:{line:7,column:76},end:{line:7,column:347}},"3":{start:{line:7,column:134},end:{line:7,column:142}},"4":{start:{line:7,column:144},end:{line:7,column:199}},"5":{start:{line:7,column:200},end:{line:7,column:231}},"6":{start:{line:7,column:232},end:{line:7,column:286}},"7":{start:{line:7,column:259},end:{line:7,column:286}},"8":{start:{line:7,column:287},end:{line:7,column:345}},"9":{start:{line:7,column:350},end:{line:7,column:559}},"10":{start:{line:7,column:407},end:{line:7,column:475}},"11":{start:{line:7,column:423},end:{line:7,column:475}},"12":{start:{line:7,column:476},end:{line:7,column:536}},"13":{start:{line:7,column:493},end:{line:7,column:536}},"14":{start:{line:7,column:537},end:{line:7,column:556}},"15":{start:{line:9,column:9},end:{line:9,column:22}},"16":{start:{line:11,column:9},end:{line:11,column:36}},"17":{start:{line:13,column:40},end:{line:13,column:267}},"18":{start:{line:13,column:69},end:{line:13,column:80}},"19":{start:{line:13,column:103},end:{line:13,column:105}},"20":{start:{line:13,column:107},end:{line:13,column:228}},"21":{start:{line:13,column:126},end:{line:13,column:226}},"22":{start:{line:13,column:149},end:{line:13,column:224}},"23":{start:{line:13,column:201},end:{line:13,column:224}},"24":{start:{line:13,column:229},end:{line:13,column:250}},"25":{start:{line:13,column:251},end:{line:13,column:265}},"26":{start:{line:15,column:50},end:{line:15,column:151}},"27":{start:{line:15,column:92},end:{line:15,column:149}},"28":{start:{line:18,column:12},end:{line:69,column:3}},"29":{start:{line:25,column:4},end:{line:25,column:33}},"30":{start:{line:27,column:4},end:{line:27,column:30}},"31":{start:{line:28,column:4},end:{line:28,column:32}},"32":{start:{line:29,column:4},end:{line:29,column:32}},"33":{start:{line:30,column:4},end:{line:30,column:28}},"34":{start:{line:39,column:2},end:{line:66,column:6}},"35":{start:{line:42,column:6},end:{line:42,column:23}},"36":{start:{line:53,column:6},end:{line:53,column:38}},"37":{start:{line:64,column:6},end:{line:64,column:271}},"38":{start:{line:68,column:2},end:{line:68,column:15}},"39":{start:{line:71,column:0},end:{line:71,column:24}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:7,column:19},end:{line:7,column:20}},loc:{start:{line:7,column:31},end:{line:7,column:561}},line:7},"1":{name:"defineProperties",decl:{start:{line:7,column:42},end:{line:7,column:58}},loc:{start:{line:7,column:74},end:{line:7,column:349}},line:7},"2":{name:"(anonymous_2)",decl:{start:{line:7,column:357},end:{line:7,column:358}},loc:{start:{line:7,column:405},end:{line:7,column:558}},line:7},"3":{name:"_interopRequireWildcard",decl:{start:{line:13,column:9},end:{line:13,column:32}},loc:{start:{line:13,column:38},end:{line:13,column:269}},line:13},"4":{name:"_classCallCheck",decl:{start:{line:15,column:9},end:{line:15,column:24}},loc:{start:{line:15,column:48},end:{line:15,column:153}},line:15},"5":{name:"(anonymous_5)",decl:{start:{line:18,column:12},end:{line:18,column:13}},loc:{start:{line:18,column:24},end:{line:69,column:1}},line:18},"6":{name:"Graph",decl:{start:{line:24,column:11},end:{line:24,column:16}},loc:{start:{line:24,column:25},end:{line:31,column:3}},line:24},"7":{name:"getType",decl:{start:{line:41,column:20},end:{line:41,column:27}},loc:{start:{line:41,column:30},end:{line:43,column:5}},line:41},"8":{name:"getArea",decl:{start:{line:52,column:20},end:{line:52,column:27}},loc:{start:{line:52,column:30},end:{line:54,column:5}},line:52},"9":{name:"render",decl:{start:{line:63,column:20},end:{line:63,column:26}},loc:{start:{line:63,column:29},end:{line:65,column:5}},line:63}},branchMap:{"0":{loc:{start:{line:7,column:168},end:{line:7,column:198}},type:"binary-expr",locations:[{start:{line:7,column:168},end:{line:7,column:189}},{start:{line:7,column:193},end:{line:7,column:198}}],line:7},"1":{loc:{start:{line:7,column:232},end:{line:7,column:286}},type:"if",locations:[{start:{line:7,column:232},end:{line:7,column:286}},{start:{line:7,column:232},end:{line:7,column:286}}],line:7},"2":{loc:{start:{line:7,column:407},end:{line:7,column:475}},type:"if",locations:[{start:{line:7,column:407},end:{line:7,column:475}},{start:{line:7,column:407},end:{line:7,column:475}}],line:7},"3":{loc:{start:{line:7,column:476},end:{line:7,column:536}},type:"if",locations:[{start:{line:7,column:476},end:{line:7,column:536}},{start:{line:7,column:476},end:{line:7,column:536}}],line:7},"4":{loc:{start:{line:13,column:40},end:{line:13,column:267}},type:"if",locations:[{start:{line:13,column:40},end:{line:13,column:267}},{start:{line:13,column:40},end:{line:13,column:267}}],line:13},"5":{loc:{start:{line:13,column:44},end:{line:13,column:65}},type:"binary-expr",locations:[{start:{line:13,column:44},end:{line:13,column:47}},{start:{line:13,column:51},end:{line:13,column:65}}],line:13},"6":{loc:{start:{line:13,column:107},end:{line:13,column:228}},type:"if",locations:[{start:{line:13,column:107},end:{line:13,column:228}},{start:{line:13,column:107},end:{line:13,column:228}}],line:13},"7":{loc:{start:{line:13,column:149},end:{line:13,column:224}},type:"if",locations:[{start:{line:13,column:149},end:{line:13,column:224}},{start:{line:13,column:149},end:{line:13,column:224}}],line:13},"8":{loc:{start:{line:15,column:50},end:{line:15,column:151}},type:"if",locations:[{start:{line:15,column:50},end:{line:15,column:151}},{start:{line:15,column:50},end:{line:15,column:151}}],line:15}},s:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0},f:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0},b:{"0":[0,0],"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0]},inputSourceMap:{version:3,sources:["src/graph/graph.js"],names:["d3","Graph","config","width","height","margin","type","select","append","attr","left","right","top","bottom"],mappings:";;;;;;;;AAAA;;IAAYA,E;;;;;;AAEZ;IACqBC,K;;AAEnB;;;;AAIA,iBAAYC,MAAZ,EAAoB;AAAA;;AAClB,SAAKC,KAAL,GAAaD,OAAOC,KAApB;AACA,SAAKC,MAAL,GAAcF,OAAOE,MAArB;AACA,SAAKC,MAAL,GAAcH,OAAOG,MAArB;AACA,SAAKC,IAAL,GAAYJ,OAAOI,IAAnB;AACD;;AAED;;;;;;;;8BAIU;AACR,aAAO,KAAKA,IAAZ;AACD;;AAED;;;;;;;8BAIU;AACR,aAAO,KAAKF,MAAL,GAAc,KAAKD,KAA1B;AACD;;AAED;;;;;;;6BAIS;AACP,aAAOH,GAAGO,MAAH,CAAU,MAAV,EACJC,MADI,CACG,KADH,EAEHC,IAFG,CAEE,OAFF,EAEW,KAAKN,KAAL,GAAa,KAAKE,MAAL,CAAYK,IAAzB,GAAgC,KAAKL,MAAL,CAAYM,KAFvD,EAGHF,IAHG,CAGE,QAHF,EAGY,KAAKL,MAAL,GAAc,KAAKC,MAAL,CAAYO,GAA1B,GAAgC,KAAKP,MAAL,CAAYQ,MAHxD,EAIDL,MAJC,CAIM,GAJN,EAKCC,IALD,CAKM,WALN,iBAKgC,KAAKJ,MAAL,CAAYK,IAL5C,UAKqD,KAAKL,MAAL,CAAYO,GALjE,OAAP;AAMD;;;;;;kBAxCkBX,K",file:"graph.js",sourceRoot:"/home/gandrou/Desktop/invenio-statistics-js",sourcesContent:["import * as d3 from 'd3';\n\n/** Class representing an abstract graph. */\nexport default class Graph {\n\n  /**\n   * Create a graph.\n   * @param {object} config - The configuration of the graph.\n  */\n  constructor(config) {\n    this.width = config.width;\n    this.height = config.height;\n    this.margin = config.margin;\n    this.type = config.type;\n  }\n\n  /**\n   * Get the type of the graph.\n   * @return {string} The type value.\n  */\n  getType() {\n    return this.type;\n  }\n\n  /**\n   * Get the type of the graph.\n   * @return {number} The area value.\n  */\n  getArea() {\n    return this.height * this.width;\n  }\n\n  /**\n   * Render respective graph to the DOM.\n   * @return {obj} The SVG element.\n  */\n  render() {\n    return d3.select('body')\n      .append('svg')\n       .attr('width', this.width + this.margin.left + this.margin.right)\n       .attr('height', this.height + this.margin.top + this.margin.bottom)\n         .append('g')\n           .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);\n  }\n\n}\n"]},_coverageSchema:"332fd63041d2c1bcb487cc26dd0d5f7d97098a6c"},coverage=global[gcv]||(global[gcv]={});if(coverage[path]&&coverage[path].hash===hash){return coverage[path];}coverageData.hash=hash;return coverage[path]=coverageData;}();++cov_ffio7msx1.s[0];Object.defineProperty(exports,"__esModule",{value:true});var _createClass=(++cov_ffio7msx1.s[1],function(){++cov_ffio7msx1.f[0];function defineProperties(target,props){++cov_ffio7msx1.f[1];++cov_ffio7msx1.s[2];for(var i=0;i<props.length;i++){var descriptor=(++cov_ffio7msx1.s[3],props[i]);++cov_ffio7msx1.s[4];descriptor.enumerable=(++cov_ffio7msx1.b[0][0],descriptor.enumerable)||(++cov_ffio7msx1.b[0][1],false);++cov_ffio7msx1.s[5];descriptor.configurable=true;++cov_ffio7msx1.s[6];if("value"in descriptor){++cov_ffio7msx1.b[1][0];++cov_ffio7msx1.s[7];descriptor.writable=true;}else{++cov_ffio7msx1.b[1][1];}++cov_ffio7msx1.s[8];Object.defineProperty(target,descriptor.key,descriptor);}}++cov_ffio7msx1.s[9];return function(Constructor,protoProps,staticProps){++cov_ffio7msx1.f[2];++cov_ffio7msx1.s[10];if(protoProps){++cov_ffio7msx1.b[2][0];++cov_ffio7msx1.s[11];defineProperties(Constructor.prototype,protoProps);}else{++cov_ffio7msx1.b[2][1];}++cov_ffio7msx1.s[12];if(staticProps){++cov_ffio7msx1.b[3][0];++cov_ffio7msx1.s[13];defineProperties(Constructor,staticProps);}else{++cov_ffio7msx1.b[3][1];}++cov_ffio7msx1.s[14];return Constructor;};}());var _d=(++cov_ffio7msx1.s[15],__webpack_require__(0));var d3=(++cov_ffio7msx1.s[16],_interopRequireWildcard(_d));function _interopRequireWildcard(obj){++cov_ffio7msx1.f[3];++cov_ffio7msx1.s[17];if((++cov_ffio7msx1.b[5][0],obj)&&(++cov_ffio7msx1.b[5][1],obj.__esModule)){++cov_ffio7msx1.b[4][0];++cov_ffio7msx1.s[18];return obj;}else{++cov_ffio7msx1.b[4][1];var newObj=(++cov_ffio7msx1.s[19],{});++cov_ffio7msx1.s[20];if(obj!=null){++cov_ffio7msx1.b[6][0];++cov_ffio7msx1.s[21];for(var key in obj){++cov_ffio7msx1.s[22];if(Object.prototype.hasOwnProperty.call(obj,key)){++cov_ffio7msx1.b[7][0];++cov_ffio7msx1.s[23];newObj[key]=obj[key];}else{++cov_ffio7msx1.b[7][1];}}}else{++cov_ffio7msx1.b[6][1];}++cov_ffio7msx1.s[24];newObj.default=obj;++cov_ffio7msx1.s[25];return newObj;}}function _classCallCheck(instance,Constructor){++cov_ffio7msx1.f[4];++cov_ffio7msx1.s[26];if(!(instance instanceof Constructor)){++cov_ffio7msx1.b[8][0];++cov_ffio7msx1.s[27];throw new TypeError("Cannot call a class as a function");}else{++cov_ffio7msx1.b[8][1];}}/** Class representing an abstract graph. */var Graph=(++cov_ffio7msx1.s[28],function(){++cov_ffio7msx1.f[5];/**
+   * Create a graph.
+   * @param {object} config - The configuration of the graph.
+  */function Graph(config){++cov_ffio7msx1.f[6];++cov_ffio7msx1.s[29];_classCallCheck(this,Graph);++cov_ffio7msx1.s[30];this.width=config.width;++cov_ffio7msx1.s[31];this.height=config.height;++cov_ffio7msx1.s[32];this.margin=config.margin;++cov_ffio7msx1.s[33];this.type=config.type;}/**
+   * Get the type of the graph.
+   * @return {string} The type value.
+  */++cov_ffio7msx1.s[34];_createClass(Graph,[{key:'getType',value:function getType(){++cov_ffio7msx1.f[7];++cov_ffio7msx1.s[35];return this.type;}/**
+     * Get the type of the graph.
+     * @return {number} The area value.
+    */},{key:'getArea',value:function getArea(){++cov_ffio7msx1.f[8];++cov_ffio7msx1.s[36];return this.height*this.width;}/**
+     * Render respective graph to the DOM.
+     * @return {obj} The SVG element.
+    */},{key:'render',value:function render(){++cov_ffio7msx1.f[9];++cov_ffio7msx1.s[37];return d3.select('body').append('svg').attr('width',this.width+this.margin.left+this.margin.right).attr('height',this.height+this.margin.top+this.margin.bottom).append('g').attr('transform','translate('+this.margin.left+', '+this.margin.top+')');}}]);++cov_ffio7msx1.s[38];return Graph;}());++cov_ffio7msx1.s[39];exports.default=Graph;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(5);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(7)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./styles.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./styles.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "body {\n  font: 14px Roboto; }\n\n.line {\n  fill: none;\n  stroke: #4682b4;\n  stroke-linecap: round;\n  stroke-linejoin: round;\n  stroke-width: 2; }\n\n.axis path,\n.axis line {\n  fill: none;\n  shape-rendering: crispEdges;\n  stroke: axiscolor;\n  stroke-width: 1px; }\n\n.grid path {\n  stroke-width: 0; }\n\n.grid line {\n  shape-rendering: crispEdges;\n  stroke: #d3d3d3; }\n\n.grid .tick {\n  opacity: .7;\n  stroke: #d3d3d3; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(selector) {
+		if (typeof memo[selector] === "undefined") {
+			memo[selector] = fn.call(this, selector);
+		}
+
+		return memo[selector]
+	};
+})(function (target) {
+	return document.querySelector(target)
+});
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(8);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton) options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+	if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	options.attrs.type = "text/css";
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	options.attrs.type = "text/css";
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
 
 
 /***/ })
