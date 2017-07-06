@@ -8,7 +8,7 @@ body {
 
 .line {
   fill: none;
-  stroke: $linecolor;
+  stroke: url('#value-gradient');
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
@@ -21,6 +21,10 @@ body {
     shape-rendering: crispEdges;
     stroke: axiscolor;
     stroke-width: 1px;
+  }
+
+  text {
+    opacity: .6;
   }
 }
 

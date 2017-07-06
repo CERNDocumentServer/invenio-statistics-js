@@ -12,27 +12,36 @@ const config = {
     top: 30,
     right: 20,
     bottom: 30,
-    left: 40
+    left: 50
   },
+  type: 'line',
   axis: {
     x: {
-      scale: 'time',
+      scaleType: 'scaleTime',
       label: 'labelX',
       ticks: 5,
+      ticksFormat: '',
       visible: true
     },
     y: {
-      scale: 'linear',
+      scaleType: 'scaleLinear',
       label: 'labelY',
       ticks: 5,
+      ticksFormat: '',
       visible: true
     }
   },
-  type: 'line',
   data: myData,
   tooltip: false,
-  title: 'Sometitle',
-  legend: false,
+  gridlines: {
+    x: true,
+    y: true
+  },
+  title: 'Downloads',
+  legend: {
+    x: 'Date',
+    y: 'Downloads'
+  },
   duration: 750
 };
 
