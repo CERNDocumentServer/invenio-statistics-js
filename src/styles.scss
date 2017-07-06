@@ -14,8 +14,15 @@ body {
   stroke-width: 2;
 }
 
+.area {
+  fill-opacity: .35;
+}
+
 .axis {
-  path,
+  path {
+    display: none;
+  }
+
   line {
     fill: none;
     shape-rendering: crispEdges;

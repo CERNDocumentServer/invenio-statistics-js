@@ -30,12 +30,21 @@ export default class LineGraph extends Graph {
     y.domain([0, d3.max(data, d => d.value)]);
 
     // Create the line graph
-    const line = d3[this.config.type]();
-
-    // Use curve instead of straight line
-    line.curve(d3.curveCardinal)
+    const line = d3[this.config.graph.type]()
       .x(d => x(d.date))
       .y(d => y(d.value));
+
+    // If defined, create the area graph
+    const area = d3.area()
+      .curve(d3.curveCardinal)
+      .x(d => x(d.date))
+      .y0(this.config.height)
+      .y1(d => y(d.value));
+
+    // If defined, use curve instead of straight line
+    if (this.config.graph.options.curved) {
+      line.curve(d3[this.config.graph.options.curveType]);
+    }
 
     // Create the x Axis
     const xAxis = d3.axisBottom(x).ticks(this.config.axis.x.ticks);
@@ -89,7 +98,7 @@ export default class LineGraph extends Graph {
     if (this.config.legend.y.length > 0) {
       svg.append('text')
         .attr('transform',
-          `translate(${-this.config.margin.right - 22}, ${(this.config.height / 2) - this.config.margin.top})rotate(-90)`)
+          `translate(${-this.config.margin.right - 28}, ${(this.config.height / 2) - this.config.margin.top})rotate(-90)`)
         .attr('text-anchor', 'middle')
         .attr('dy', '.70em')
         .text(this.config.legend.y);
@@ -98,14 +107,18 @@ export default class LineGraph extends Graph {
     // Add the Y Axis to the SVG element
     svg.append('g')
       .call(yAxis)
-      .attr('class', 'y axis')
-      .select('.domain')
-        .remove();
+      .attr('class', 'y axis');
 
     // Add the line to the SVG element
     svg.append('path')
       .attr('class', 'line')
       .attr('d', line(data));
+
+    // If defined, add colored aera under the line
+    svg.append('path')
+     .attr('class', 'area')
+     .attr('fill', this.config.graph.options.fillAreaColor)
+     .attr('d', area(data));
 
     // Define the linear gradient coloring of the line
     svg.append('linearGradient')
@@ -125,6 +138,7 @@ export default class LineGraph extends Graph {
             .attr('offset', d => d.offset)
             .attr('stop-color', d => d.color)
             .attr('stop-opacity', d => d.opacity);
+
     return svg;
   }
 
@@ -133,18 +147,24 @@ export default class LineGraph extends Graph {
    * @return {object} The SVG element containing the updated line graph.
    */
   update(data) {
-    const x = d3.scaleTime().range([0, this.config.width]);
-    const y = d3.scaleLinear().range([this.config.height, 0]);
-    const line = d3.line()
-      .curve(d3.curveCardinal)
-      // .interpolate('basis')
-      .x(d => x(d.date))
-      .y(d => y(d.value));
-
     data.forEach((d) => {
       d.date = d3.timeParse('%d-%b-%y')(d.date);
       d.value = +d.value;
     });
+
+    const x = d3.scaleTime().range([0, this.config.width]);
+    const y = d3.scaleLinear().range([this.config.height, 0]);
+    const line = d3.line()
+      .curve(d3.curveCardinal)
+      .x(d => x(d.date))
+      .y(d => y(d.value));
+
+    // If defined, create the area graph
+    const area = d3.area()
+      .curve(d3.curveCardinal)
+      .x(d => x(d.date))
+      .y0(this.config.height)
+      .y1(d => y(d.value));
 
     x.domain(d3.extent(data, d => d.date));
     y.domain([0, d3.max(data, d => d.value)]);
@@ -156,6 +176,11 @@ export default class LineGraph extends Graph {
     svg.select('.line')
       .duration(750)
       .attr('d', line(data));
+
+    // If defined, add colored aera under the line
+    svg.select('.area')
+      .duration(750)
+      .attr('d', area(data));
 
     svg.select('.x.axis')
        .duration(750)
