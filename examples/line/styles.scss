@@ -15,18 +15,15 @@ body {
 }
 
 .area {
-  fill-opacity: .35;
+  fill-opacity: .25;
 }
 
 .axis {
-  path {
-    display: none;
-  }
 
   line {
     fill: none;
     shape-rendering: crispEdges;
-    stroke: axiscolor;
+    stroke: $axiscolor;
     stroke-width: 1px;
   }
 

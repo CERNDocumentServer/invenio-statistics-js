@@ -1,9 +1,9 @@
 // Karma configuration
 // Generated on Fri Jun 30 2017 15:41:14 GMT+0200 (CEST)
-var webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config.js');
 const path = require('path');
 
-module.exports = function(config) {
+module.exports = (config) => {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -17,15 +17,14 @@ module.exports = function(config) {
       'karma-webpack',
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-sourcemap-loader',
-      'karma-coverage',
-      'karma-coverage-istanbul-reporter'
+      'karma-coverage'
     ],
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'node_modules/d3/build/d3.js', watched: false},
-      { pattern: 'tests/index.js', watched: false}
+      { pattern: 'node_modules/d3/build/d3.js', watched: false },
+      { pattern: 'examples/**/*.js' },
+      { pattern: 'tests/**/*_test.js' }
     ],
 
     // list of files to exclude
@@ -35,7 +34,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'tests/index.js': ['webpack', 'sourcemap']
+      'tests/*_test.js': ['webpack'],
+      'examples/**/*.js': ['webpack', 'coverage']
     },
 
     // webpack config
@@ -44,7 +44,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage-istanbul'],
+    reporters: ['progress', 'coverage'],
 
     // web server port
     port: 9876,
@@ -53,7 +53,8 @@ module.exports = function(config) {
     colors: true,
 
     // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR ||
+    // config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -88,5 +89,5 @@ module.exports = function(config) {
         }
       }
     }
-  })
-}
+  });
+};

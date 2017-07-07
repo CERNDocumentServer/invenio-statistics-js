@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import Graph from '../graph/graph';
 
 /**
@@ -12,49 +13,75 @@ export default class LineGraph extends Graph {
    * @return {object} The SVG element containing the line graph.
    */
   render(data) {
-    // Parse input data
-    data.forEach((d) => {
-      d.date = d3.timeParse('%d-%b-%y')(d.date);
-      d.value = +d.value;
-    });
-
     // Create the container SVG element
     const svg = super.render();
+    this.keyX = this.config.axis.x.mapTo;
+    this.keyY = this.config.axis.y.mapTo;
+
+    // Parse input data
+    data.forEach((d) => {
+      if (this.config.axis.x.scaleType === 'scaleTime') {
+        _.set(d, this.keyX, d3.timeParse('%d-%b-%y')(_.get(d, this.keyX)));
+      }
+      _.set(d, this.keyY, +_.get(d, this.keyY));
+    });
 
     // Create the scale for the X axis
-    const x = d3[this.config.axis.x.scaleType]().range([0, this.config.width]);
-    x.domain(d3.extent(data, d => d.date));
+    const x = d3[this.config.axis.x.scaleType]();
+
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      x.range([0, this.config.width]);
+      x.domain(d3.extent(data, d => _.get(d, this.keyX)));
+    } else {
+      x.range([this.config.width, 0]);
+      x.domain(data.map(d => _.get(d, this.keyX)));
+      x.padding(1);
+    }
 
     // Create the scale for the Y axis
-    const y = d3[this.config.axis.y.scaleType]().range([this.config.height, 0]);
-    y.domain([0, d3.max(data, d => d.value)]);
+    const y = d3[this.config.axis.y.scaleType]()
+      .range([this.config.height, 0])
+      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
 
     // Create the line graph
     const line = d3[this.config.graph.type]()
-      .x(d => x(d.date))
-      .y(d => y(d.value));
+      .x(d => x(_.get(d, this.keyX)))
+      .y(d => y(_.get(d, this.keyY)));
 
-    // If defined, create the area graph
+    // If specified, create the area graph
     const area = d3.area()
       .curve(d3.curveCardinal)
-      .x(d => x(d.date))
+      .x(d => x(_.get(d, this.keyX)))
       .y0(this.config.height)
-      .y1(d => y(d.value));
+      .y1(d => y(_.get(d, this.keyY)));
 
-    // If defined, use curve instead of straight line
+    // If specified, use curve instead of straight line
     if (this.config.graph.options.curved) {
       line.curve(d3[this.config.graph.options.curveType]);
     }
 
     // Create the x Axis
-    const xAxis = d3.axisBottom(x).ticks(this.config.axis.x.ticks);
+    const xAxis = d3.axisBottom(x);
 
-    // If defined, add gridlines along the X axis
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      xAxis.ticks(this.config.axis.x.ticks);
+    } else {
+      xAxis.tickValues(
+        x.domain().filter((d, i) => !(i % this.config.axis.x.ticks))
+      );
+    }
+
+    // If specified, add gridlines along the X axis
     if (this.config.gridlines.x) {
       const gridlinesX = d3.axisBottom(x)
-        .ticks(this.config.axis.x.ticks)
         .tickFormat(this.config.axis.x.ticksFormat)
         .tickSize(-this.config.height);
+
+      if (this.config.axis.x.scaleType === 'scaleTime') {
+        gridlinesX.ticks(this.config.axis.x.ticks);
+      } else {
+        gridlinesX.tickValues(x.domain().filter((d, i) => !(i % this.config.axis.x.ticks)));
+      }
 
       svg.append('g')
         .attr('transform', `translate(0, ${this.config.height})`)
@@ -62,7 +89,7 @@ export default class LineGraph extends Graph {
         .attr('class', 'grid');
     }
 
-    // If defined, add legend to the X Axis
+    // If specified, add legend to the X Axis
     if (this.config.legend.x.length > 0) {
       svg.append('text')
         .attr('transform',
@@ -75,14 +102,22 @@ export default class LineGraph extends Graph {
     svg.append('g')
       .attr('transform', `translate(0, ${this.config.height})`)
       .call(xAxis)
-      .attr('class', 'x axis')
-      .select('.domain')
-        .remove();
+      .attr('class', 'x axis');
+
+    // If specified, hide the X axis path
+    if (!this.config.axis.x.visible) {
+      svg.selectAll('.x.axis path')
+        .attr('style', 'display: none;');
+      svg.selectAll('.x.axis line')
+        .attr('style', 'display: none;');
+    }
 
     // Create the Y Axis
-    const yAxis = d3.axisLeft(y).ticks(this.config.axis.y.ticks);
+    const yAxis = d3.axisLeft(y)
+      .ticks(this.config.axis.y.ticks)
+      .tickSizeOuter(0);
 
-    // If defined, add gridlines along the Y axis
+    // If specified, add gridlines along the Y axis
     if (this.config.gridlines.y) {
       const gridlinesY = d3.axisLeft(y)
         .ticks(this.config.axis.y.ticks)
@@ -94,7 +129,7 @@ export default class LineGraph extends Graph {
           .attr('class', 'grid');
     }
 
-    // If defined, add legend to the Y Axis
+    // If specified, add legend to the Y Axis
     if (this.config.legend.y.length > 0) {
       svg.append('text')
         .attr('transform',
@@ -109,16 +144,26 @@ export default class LineGraph extends Graph {
       .call(yAxis)
       .attr('class', 'y axis');
 
+    // If specified, hide the Y axis path
+    if (!this.config.axis.y.visible) {
+      svg.selectAll('.y.axis path')
+        .attr('style', 'display: none;');
+      svg.selectAll('.y.axis line')
+        .attr('style', 'display: none;');
+    }
+
     // Add the line to the SVG element
     svg.append('path')
       .attr('class', 'line')
       .attr('d', line(data));
 
-    // If defined, add colored aera under the line
-    svg.append('path')
-     .attr('class', 'area')
-     .attr('fill', this.config.graph.options.fillAreaColor)
-     .attr('d', area(data));
+    // If specified, add colored aera under the line
+    if (this.config.graph.options.fillArea) {
+      svg.append('path')
+       .attr('class', 'area')
+       .attr('fill', this.config.graph.options.fillAreaColor)
+       .attr('d', area(data));
+    }
 
     // Define the linear gradient coloring of the line
     svg.append('linearGradient')
@@ -130,8 +175,14 @@ export default class LineGraph extends Graph {
         .attr('y2', '100%')
       .selectAll('stop')
         .data([
-          { offset: '0%', color: '#4CAF50', opacity: '0.9' },
-          { offset: '100%', color: '#C8E6C9', opacity: '0.9' }
+          { offset: `${this.config.color.thresholds[0].offset}%`,
+            color: this.config.color.thresholds[0].value,
+            opacity: `${this.config.color.thresholds[0].value}`
+          },
+          { offset: `${this.config.color.thresholds[1].offset}%`,
+            color: this.config.color.thresholds[1].value,
+            opacity: `${this.config.color.thresholds[1].value}`
+          }
         ])
         .enter()
           .append('stop')
@@ -147,52 +198,96 @@ export default class LineGraph extends Graph {
    * @return {object} The SVG element containing the updated line graph.
    */
   update(data) {
+    const svg = d3.select('svg').transition();
+
+    // Parse the updated input data
     data.forEach((d) => {
-      d.date = d3.timeParse('%d-%b-%y')(d.date);
-      d.value = +d.value;
+      if (this.config.axis.x.scaleType === 'scaleTime') {
+        _.set(d, this.keyX, d3.timeParse('%d-%b-%y')(_.get(d, this.keyX)));
+      }
+      _.set(d, this.keyY, +_.get(d, this.keyY));
     });
 
-    const x = d3.scaleTime().range([0, this.config.width]);
-    const y = d3.scaleLinear().range([this.config.height, 0]);
-    const line = d3.line()
-      .curve(d3.curveCardinal)
-      .x(d => x(d.date))
-      .y(d => y(d.value));
+    // Create the scale for the X axis
+    const x = d3[this.config.axis.x.scaleType]();
 
-    // If defined, create the area graph
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      x.range([0, this.config.width]);
+      x.domain(d3.extent(data, d => _.get(d, this.keyX)));
+    } else {
+      x.range([this.config.width, 0]);
+      x.domain(data.map(d => _.get(d, this.keyX)));
+      x.padding(1);
+    }
+
+    // Create the scale for the Y axis
+    const y = d3[this.config.axis.y.scaleType]()
+      .range([this.config.height, 0])
+      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
+
+    // Create the line graph
+    const line = d3[this.config.graph.type]()
+      .x(d => x(_.get(d, this.keyX)))
+      .y(d => y(_.get(d, this.keyY)));
+
+    // If specified, create the area graph
     const area = d3.area()
       .curve(d3.curveCardinal)
-      .x(d => x(d.date))
+      .x(d => x(_.get(d, this.keyX)))
       .y0(this.config.height)
-      .y1(d => y(d.value));
+      .y1(d => y(_.get(d, this.keyY)));
 
-    x.domain(d3.extent(data, d => d.date));
-    y.domain([0, d3.max(data, d => d.value)]);
+    // If specified, use curve instead of straight line
+    if (this.config.graph.options.curved) {
+      line.curve(d3[this.config.graph.options.curveType]);
+    }
 
-    const xAxis = d3.axisBottom(x).ticks(5);
-    const yAxis = d3.axisLeft(y).ticks(5);
-    const svg = d3.select('svg').transition();
+    // Create the x Axis
+    const xAxis = d3.axisBottom(x);
+
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      xAxis.ticks(this.config.axis.x.ticks);
+    } else {
+      xAxis.tickValues(
+        x.domain().filter((d, i) => !(i % this.config.axis.x.ticks))
+      );
+    }
+
+    const yAxis = d3.axisLeft(y)
+      .ticks(this.config.axis.y.ticks)
+      .tickSizeOuter(0);
 
     svg.select('.line')
       .duration(750)
       .attr('d', line(data));
 
-    // If defined, add colored aera under the line
     svg.select('.area')
       .duration(750)
       .attr('d', area(data));
 
     svg.select('.x.axis')
        .duration(750)
-       .call(xAxis)
-       .select('.domain')
-         .remove();
+       .call(xAxis);
+
+    // If specified, hide the X axis path
+    if (!this.config.axis.x.visible) {
+      svg.selectAll('.x.axis path')
+        .attr('style', 'display: none;');
+      svg.selectAll('.x.axis line')
+        .attr('style', 'display: none;');
+    }
 
     svg.select('.y.axis')
        .duration(750)
-       .call(yAxis)
-       .select('.domain')
-         .remove();
+       .call(yAxis);
+
+    // If specified, hide the Y axis path
+    if (!this.config.axis.y.visible) {
+      svg.selectAll('.y.axis path')
+        .attr('style', 'display: none;');
+      svg.selectAll('.y.axis line')
+        .attr('style', 'display: none;');
+    }
 
     return svg;
   }
