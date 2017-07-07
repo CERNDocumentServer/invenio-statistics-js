@@ -16942,82 +16942,21 @@ Object.defineProperty(exports, '__esModule', { value: true });
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _line = __webpack_require__(2);
 
 var _line2 = _interopRequireDefault(_line);
 
-__webpack_require__(7);
+var _config = __webpack_require__(7);
+
+var _config2 = _interopRequireDefault(_config);
+
+__webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var myData = [{ date: '1-May-12', value: 58.13 }, { date: '30-Apr-12', value: 53.98 }, { date: '27-Apr-12', value: 67 }, { date: '26-Apr-12', value: 89.7 }, { date: '25-Apr-12', value: 99 }, { date: '24-Apr-12', value: 130.28 }, { date: '23-Apr-12', value: 166.7 }, { date: '20-Apr-12', value: 234.98 }, { date: '19-Apr-12', value: 345.44 }, { date: '18-Apr-12', value: 443.34 }, { date: '17-Apr-12', value: 543.7 }, { date: '16-Apr-12', value: 580.13 }, { date: '13-Apr-12', value: 605.23 }, { date: '12-Apr-12', value: 622.77 }, { date: '11-Apr-12', value: 626.2 }, { date: '10-Apr-12', value: 628.44 }, { date: '9-Apr-12', value: 636.23 }, { date: '5-Apr-12', value: 633.68 }, { date: '4-Apr-12', value: 624.31 }, { date: '3-Apr-12', value: 629.32 }, { date: '2-Apr-12', value: 618.63 }, { date: '30-Mar-12', value: 599.55 }, { date: '29-Mar-12', value: 609.86 }, { date: '28-Mar-12', value: 617.62 }, { date: '27-Mar-12', value: 614.48 }, { date: '26-Mar-12', value: 606.98 }];
 
-var config = {
-  width: 800,
-  height: 400,
-  margin: {
-    top: 30,
-    right: 20,
-    bottom: 30,
-    left: 50
-  },
-  graph: {
-    type: 'line',
-    options: {
-      curved: true,
-      curveType: 'curveCardinal',
-      fillArea: true,
-      fillAreaColor: '#E8F5E9'
-    }
-  },
-  axis: {
-    x: {
-      mapTo: 'date',
-      scaleType: 'scaleTime',
-      label: 'labelX',
-      ticks: 5,
-      ticksFormat: '',
-      visible: false
-    },
-    y: {
-      mapTo: 'value',
-      scaleType: 'scaleLinear',
-      label: 'labelY',
-      ticks: 5,
-      ticksFormat: '',
-      visible: false
-    }
-  },
-  data: myData,
-  tooltip: false,
-  gridlines: {
-    x: false,
-    y: false
-  },
-  title: 'Downloads',
-  legend: {
-    x: 'Date',
-    y: 'Downloads'
-  },
-  color: {
-    scale: 'linearGradient',
-    thresholds: [{
-      offset: 0,
-      value: '#4CAF50',
-      opacity: 0.9
-    }, {
-      offset: 100,
-      value: '#C8E6C9',
-      opacity: 0.9
-    }]
-  }
-};
-
-var graph = new _line2.default(config);
+var graph = new _line2.default(_config2.default);
 graph.render(myData);
 
 var toggle = true;
@@ -17035,8 +16974,9 @@ function update() {
   }
 }
 
-// document.getElementById('option').addEventListener('click', update);
-exports.default = config;
+if (document.getElementById('option')) {
+  document.getElementById('option').addEventListener('click', update);
+}
 
 /***/ }),
 /* 2 */
@@ -34569,10 +34509,84 @@ exports.default = Graph;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Export configuration object
+var config = {
+  width: 800,
+  height: 400,
+  margin: {
+    top: 30,
+    right: 20,
+    bottom: 30,
+    left: 50
+  },
+  graph: {
+    type: 'line',
+    options: {
+      curved: true,
+      curveType: 'curveCardinal',
+      fillArea: true,
+      fillAreaColor: '#E8F5E9'
+    }
+  },
+  axis: {
+    x: {
+      mapTo: 'date',
+      scaleType: 'scaleTime',
+      label: 'labelX',
+      ticks: 5,
+      ticksFormat: '',
+      visible: false
+    },
+    y: {
+      mapTo: 'value',
+      scaleType: 'scaleLinear',
+      label: 'labelY',
+      ticks: 5,
+      ticksFormat: '',
+      visible: false
+    }
+  },
+  data: module.exports.myData,
+  tooltip: false,
+  gridlines: {
+    x: true,
+    y: true
+  },
+  title: 'Downloads',
+  legend: {
+    x: 'Date',
+    y: 'Downloads'
+  },
+  color: {
+    scale: 'linearGradient',
+    thresholds: [{
+      offset: 0,
+      value: '#4CAF50',
+      opacity: 0.9
+    }, {
+      offset: 100,
+      value: '#C8E6C9',
+      opacity: 0.9
+    }]
+  }
+};
+
+exports.default = config;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -34580,7 +34594,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -34597,10 +34611,10 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(undefined);
+exports = module.exports = __webpack_require__(10)(undefined);
 // imports
 
 
@@ -34611,7 +34625,7 @@ exports.push([module.i, "body {\n  font: 14px Roboto; }\n\n.line {\n  fill: none
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -34693,7 +34707,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -34739,7 +34753,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(11);
+var	fixUrls = __webpack_require__(12);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -35052,7 +35066,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 
@@ -35148,4 +35162,3 @@ module.exports = function (css) {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
