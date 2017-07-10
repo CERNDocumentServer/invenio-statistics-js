@@ -21,4 +21,4 @@ node_modules/
 dist/
 
 #package-loc.json
-package.json
+package-loc.json

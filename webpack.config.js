@@ -3,9 +3,12 @@ const path = require('path');
 process.noDeprecation = true;
 
 module.exports = {
-  entry: './examples/bar/index.js',
+  entry: {
+    bar: './examples/bar/index.js',
+    line: './examples/line/index.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/src'
   },
