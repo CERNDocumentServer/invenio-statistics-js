@@ -34,10 +34,11 @@ export default class Graph {
   render() {
     return d3.select('body')
       .append('svg')
-       .attr('width', this.config.width + this.config.margin.left + this.config.margin.right)
-       .attr('height', this.config.height + this.config.margin.top + this.config.margin.bottom)
-         .append('g')
-           .attr('transform', `translate(${this.config.margin.left}, ${this.config.margin.top})`);
+        .attr('class', 'container')
+        .attr('width', this.config.width + this.config.margin.left + this.config.margin.right)
+        .attr('height', this.config.height + this.config.margin.top + this.config.margin.bottom)
+          .append('g')
+            .attr('transform', `translate(${this.config.margin.left}, ${this.config.margin.top})`);
   }
 
 }

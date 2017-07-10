@@ -6,16 +6,12 @@ body {
   font: 14px Roboto;
 }
 
-.line {
-  fill: none;
-  stroke: url('#value-gradient');
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
+.bar {
+  fill: steelblue;
 }
 
-.area {
-  fill-opacity: .25;
+.bar:hover {
+  fill: brown;
 }
 
 .axis {

@@ -9,41 +9,32 @@ const config = {
     left: 50
   },
   graph: {
-    type: 'line',
-    options: {
-      curved: true,
-      curveType: 'curveCardinal',
-      fillArea: true,
-      fillAreaColor: '#E8F5E9'
-    }
+    type: 'bar'
   },
   axis: {
     x: {
-      mapTo: 'date',
-      scaleType: 'scaleTime',
-      label: 'labelX',
-      ticks: 5,
+      mapTo: 'user',
+      scaleType: 'scaleBand',
+      ticks: null,
       ticksFormat: '',
       visible: false
     },
     y: {
-      mapTo: 'value',
+      mapTo: 'downloads',
       scaleType: 'scaleLinear',
-      label: 'labelY',
-      ticks: 5,
+      ticks: null,
       ticksFormat: '',
       visible: false
     }
   },
-  data: module.exports.myData,
   tooltip: false,
   gridlines: {
-    x: true,
+    x: false,
     y: true
   },
   title: 'Downloads',
-  legend: {
-    x: 'Date',
+  label: {
+    x: 'Users',
     y: 'Downloads'
   },
   color: {

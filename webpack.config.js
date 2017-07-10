@@ -3,7 +3,7 @@ const path = require('path');
 process.noDeprecation = true;
 
 module.exports = {
-  entry: './examples/line/index.js',
+  entry: './examples/bar/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -14,6 +14,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
+  watch: true,
   module: {
     rules: [
       {

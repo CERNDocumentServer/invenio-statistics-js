@@ -16942,9 +16942,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 "use strict";
 
 
-var _line = __webpack_require__(2);
+var _bar = __webpack_require__(2);
 
-var _line2 = _interopRequireDefault(_line);
+var _bar2 = _interopRequireDefault(_bar);
 
 var _config = __webpack_require__(7);
 
@@ -16954,23 +16954,19 @@ __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var myData = [{ date: '1-May-12', value: 58.13 }, { date: '30-Apr-12', value: 53.98 }, { date: '27-Apr-12', value: 67 }, { date: '26-Apr-12', value: 89.7 }, { date: '25-Apr-12', value: 99 }, { date: '24-Apr-12', value: 130.28 }, { date: '23-Apr-12', value: 166.7 }, { date: '20-Apr-12', value: 234.98 }, { date: '19-Apr-12', value: 345.44 }, { date: '18-Apr-12', value: 443.34 }, { date: '17-Apr-12', value: 543.7 }, { date: '16-Apr-12', value: 580.13 }, { date: '13-Apr-12', value: 605.23 }, { date: '12-Apr-12', value: 622.77 }, { date: '11-Apr-12', value: 626.2 }, { date: '10-Apr-12', value: 628.44 }, { date: '9-Apr-12', value: 636.23 }, { date: '5-Apr-12', value: 633.68 }, { date: '4-Apr-12', value: 624.31 }, { date: '3-Apr-12', value: 629.32 }, { date: '2-Apr-12', value: 618.63 }, { date: '30-Mar-12', value: 599.55 }, { date: '29-Mar-12', value: 609.86 }, { date: '28-Mar-12', value: 617.62 }, { date: '27-Mar-12', value: 614.48 }, { date: '26-Mar-12', value: 606.98 }];
-
-var graph = new _line2.default(_config2.default);
-graph.render(myData);
-
+var dataSet0 = [{ user: 'Bob', downloads: 33 }, { user: 'Robin', downloads: 12 }, { user: 'Anne', downloads: 41 }, { user: 'Mark', downloads: 16 }, { user: 'Joe', downloads: 59 }, { user: 'Eve', downloads: 38 }, { user: 'Karen', downloads: 21 }, { user: 'Kirsty', downloads: 25 }, { user: 'Chris', downloads: 30 }, { user: 'Lisa', downloads: 47 }, { user: 'Tom', downloads: 5 }, { user: 'Stacy', downloads: 20 }, { user: 'Charles', downloads: 13 }, { user: 'Mary', downloads: 29 }];
 var toggle = true;
+var graph = new _bar2.default(_config2.default);
+graph.render(dataSet0);
 
 function update() {
   toggle = !toggle;
   if (toggle) {
-    myData = [{ date: '1-May-12', value: 58.13 }, { date: '30-Apr-12', value: 53.98 }, { date: '27-Apr-12', value: 67 }, { date: '26-Apr-12', value: 89.7 }, { date: '25-Apr-12', value: 99 }, { date: '24-Apr-12', value: 130.28 }, { date: '23-Apr-12', value: 166.7 }, { date: '20-Apr-12', value: 234.98 }, { date: '19-Apr-12', value: 345.44 }, { date: '18-Apr-12', value: 443.34 }, { date: '17-Apr-12', value: 543.7 }, { date: '16-Apr-12', value: 580.13 }, { date: '13-Apr-12', value: 605.23 }, { date: '12-Apr-12', value: 622.77 }, { date: '11-Apr-12', value: 626.2 }, { date: '10-Apr-12', value: 628.44 }, { date: '9-Apr-12', value: 636.23 }, { date: '5-Apr-12', value: 633.68 }, { date: '4-Apr-12', value: 624.31 }, { date: '3-Apr-12', value: 629.32 }, { date: '2-Apr-12', value: 618.63 }, { date: '30-Mar-12', value: 599.55 }, { date: '29-Mar-12', value: 609.86 }, { date: '28-Mar-12', value: 617.62 }, { date: '27-Mar-12', value: 614.48 }, { date: '26-Mar-12', value: 606.98 }];
-
-    graph.update(myData);
+    var dataSet1 = [{ user: 'Bob', downloads: 33 }, { user: 'Robin', downloads: 12 }, { user: 'Anne', downloads: 41 }, { user: 'Mark', downloads: 16 }, { user: 'Joe', downloads: 59 }, { user: 'Eve', downloads: 38 }, { user: 'Karen', downloads: 21 }, { user: 'Kirsty', downloads: 25 }, { user: 'Chris', downloads: 30 }, { user: 'Lisa', downloads: 47 }, { user: 'Tom', downloads: 5 }, { user: 'Stacy', downloads: 20 }, { user: 'Charles', downloads: 13 }, { user: 'Mary', downloads: 29 }];
+    graph.render(dataSet1);
   } else {
-    var myNewData = [{ date: '10-May-12', value: 99.55 }, { date: '8-May-12', value: 76.86 }, { date: '6-May-12', value: 67.62 }, { date: '4-May-12', value: 64.48 }, { date: '2-May-12', value: 60.98 }, { date: '1-May-12', value: 58.13 }, { date: '30-Apr-12', value: 53.98 }, { date: '27-Apr-12', value: 67 }, { date: '26-Apr-12', value: 89.7 }, { date: '25-Apr-12', value: 99 }, { date: '24-Apr-12', value: 90.28 }, { date: '23-Apr-12', value: 106.7 }, { date: '20-Apr-12', value: 94.98 }, { date: '19-Apr-12', value: 85.44 }, { date: '18-Apr-12', value: 73.34 }, { date: '17-Apr-12', value: 53.7 }, { date: '16-Apr-12', value: 50.13 }, { date: '13-Apr-12', value: 65.23 }, { date: '12-Apr-12', value: 62.77 }, { date: '11-Apr-12', value: 66.2 }, { date: '10-Apr-12', value: 68.44 }, { date: '9-Apr-12', value: 66.23 }, { date: '5-Apr-12', value: 63.68 }, { date: '4-Apr-12', value: 64.31 }, { date: '3-Apr-12', value: 69.32 }, { date: '2-Apr-12', value: 61.63 }];
-
-    graph.update(myNewData);
+    var dataSet2 = [{ user: 'Bob', downloads: 15 }, { user: 'Robin', downloads: 25 }, { user: 'Anne', downloads: 44 }, { user: 'Mark', downloads: 4 }, { user: 'Joe', downloads: 65 }, { user: 'Eve', downloads: 21 }, { user: 'Karen', downloads: 28 }, { user: 'Kirsty', downloads: 35 }, { user: 'Chris', downloads: 50 }, { user: 'Lisa', downloads: 12 }, { user: 'Tom', downloads: 16 }, { user: 'Stacy', downloads: 15 }, { user: 'Charles', downloads: 5 }, { user: 'Mary', downloads: 75 }];
+    graph.render(dataSet2);
   }
 }
 
@@ -17016,21 +17012,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * Class representing a line graph.
- * @extends Graph
- */
-var LineGraph = function (_Graph) {
-  _inherits(LineGraph, _Graph);
+* Class representing a bar graph.
+* @extends Graph
+*/
+var BarGraph = function (_Graph) {
+  _inherits(BarGraph, _Graph);
 
-  function LineGraph() {
-    _classCallCheck(this, LineGraph);
+  function BarGraph() {
+    _classCallCheck(this, BarGraph);
 
-    return _possibleConstructorReturn(this, (LineGraph.__proto__ || Object.getPrototypeOf(LineGraph)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BarGraph.__proto__ || Object.getPrototypeOf(BarGraph)).apply(this, arguments));
   }
 
-  _createClass(LineGraph, [{
+  _createClass(BarGraph, [{
     key: 'render',
-
 
     /**
      * Create a line graph based on configuration.
@@ -17039,69 +17034,32 @@ var LineGraph = function (_Graph) {
     value: function render(data) {
       var _this2 = this;
 
-      // Create the container SVG element
-      var svg = _get(LineGraph.prototype.__proto__ || Object.getPrototypeOf(LineGraph.prototype), 'render', this).call(this);
+      // If does not exist, create a container SVG element
+      if (d3.select('.container').empty()) {
+        this.svg = _get(BarGraph.prototype.__proto__ || Object.getPrototypeOf(BarGraph.prototype), 'render', this).call(this);
+      }
+
+      // Get the keys for the X, Y axis
       this.keyX = this.config.axis.x.mapTo;
       this.keyY = this.config.axis.y.mapTo;
 
       // Parse input data
       data.forEach(function (d) {
-        if (_this2.config.axis.x.scaleType === 'scaleTime') {
-          _lodash2.default.set(d, _this2.keyX, d3.timeParse('%d-%b-%y')(_lodash2.default.get(d, _this2.keyX)));
-        }
         _lodash2.default.set(d, _this2.keyY, +_lodash2.default.get(d, _this2.keyY));
       });
 
       // Create the scale for the X axis
-      var x = d3[this.config.axis.x.scaleType]();
+      var x = d3[this.config.axis.x.scaleType]().range([this.config.width, 0]).domain(data.map(function (d) {
+        return _lodash2.default.get(d, _this2.keyX);
+      })).padding(0.1);
 
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        x.range([0, this.config.width]);
-        x.domain(d3.extent(data, function (d) {
-          return _lodash2.default.get(d, _this2.keyX);
-        }));
-      } else {
-        x.range([this.config.width, 0]);
-        x.domain(data.map(function (d) {
-          return _lodash2.default.get(d, _this2.keyX);
-        }));
-        x.padding(1);
-      }
-
-      // Create the scale for the Y axis
+      // Create the scale for the Y Axis
       var y = d3[this.config.axis.y.scaleType]().range([this.config.height, 0]).domain([0, d3.max(data, function (d) {
         return _lodash2.default.get(d, _this2.keyY);
       })]);
 
-      // Create the line graph
-      var line = d3[this.config.graph.type]().x(function (d) {
-        return x(_lodash2.default.get(d, _this2.keyX));
-      }).y(function (d) {
-        return y(_lodash2.default.get(d, _this2.keyY));
-      });
-
-      // If specified, create the area graph
-      var area = d3.area().curve(d3.curveCardinal).x(function (d) {
-        return x(_lodash2.default.get(d, _this2.keyX));
-      }).y0(this.config.height).y1(function (d) {
-        return y(_lodash2.default.get(d, _this2.keyY));
-      });
-
-      // If specified, use curve instead of straight line
-      if (this.config.graph.options.curved) {
-        line.curve(d3[this.config.graph.options.curveType]);
-      }
-
-      // Create the x Axis
+      // Create the X Axis
       var xAxis = d3.axisBottom(x);
-
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        xAxis.ticks(this.config.axis.x.ticks);
-      } else {
-        xAxis.tickValues(x.domain().filter(function (d, i) {
-          return !(i % _this2.config.axis.x.ticks);
-        }));
-      }
 
       // If specified, add gridlines along the X axis
       if (this.config.gridlines.x) {
@@ -17115,174 +17073,96 @@ var LineGraph = function (_Graph) {
           }));
         }
 
-        svg.append('g').attr('transform', 'translate(0, ' + this.config.height + ')').call(gridlinesX).attr('class', 'grid');
+        if (this.svg.select('.gridX').empty()) {
+          this.svg.append('g').attr('transform', 'translate(0, ' + this.config.height + ')').attr('class', 'gridX').call(gridlinesX);
+        } else {
+          this.svg.select('.gridX').transition().duration(500).style('fill-opacity', 1e-6).call(gridlinesX);
+        }
       }
 
-      // If specified, add legend to the X Axis
-      if (this.config.legend.x.length > 0) {
-        svg.append('text').attr('transform', 'translate(' + (this.config.width / 2 - this.config.margin.left) + ', ' + (this.config.height + this.config.margin.top) + ')').attr('text-anchor', 'middle').text(this.config.legend.x);
+      // If specified, add label to the X Axis
+      if (this.config.label.x.length > 0) {
+        if (d3.select('.labelX').empty()) {
+          this.svg.append('text').attr('class', 'labelX').attr('transform', 'translate(' + this.config.width / 2 + ',\n            ' + (this.config.height + this.config.margin.top) + ')').attr('text-anchor', 'middle').text(this.config.label.x);
+        } else {
+          d3.select('.labelX').text(this.config.label.x);
+        }
       }
 
-      // Add the X Axis to the SVG element
-      svg.append('g').attr('transform', 'translate(0, ' + this.config.height + ')').call(xAxis).attr('class', 'x axis');
+      // Add the X Axis to the container element
+      if (this.svg.select('.x.axis').empty()) {
+        this.svg.append('g').attr('transform', 'translate(0, ' + this.config.height + ')').attr('class', 'x axis').call(xAxis);
+      } else {
+        this.svg.select('.x.axis').transition().duration(500).call(xAxis);
+      }
 
       // If specified, hide the X axis path
       if (!this.config.axis.x.visible) {
-        svg.selectAll('.x.axis path').attr('style', 'display: none;');
-        svg.selectAll('.x.axis line').attr('style', 'display: none;');
+        this.svg.selectAll('.x.axis path').attr('style', 'display: none;');
+        this.svg.selectAll('.x.axis line').attr('style', 'display: none;');
       }
 
       // Create the Y Axis
-      var yAxis = d3.axisLeft(y).ticks(this.config.axis.y.ticks).tickSizeOuter(0);
+      var yAxis = d3.axisLeft(y).tickSizeOuter(0);
 
       // If specified, add gridlines along the Y axis
       if (this.config.gridlines.y) {
         var gridlinesY = d3.axisLeft(y).ticks(this.config.axis.y.ticks).tickFormat(this.config.axis.y.ticksFormat).tickSize(-this.config.width);
 
-        svg.append('g').call(gridlinesY).attr('class', 'grid');
-      }
-
-      // If specified, add legend to the Y Axis
-      if (this.config.legend.y.length > 0) {
-        svg.append('text').attr('transform', 'translate(' + (-this.config.margin.right - 28) + ', ' + (this.config.height / 2 - this.config.margin.top) + ')rotate(-90)').attr('text-anchor', 'middle').attr('dy', '.70em').text(this.config.legend.y);
-      }
-
-      // Add the Y Axis to the SVG element
-      svg.append('g').call(yAxis).attr('class', 'y axis');
-
-      // If specified, hide the Y axis path
-      if (!this.config.axis.y.visible) {
-        svg.selectAll('.y.axis path').attr('style', 'display: none;');
-        svg.selectAll('.y.axis line').attr('style', 'display: none;');
-      }
-
-      // Add the line to the SVG element
-      svg.append('path').attr('class', 'line').attr('d', line(data));
-
-      // If specified, add colored aera under the line
-      if (this.config.graph.options.fillArea) {
-        svg.append('path').attr('class', 'area').attr('fill', this.config.graph.options.fillAreaColor).attr('d', area(data));
-      }
-
-      // Define the linear gradient coloring of the line
-      svg.append('linearGradient').attr('id', 'value-gradient').attr('gradientUnits', 'userSpaceOnUse').attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%').selectAll('stop').data([{ offset: this.config.color.thresholds[0].offset + '%',
-        color: this.config.color.thresholds[0].value,
-        opacity: '' + this.config.color.thresholds[0].value
-      }, { offset: this.config.color.thresholds[1].offset + '%',
-        color: this.config.color.thresholds[1].value,
-        opacity: '' + this.config.color.thresholds[1].value
-      }]).enter().append('stop').attr('offset', function (d) {
-        return d.offset;
-      }).attr('stop-color', function (d) {
-        return d.color;
-      }).attr('stop-opacity', function (d) {
-        return d.opacity;
-      });
-
-      return svg;
-    }
-
-    /**
-     * Update the input data given to the line graph.
-     * @return {object} The SVG element containing the updated line graph.
-     */
-
-  }, {
-    key: 'update',
-    value: function update(data) {
-      var _this3 = this;
-
-      var svg = d3.select('svg').transition();
-
-      // Parse the updated input data
-      data.forEach(function (d) {
-        if (_this3.config.axis.x.scaleType === 'scaleTime') {
-          _lodash2.default.set(d, _this3.keyX, d3.timeParse('%d-%b-%y')(_lodash2.default.get(d, _this3.keyX)));
+        if (this.svg.select('.gridY').empty()) {
+          this.svg.append('g').attr('class', 'gridY').call(gridlinesY);
+        } else {
+          this.svg.select('.gridY').transition().duration(500).call(gridlinesY);
         }
-        _lodash2.default.set(d, _this3.keyY, +_lodash2.default.get(d, _this3.keyY));
-      });
+      }
 
-      // Create the scale for the X axis
-      var x = d3[this.config.axis.x.scaleType]();
+      // If specified, add label to the Y Axis
+      if (this.config.label.y.length > 0) {
+        if (d3.select('.labelY').empty()) {
+          this.svg.append('text').attr('class', 'labelY').attr('transform', 'translate(' + (-this.config.margin.right - 28) + ',\n            ' + (this.config.height / 2 - this.config.margin.top) + ')rotate(-90)').attr('text-anchor', 'middle').attr('dy', '.70em').text(this.config.label.y);
+        } else {
+          d3.select('.labelY').text(this.config.label.y);
+        }
+      }
 
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        x.range([0, this.config.width]);
-        x.domain(d3.extent(data, function (d) {
-          return _lodash2.default.get(d, _this3.keyX);
-        }));
+      // Add the Y Axis to the container element
+      if (this.svg.select('.y.axis').empty()) {
+        this.svg.append('g').attr('class', 'y axis').call(yAxis);
       } else {
-        x.range([this.config.width, 0]);
-        x.domain(data.map(function (d) {
-          return _lodash2.default.get(d, _this3.keyX);
-        }));
-        x.padding(1);
+        this.svg.select('.y.axis').transition().duration(500).call(yAxis);
       }
-
-      // Create the scale for the Y axis
-      var y = d3[this.config.axis.y.scaleType]().range([this.config.height, 0]).domain([0, d3.max(data, function (d) {
-        return _lodash2.default.get(d, _this3.keyY);
-      })]);
-
-      // Create the line graph
-      var line = d3[this.config.graph.type]().x(function (d) {
-        return x(_lodash2.default.get(d, _this3.keyX));
-      }).y(function (d) {
-        return y(_lodash2.default.get(d, _this3.keyY));
-      });
-
-      // If specified, create the area graph
-      var area = d3.area().curve(d3.curveCardinal).x(function (d) {
-        return x(_lodash2.default.get(d, _this3.keyX));
-      }).y0(this.config.height).y1(function (d) {
-        return y(_lodash2.default.get(d, _this3.keyY));
-      });
-
-      // If specified, use curve instead of straight line
-      if (this.config.graph.options.curved) {
-        line.curve(d3[this.config.graph.options.curveType]);
-      }
-
-      // Create the x Axis
-      var xAxis = d3.axisBottom(x);
-
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        xAxis.ticks(this.config.axis.x.ticks);
-      } else {
-        xAxis.tickValues(x.domain().filter(function (d, i) {
-          return !(i % _this3.config.axis.x.ticks);
-        }));
-      }
-
-      var yAxis = d3.axisLeft(y).ticks(this.config.axis.y.ticks).tickSizeOuter(0);
-
-      svg.select('.line').duration(750).attr('d', line(data));
-
-      svg.select('.area').duration(750).attr('d', area(data));
-
-      svg.select('.x.axis').duration(750).call(xAxis);
-
-      // If specified, hide the X axis path
-      if (!this.config.axis.x.visible) {
-        svg.selectAll('.x.axis path').attr('style', 'display: none;');
-        svg.selectAll('.x.axis line').attr('style', 'display: none;');
-      }
-
-      svg.select('.y.axis').duration(750).call(yAxis);
 
       // If specified, hide the Y axis path
       if (!this.config.axis.y.visible) {
-        svg.selectAll('.y.axis path').attr('style', 'display: none;');
-        svg.selectAll('.y.axis line').attr('style', 'display: none;');
+        this.svg.selectAll('.y.axis path').attr('style', 'display: none;');
+        this.svg.selectAll('.y.axis line').attr('style', 'display: none;');
       }
 
-      return svg;
+      var bars = this.svg.selectAll('.bar');
+      if (bars.empty()) {
+        bars.data(data).enter().append('rect').attr('class', 'bar').attr('x', function (d) {
+          return x(_lodash2.default.get(d, _this2.keyX));
+        }).attr('y', function (d) {
+          return y(_lodash2.default.get(d, _this2.keyY));
+        }).attr('width', x.bandwidth()).attr('height', function (d) {
+          return _this2.config.height - y(_lodash2.default.get(d, _this2.keyY));
+        });
+      } else {
+        bars.data(data).transition().duration(500).attr('x', function (d) {
+          return x(_lodash2.default.get(d, _this2.keyX));
+        }).attr('y', function (d) {
+          return y(_lodash2.default.get(d, _this2.keyY));
+        }).attr('width', x.bandwidth()).attr('height', function (d) {
+          return _this2.config.height - y(_lodash2.default.get(d, _this2.keyY));
+        });
+      }
     }
   }]);
 
-  return LineGraph;
+  return BarGraph;
 }(_graph2.default);
 
-exports.default = LineGraph;
+exports.default = BarGraph;
 
 /***/ }),
 /* 3 */
@@ -34496,7 +34376,7 @@ var Graph = function () {
   }, {
     key: 'render',
     value: function render() {
-      return d3.select('body').append('svg').attr('width', this.config.width + this.config.margin.left + this.config.margin.right).attr('height', this.config.height + this.config.margin.top + this.config.margin.bottom).append('g').attr('transform', 'translate(' + this.config.margin.left + ', ' + this.config.margin.top + ')');
+      return d3.select('body').append('svg').attr('class', 'container').attr('width', this.config.width + this.config.margin.left + this.config.margin.right).attr('height', this.config.height + this.config.margin.top + this.config.margin.bottom).append('g').attr('transform', 'translate(' + this.config.margin.left + ', ' + this.config.margin.top + ')');
     }
   }]);
 
@@ -34526,41 +34406,32 @@ var config = {
     left: 50
   },
   graph: {
-    type: 'line',
-    options: {
-      curved: true,
-      curveType: 'curveCardinal',
-      fillArea: true,
-      fillAreaColor: '#E8F5E9'
-    }
+    type: 'bar'
   },
   axis: {
     x: {
-      mapTo: 'date',
-      scaleType: 'scaleTime',
-      label: 'labelX',
-      ticks: 5,
+      mapTo: 'user',
+      scaleType: 'scaleBand',
+      ticks: null,
       ticksFormat: '',
       visible: false
     },
     y: {
-      mapTo: 'value',
+      mapTo: 'downloads',
       scaleType: 'scaleLinear',
-      label: 'labelY',
-      ticks: 5,
+      ticks: null,
       ticksFormat: '',
       visible: false
     }
   },
-  data: module.exports.myData,
   tooltip: false,
   gridlines: {
-    x: true,
+    x: false,
     y: true
   },
   title: 'Downloads',
-  legend: {
-    x: 'Date',
+  label: {
+    x: 'Users',
     y: 'Downloads'
   },
   color: {
@@ -34619,7 +34490,7 @@ exports = module.exports = __webpack_require__(10)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  font: 14px Roboto; }\n\n.line {\n  fill: none;\n  stroke: url(\"#value-gradient\");\n  stroke-linecap: round;\n  stroke-linejoin: round;\n  stroke-width: 2; }\n\n.area {\n  fill-opacity: .25; }\n\n.axis line {\n  fill: none;\n  shape-rendering: crispEdges;\n  stroke: #808080;\n  stroke-width: 1px; }\n\n.axis text {\n  opacity: .6; }\n\n.grid path {\n  stroke-width: 0; }\n\n.grid line {\n  shape-rendering: crispEdges;\n  stroke: #d3d3d3; }\n\n.grid .tick {\n  opacity: .7;\n  stroke: #d3d3d3; }\n", ""]);
+exports.push([module.i, "body {\n  font: 14px Roboto; }\n\n.bar {\n  fill: steelblue; }\n\n.bar:hover {\n  fill: brown; }\n\n.axis line {\n  fill: none;\n  shape-rendering: crispEdges;\n  stroke: #808080;\n  stroke-width: 1px; }\n\n.axis text {\n  opacity: .6; }\n\n.gridX path, .gridY path {\n  stroke-width: 0; }\n\n.gridX line, .gridY line {\n  shape-rendering: crispEdges;\n  stroke: #d3d3d3; }\n\n.gridX .tick, .gridY .tick {\n  opacity: .7;\n  stroke: #d3d3d3; }\n", ""]);
 
 // exports
 

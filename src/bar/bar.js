@@ -3,10 +3,10 @@ import _ from 'lodash';
 import Graph from '../graph/graph';
 
 /**
- * Class representing a line graph.
- * @extends Graph
- */
-export default class LineGraph extends Graph {
+* Class representing a bar graph.
+* @extends Graph
+*/
+export default class BarGraph extends Graph {
   /**
    * Create a line graph based on configuration.
    * @return {object} The SVG element containing the line graph.
@@ -23,23 +23,14 @@ export default class LineGraph extends Graph {
 
     // Parse input data
     data.forEach((d) => {
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        _.set(d, this.keyX, d3.timeParse('%d-%b-%y')(_.get(d, this.keyX)));
-      }
       _.set(d, this.keyY, +_.get(d, this.keyY));
     });
 
     // Create the scale for the X axis
-    const x = d3[this.config.axis.x.scaleType]();
-
-    if (this.config.axis.x.scaleType === 'scaleTime') {
-      x.range([0, this.config.width]);
-      x.domain(d3.extent(data, d => _.get(d, this.keyX)));
-    } else {
-      x.range([this.config.width, 0]);
-      x.domain(data.map(d => _.get(d, this.keyX)));
-      x.padding(1);
-    }
+    const x = d3[this.config.axis.x.scaleType]()
+      .range([this.config.width, 0])
+      .domain(data.map(d => _.get(d, this.keyX)))
+      .padding(0.1);
 
     // Create the scale for the Y Axis
     const y = d3[this.config.axis.y.scaleType]()
@@ -59,7 +50,8 @@ export default class LineGraph extends Graph {
         gridlinesX.ticks(this.config.axis.x.ticks);
       } else {
         gridlinesX.tickValues(
-          x.domain().filter((d, i) => !(i % this.config.axis.x.ticks)));
+          x.domain().filter((d, i) => !(i % this.config.axis.x.ticks))
+        );
       }
 
       if (this.svg.select('.gridX').empty()) {
@@ -70,7 +62,7 @@ export default class LineGraph extends Graph {
       } else {
         this.svg.select('.gridX')
           .transition()
-          .duration(650)
+          .duration(500)
           .style('fill-opacity', 1e-6)
           .call(gridlinesX);
       }
@@ -82,9 +74,10 @@ export default class LineGraph extends Graph {
         this.svg.append('text')
           .attr('class', 'labelX')
           .attr('transform',
-            `translate(${(this.config.width / 2)}, ${this.config.height + this.config.margin.top})`)
-            .attr('text-anchor', 'middle')
-            .text(this.config.label.x);
+            `translate(${(this.config.width / 2)},
+            ${this.config.height + this.config.margin.top})`)
+          .attr('text-anchor', 'middle')
+          .text(this.config.label.x);
       } else {
         d3.select('.labelX')
           .text(this.config.label.x);
@@ -100,7 +93,7 @@ export default class LineGraph extends Graph {
     } else {
       this.svg.select('.x.axis')
         .transition()
-        .duration(750)
+        .duration(500)
         .call(xAxis);
     }
 
@@ -130,7 +123,7 @@ export default class LineGraph extends Graph {
       } else {
         this.svg.select('.gridY')
           .transition()
-          .duration(650)
+          .duration(500)
           .call(gridlinesY);
       }
     }
@@ -160,7 +153,7 @@ export default class LineGraph extends Graph {
     } else {
       this.svg.select('.y.axis')
         .transition()
-        .duration(750)
+        .duration(500)
         .call(yAxis);
     }
 
@@ -172,75 +165,25 @@ export default class LineGraph extends Graph {
         .attr('style', 'display: none;');
     }
 
-    // Create the line graph
-    const line = d3[this.config.graph.type]()
-      .x(d => x(_.get(d, this.keyX)))
-      .y(d => y(_.get(d, this.keyY)));
-
-    // If specified, use curve instead of straight line
-    if (this.config.graph.options.curved) {
-      line.curve(d3[this.config.graph.options.curveType]);
-    }
-
-    // If specified, create the area graph
-    const area = d3.area()
-      .curve(d3.curveCardinal)
-      .x(d => x(_.get(d, this.keyX)))
-      .y0(this.config.height)
-      .y1(d => y(_.get(d, this.keyY)));
-
-    // Add the line to the SVG element
-    if (d3.select('.line').empty()) {
-      this.svg.append('path')
-        .attr('class', 'line')
-        .attr('d', line(data));
+    const bars = this.svg.selectAll('.bar');
+    if (bars.empty()) {
+      bars
+        .data(data)
+        .enter().append('rect')
+          .attr('class', 'bar')
+          .attr('x', d => x(_.get(d, this.keyX)))
+          .attr('y', d => y(_.get(d, this.keyY)))
+          .attr('width', x.bandwidth())
+          .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
     } else {
-      this.svg.select('.line')
+      bars
+      .data(data)
         .transition()
-        .duration(750)
-        .attr('d', line(data));
+        .duration(500)
+        .attr('x', d => x(_.get(d, this.keyX)))
+        .attr('y', d => y(_.get(d, this.keyY)))
+        .attr('width', x.bandwidth())
+        .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
     }
-
-    // If specified, add colored aera under the line
-    if (this.config.graph.options.fillArea) {
-      if (d3.select('.area').empty()) {
-        this.svg.append('path')
-         .attr('class', 'area')
-         .attr('fill', this.config.graph.options.fillAreaColor)
-         .attr('d', area(data));
-      } else {
-        this.svg.select('.area')
-          .transition()
-          .duration(750)
-          .attr('d', area(data));
-      }
-    }
-
-    // Define the linear gradient coloring of the line
-    this.svg.append('linearGradient')
-        .attr('id', 'value-gradient')
-        .attr('gradientUnits', 'userSpaceOnUse')
-        .attr('x1', '0%')
-        .attr('y1', '0%')
-        .attr('x2', '0%')
-        .attr('y2', '100%')
-      .selectAll('stop')
-        .data([
-          { offset: `${this.config.color.thresholds[0].offset}%`,
-            color: this.config.color.thresholds[0].value,
-            opacity: `${this.config.color.thresholds[0].value}`
-          },
-          { offset: `${this.config.color.thresholds[1].offset}%`,
-            color: this.config.color.thresholds[1].value,
-            opacity: `${this.config.color.thresholds[1].value}`
-          }
-        ])
-        .enter()
-          .append('stop')
-            .attr('offset', d => d.offset)
-            .attr('stop-color', d => d.color)
-            .attr('stop-opacity', d => d.opacity);
-
-    return this.svg;
   }
-}
+ }
