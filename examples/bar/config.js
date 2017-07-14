@@ -37,7 +37,10 @@ const config = {
   axis: {
     x: {
       mapTo: 'user',
-      scaleType: 'scaleBand',
+      scale: {
+        type: 'scaleBand',
+        format: null
+      },
       options: {
         label: {
           value: 'Users',

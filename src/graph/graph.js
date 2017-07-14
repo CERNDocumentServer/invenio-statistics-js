@@ -63,7 +63,7 @@ class Graph {
       .tickSize(-this.config.height)
       .tickFormat(this.config.axis.x.options.ticks.format);
 
-    if (this.config.axis.x.scaleType === 'scaleTime') {
+    if (this.config.axis.x.scale.type === 'scaleTime') {
       gridlinesX.ticks(this.config.axis.x.options.ticks.number);
     } else {
       gridlinesX.tickValues(

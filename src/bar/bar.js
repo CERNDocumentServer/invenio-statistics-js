@@ -45,13 +45,16 @@ class BarGraph extends Graph {
 
     // Parse input data
     data.forEach((d) => {
+      if (this.config.axis.x.scale.type === 'scaleTime') {
+        _.set(d, this.keyX, d3.timeParse(this.config.scale.format)(_.get(d, this.keyX)));
+      }
       _.set(d, this.keyY, +_.get(d, this.keyY));
     });
 
     // Create the scale for the X axis
-    const x = d3[this.config.axis.x.scaleType]();
+    const x = d3[this.config.axis.x.scale.type]();
 
-    if (this.config.axis.x.scaleType === 'scaleTime') {
+    if (this.config.axis.x.scale.type === 'scaleTime') {
       x.range([0, this.config.width]);
       x.domain(d3.extent(data, d => _.get(d, this.keyX)));
     } else {
@@ -64,9 +67,9 @@ class BarGraph extends Graph {
     const xAxis = d3.axisBottom(x)
       .tickSizeOuter(0);
 
-    if (this.config.axis.x.scaleType === 'scaleTime') {
+    if (this.config.axis.x.scale.type === 'scaleTime') {
       xAxis.ticks(xAxisOptions.ticks.number);
-      xAxis.tickFormat(d3.timeFormat('%d-%b-%y'));
+      xAxis.tickFormat(d3.timeFormat(this.config.axis.x.scale.format));
     } else {
       xAxis.tickValues(
         x.domain().filter((d, i) => !(i % xAxisOptions.ticks.number)));

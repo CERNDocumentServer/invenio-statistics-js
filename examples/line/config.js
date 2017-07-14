@@ -43,7 +43,10 @@ const config = {
   axis: {
     x: {
       mapTo: 'date',
-      scaleType: 'scaleBand',
+      scale: {
+        type: 'scaleTime',
+        format: '%d-%b-%y'
+      },
       options: {
         label: {
           value: 'Date',
