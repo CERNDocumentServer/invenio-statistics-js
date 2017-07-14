@@ -1,18 +1,41 @@
+/*
+ * This file is part of Invenio.
+ * Copyright (C) 2017 CERN.
+ *
+ * Invenio is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * Invenio is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Invenio; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
 // Export configuration object
 const config = {
-  width: 800,
-  height: 400,
+  width: 900,
+  height: 450,
   margin: {
     top: 30,
     right: 20,
-    bottom: 30,
+    bottom: 50,
     left: 50
   },
   graph: {
     type: 'line',
     options: {
       curved: true,
-      curveType: 'curveCardinal',
+      curveType: 'curveBasis',
       fillArea: true,
       fillAreaColor: '#E8F5E9'
     }
@@ -20,29 +43,52 @@ const config = {
   axis: {
     x: {
       mapTo: 'date',
-      scaleType: 'scaleTime',
-      ticks: 5,
-      ticksFormat: '',
-      visible: false
+      scale: {
+        type: 'scaleTime',
+        format: '%d-%b-%y'
+      },
+      options: {
+        label: {
+          value: 'Date',
+          visible: true
+        },
+        line: {
+          visible: false
+        },
+        ticks: {
+          number: 5,
+          format: '',
+          visible: false
+        },
+        tickLabels: {
+          visible: true,
+          rotated: true
+        },
+        gridlines: true
+      }
     },
     y: {
       mapTo: 'value',
       scaleType: 'scaleLinear',
-      ticks: 5,
-      ticksFormat: '',
-      visible: false
+      options: {
+        label: {
+          value: 'Views',
+          visible: true
+        },
+        line: {
+          visible: false
+        },
+        ticks: {
+          number: 5,
+          format: '',
+          visible: false
+        },
+        tickLabels: {
+          visible: true
+        },
+        gridlines: true
+      }
     }
-  },
-  data: module.exports.myData,
-  tooltip: false,
-  gridlines: {
-    x: true,
-    y: true
-  },
-  title: 'Downloads',
-  label: {
-    x: 'Date',
-    y: 'Downloads'
   },
   color: {
     scale: 'linearGradient',
@@ -58,6 +104,11 @@ const config = {
         opacity: 0.9
       }
     ]
+  },
+  tooltip: false,
+  title: {
+    visible: true,
+    value: 'Views by Date'
   }
 };
 
