@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf ./dist && webpack --env build",
+    "build": "rm -rf ./dist && rm -rf ./examples/dist && webpack --env build",
     "test": "rm -rf ./coverage && karma start",
-    "dev": "rm -rf ./dist && webpack --progress --config webpack.config.js",
+    "dev": "rm -rf ./dist && rm -rf ./examples/dist && webpack --progress",
     "start": "node_modules/.bin/webpack-dev-server",
     "doc": "rm -rf ./docs && node_modules/.bin/jsdoc -c conf.json"
   },

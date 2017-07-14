@@ -45,7 +45,7 @@ module.exports = [{
     new BannerWebpackPlugin({
       chunks: {
         lib: {
-          beforeContent: `/* ${fs.readFileSync('./LICENSE', 'utf8')} */`
+          beforeContent: `/* ${fs.readFileSync('./.license', 'utf8')} */`
         }
       }
     })
@@ -67,10 +67,10 @@ module.exports = [{
     new BannerWebpackPlugin({
       chunks: {
         line: {
-          beforeContent: `/* ${fs.readFileSync('./LICENSE', 'utf8')} */`
+          beforeContent: `/* ${fs.readFileSync('./.license', 'utf8')} */`
         },
         bar: {
-          beforeContent: `/* ${fs.readFileSync('./LICENSE', 'utf8')} */`
+          beforeContent: `/* ${fs.readFileSync('./.license', 'utf8')} */`
         }
       }
     })
