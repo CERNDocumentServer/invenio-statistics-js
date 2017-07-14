@@ -23,7 +23,7 @@
 
 // Export configuration object
 const config = {
-  width: 800,
+  width: 1000,
   height: 450,
   margin: {
     top: 30,
@@ -84,7 +84,15 @@ const config = {
       }
     }
   },
-  title: 'Downloads'
+  title: {
+    visible: true,
+    value: 'Downloads per User'
+  },
+  color: {
+    scale: 'scaleOrdinal',
+    number: 20
+  },
+  tooltip: true
 };
 
 export default config;

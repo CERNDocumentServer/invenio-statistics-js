@@ -31,14 +31,6 @@ body {
   font: 14px Roboto;
 }
 
-.bar {
-  fill: $barcolor;
-}
-
-.bar:hover {
-  fill: $barhover;
-}
-
 .axis {
 
   line {
@@ -68,4 +60,14 @@ body {
     stroke: $gridcolor;
   }
 
+}
+
+.title {
+  font: Roboto;
+  font-size: 18px;
+}
+
+.labelX, .labelY {
+  font: Roboto;
+  font-size: 14px;
 }

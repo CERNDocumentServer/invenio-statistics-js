@@ -292,6 +292,16 @@ class LineGraph extends Graph {
       .attr('stop-color', d => d.color)
       .attr('stop-opacity', d => d.opacity);
 
+    // If specified, add title to the graph
+    if (this.config.title.visible) {
+      this.svg.append('text')
+        .attr('x', (this.config.width / 2))
+        .attr('y', 0 - (this.config.margin.top / 2))
+        .attr('class', 'title')
+        .attr('text-anchor', 'middle')
+        .text(this.config.title.value);
+    }
+
     return this.svg;
   }
 }

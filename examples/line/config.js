@@ -23,7 +23,7 @@
 
 // Export configuration object
 const config = {
-  width: 800,
+  width: 900,
   height: 450,
   margin: {
     top: 30,
@@ -90,7 +90,6 @@ const config = {
       }
     }
   },
-  title: 'Views',
   color: {
     scale: 'linearGradient',
     thresholds: [
@@ -105,6 +104,11 @@ const config = {
         opacity: 0.9
       }
     ]
+  },
+  tooltip: false,
+  title: {
+    visible: true,
+    value: 'Views by Date'
   }
 };
 

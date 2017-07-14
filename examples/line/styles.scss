@@ -69,5 +69,14 @@ body {
     opacity: .7;
     stroke: $gridcolor;
   }
+}
 
+.title {
+  font: Roboto;
+  font-size: 18px;
+}
+
+.labelX, .labelY {
+  font: Roboto;
+  font-size: 14px;
 }

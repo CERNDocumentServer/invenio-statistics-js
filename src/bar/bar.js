@@ -58,7 +58,7 @@ class BarGraph extends Graph {
       x.range([0, this.config.width]);
       x.domain(d3.extent(data, d => _.get(d, this.keyX)));
     } else {
-      x.range([this.config.width, 0]);
+      x.range([0, this.config.width]);
       x.domain(data.map(d => _.get(d, this.keyX)));
       x.padding(0.05);
     }
@@ -230,6 +230,8 @@ class BarGraph extends Graph {
     }
 
     const bars = d3.select('.container').select('g').selectAll('.bar');
+    const colorScale = d3[this.config.color.scale](d3[`schemeCategory${this.config.color.number}`]);
+
     if (bars.empty()) {
       bars
         .data(data)
@@ -239,6 +241,7 @@ class BarGraph extends Graph {
         .attr('y', this.config.height)
         .attr('width', x.bandwidth())
         .attr('height', 0)
+        .attr('fill', (d, i) => colorScale(i))
         .transition()
         .duration(350)
         .delay(150)
@@ -250,12 +253,22 @@ class BarGraph extends Graph {
         .data(data)
         .exit()
         .transition()
-        .duration(350)
-        .delay(100)
+        .duration(250)
         .attr('y', y(0))
         .attr('height', this.config.height - y(0))
         .style('fill-opacity', 1e-6)
         .remove();
+
+      // Update data that was present in the old data set
+      bars
+        .data(data)
+        .transition()
+        .duration(500)
+        .attr('x', d => x(_.get(d, this.keyX)))
+        .attr('y', d => y(_.get(d, this.keyY)))
+        .attr('width', x.bandwidth())
+        .attr('fill', (d, i) => colorScale(i))
+        .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
 
       // Add new data that was not present in the old data set
       bars
@@ -267,22 +280,31 @@ class BarGraph extends Graph {
         .attr('y', this.config.height)
         .attr('width', x.bandwidth())
         .attr('height', 0)
+        .attr('fill', (d, i) => colorScale(i))
         .transition()
-        .duration(350)
-        .delay(100)
+        .duration(250)
+        .delay(250)
         .attr('y', d => y(_.get(d, this.keyY)))
-        .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
-
-      // Update data that was present in the old data set
-      bars
-        .data(data)
-        .transition()
-        .duration(500)
-        .attr('x', d => x(_.get(d, this.keyX)))
-        .attr('y', d => y(_.get(d, this.keyY)))
-        .attr('width', x.bandwidth())
         .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
     }
+
+    // If specified, add simple tooltip
+    if (this.config.tooltip) {
+      d3.select('.container').select('g').selectAll('.bar')
+        .append('title')
+        .text(d => `(${_.get(d, this.keyX)}, ${_.get(d, this.keyY)})`);
+    }
+
+    // If specified, add title to the graph
+    if (this.config.title.visible) {
+      this.svg.append('text')
+        .attr('x', (this.config.width / 2))
+        .attr('y', 0 - (this.config.margin.top / 2))
+        .attr('class', 'title')
+        .attr('text-anchor', 'middle')
+        .text(this.config.title.value);
+    }
+
     return this.svg;
   }
 }
