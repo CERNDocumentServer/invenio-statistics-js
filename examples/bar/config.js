@@ -24,11 +24,11 @@
 // Export configuration object
 const config = {
   width: 800,
-  height: 400,
+  height: 450,
   margin: {
     top: 30,
     right: 20,
-    bottom: 30,
+    bottom: 40,
     left: 50
   },
   graph: {
@@ -52,9 +52,10 @@ const config = {
           visible: false
         },
         tickLabels: {
-          visible: true
+          visible: true,
+          rotated: true
         },
-        gridlines: false
+        gridlines: true
       }
     },
     y: {
@@ -76,7 +77,7 @@ const config = {
         tickLabels: {
           visible: true
         },
-        gridlines: false
+        gridlines: true
       }
     }
   },

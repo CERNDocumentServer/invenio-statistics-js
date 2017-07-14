@@ -24,18 +24,18 @@
 // Export configuration object
 const config = {
   width: 800,
-  height: 400,
+  height: 450,
   margin: {
     top: 30,
     right: 20,
-    bottom: 30,
+    bottom: 50,
     left: 50
   },
   graph: {
     type: 'line',
     options: {
       curved: true,
-      curveType: 'curveCardinal',
+      curveType: 'curveBasis',
       fillArea: true,
       fillAreaColor: '#E8F5E9'
     }
@@ -53,14 +53,15 @@ const config = {
           visible: false
         },
         ticks: {
-          number: 7,
+          number: 5,
           format: '',
-          visible: true
+          visible: false
         },
         tickLabels: {
-          visible: true
+          visible: true,
+          rotated: true
         },
-        gridlines: false
+        gridlines: true
       }
     },
     y: {
@@ -82,7 +83,7 @@ const config = {
         tickLabels: {
           visible: true
         },
-        gridlines: false
+        gridlines: true
       }
     }
   },

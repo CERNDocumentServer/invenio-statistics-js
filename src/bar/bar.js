@@ -39,9 +39,9 @@ class BarGraph extends Graph {
     // If does not exist, create a container SVG element
     this.svg = d3.select('.container').empty() ? super.render() : d3.select('.container');
 
-    // Get the keys for the X, Y axis
-    this.keyX = this.config.axis.x.mapTo;
-    this.keyY = this.config.axis.y.mapTo;
+    // Get the options for the X, Y axis
+    const xAxisOptions = this.config.axis.x.options;
+    const yAxisOptions = this.config.axis.y.options;
 
     // Parse input data
     data.forEach((d) => {
@@ -49,21 +49,28 @@ class BarGraph extends Graph {
     });
 
     // Create the scale for the X axis
-    const x = d3[this.config.axis.x.scaleType]()
-      .range([this.config.width, 0])
-      .domain(data.map(d => _.get(d, this.keyX)))
-      .padding(0.1);
+    const x = d3[this.config.axis.x.scaleType]();
 
-    // Create the scale for the Y Axis
-    const y = d3[this.config.axis.y.scaleType]()
-      .range([this.config.height, 0])
-      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      x.range([0, this.config.width]);
+      x.domain(d3.extent(data, d => _.get(d, this.keyX)));
+    } else {
+      x.range([this.config.width, 0]);
+      x.domain(data.map(d => _.get(d, this.keyX)));
+      x.padding(0.05);
+    }
 
     // Create the X Axis
-    const xAxisOptions = this.config.axis.x.options;
     const xAxis = d3.axisBottom(x)
-      .ticks(xAxisOptions.ticks.number)
       .tickSizeOuter(0);
+
+    if (this.config.axis.x.scaleType === 'scaleTime') {
+      xAxis.ticks(xAxisOptions.ticks.number);
+      xAxis.tickFormat(d3.timeFormat('%d-%b-%y'));
+    } else {
+      xAxis.tickValues(
+        x.domain().filter((d, i) => !(i % xAxisOptions.ticks.number)));
+    }
 
     // Add the X Axis to the container element
     if (d3.select('.x.axis').empty()) {
@@ -74,38 +81,25 @@ class BarGraph extends Graph {
     } else {
       d3.select('.x.axis')
         .transition()
-        .duration(550)
+        .duration(500)
         .call(xAxis);
     }
 
     // If specified, add gridlines along the X axis
     if (xAxisOptions.gridlines) {
-      const gridlinesX = d3.axisBottom(x)
-        .ticks(xAxisOptions.ticks.number)
-        .tickSize(-this.config.height)
-        .tickFormat(xAxisOptions.ticks.format);
-
-      if (this.config.axis.x.scaleType === 'scaleTime') {
-        gridlinesX.ticks(xAxisOptions.ticks.number);
-      } else {
-        gridlinesX.tickValues(
-          x.domain().filter((d, i) => !(i % xAxisOptions.ticks.number))
-        );
-      }
-
       if (d3.select('.gridX').empty()) {
         this.svg.append('g')
           .attr('transform', `translate(0, ${this.config.height})`)
           .attr('class', 'gridX')
-          .call(gridlinesX);
+          .call(this.makeGridlinesX(x));
       } else {
         d3.select('.gridX')
           .transition()
-          .duration(350)
+          .duration(200)
           .style('stroke-opacity', 1e-6)
           .transition()
-          .duration(400)
-          .call(gridlinesX)
+          .duration(300)
+          .call(this.makeGridlinesX(x))
           .style('stroke-opacity', 0.7);
       }
     }
@@ -117,13 +111,22 @@ class BarGraph extends Graph {
           .attr('class', 'labelX')
           .attr('transform',
             `translate(${(this.config.width / 2)},
-            ${this.config.height + this.config.margin.top})`)
+            ${this.config.height + this.config.margin.bottom})`)
           .attr('text-anchor', 'middle')
           .text(xAxisOptions.label.value);
       } else {
         d3.select('.labelX')
           .text(xAxisOptions.label.value);
       }
+    }
+
+    // If specified, rotate the tick labels
+    if (xAxisOptions.tickLabels.rotated) {
+      d3.selectAll('g.x.axis g.tick text')
+        .style('text-anchor', 'middle')
+        .attr('dx', '-.8em')
+        .attr('dy', '.55em')
+        .attr('transform', 'rotate(-25)');
     }
 
     // If specified, hide the X axis line
@@ -144,8 +147,12 @@ class BarGraph extends Graph {
         .attr('style', 'display: none;');
     }
 
+    // Create the scale for the Y Axis
+    const y = d3[this.config.axis.y.scaleType]()
+      .range([this.config.height, 0])
+      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
+
     // Create the Y Axis
-    const yAxisOptions = this.config.axis.y.options;
     const yAxis = d3.axisLeft(y)
       .ticks(yAxisOptions.ticks.number)
       .tickSizeOuter(0);
@@ -176,10 +183,10 @@ class BarGraph extends Graph {
       } else {
         d3.select('.gridY')
           .transition()
-          .duration(150)
+          .duration(200)
           .style('stroke-opacity', 1e-6)
           .transition()
-          .duration(500)
+          .duration(300)
           .style('stroke-opacity', 0.7);
       }
     }
@@ -226,14 +233,48 @@ class BarGraph extends Graph {
         .enter().append('rect')
         .attr('class', 'bar')
         .attr('x', d => x(_.get(d, this.keyX)))
-        .attr('y', d => y(_.get(d, this.keyY)))
+        .attr('y', this.config.height)
         .attr('width', x.bandwidth())
+        .attr('height', 0)
+        .transition()
+        .duration(350)
+        .delay(150)
+        .attr('y', d => y(_.get(d, this.keyY)))
         .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
     } else {
+      // Remove old data that is not present in the new data set
+      bars
+        .data(data)
+        .exit()
+        .transition()
+        .duration(350)
+        .delay(100)
+        .attr('y', y(0))
+        .attr('height', this.config.height - y(0))
+        .style('fill-opacity', 1e-6)
+        .remove();
+
+      // Add new data that was not present in the old data set
+      bars
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('x', d => x(_.get(d, this.keyX)))
+        .attr('y', this.config.height)
+        .attr('width', x.bandwidth())
+        .attr('height', 0)
+        .transition()
+        .duration(350)
+        .delay(100)
+        .attr('y', d => y(_.get(d, this.keyY)))
+        .attr('height', d => this.config.height - y(_.get(d, this.keyY)));
+
+      // Update data that was present in the old data set
       bars
         .data(data)
         .transition()
-        .duration(650)
+        .duration(500)
         .attr('x', d => x(_.get(d, this.keyX)))
         .attr('y', d => y(_.get(d, this.keyY)))
         .attr('width', x.bandwidth())

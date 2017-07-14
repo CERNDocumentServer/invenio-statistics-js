@@ -39,9 +39,9 @@ class LineGraph extends Graph {
     // If does not exist, create a container SVG element
     this.svg = d3.select('.container').empty() ? super.render() : d3.select('.container');
 
-    // Get the keys for the X, Y axis
-    this.keyX = this.config.axis.x.mapTo;
-    this.keyY = this.config.axis.y.mapTo;
+    // Get the options for the X, Y axis
+    const xAxisOptions = this.config.axis.x.options;
+    const yAxisOptions = this.config.axis.y.options;
 
     // Parse input data
     data.forEach((d) => {
@@ -63,19 +63,13 @@ class LineGraph extends Graph {
       x.padding(1);
     }
 
-    // Create the scale for the Y Axis
-    const y = d3[this.config.axis.y.scaleType]()
-      .range([this.config.height, 0])
-      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
-
     // Create the X Axis
-    const xAxisOptions = this.config.axis.x.options;
     const xAxis = d3.axisBottom(x)
-      .ticks(xAxisOptions.ticks.number)
       .tickSizeOuter(0);
 
     if (this.config.axis.x.scaleType === 'scaleTime') {
       xAxis.ticks(xAxisOptions.ticks.number);
+      xAxis.tickFormat(d3.timeFormat('%d-%b-%y'));
     } else {
       xAxis.tickValues(
         x.domain().filter((d, i) => !(i % xAxisOptions.ticks.number)));
@@ -90,32 +84,36 @@ class LineGraph extends Graph {
     } else {
       d3.select('.x.axis')
         .transition()
-        .duration(550)
+        .duration(500)
         .call(xAxis);
     }
 
     // If specified, add gridlines along the X axis
     if (xAxisOptions.gridlines) {
-      const gridlinesX = d3.axisBottom(x)
-        .ticks(xAxisOptions.ticks.number)
-        .tickSize(-this.config.height)
-        .tickFormat(xAxisOptions.ticks.format);
-
       if (d3.select('.gridX').empty()) {
         this.svg.append('g')
-          .attr('transform', `translate(0, ${this.config.height})`)
           .attr('class', 'gridX')
-          .call(gridlinesX);
+          .attr('transform', `translate(0, ${this.config.height})`)
+          .call(this.makeGridlinesX(x));
       } else {
         d3.select('.gridX')
           .transition()
-          .duration(175)
+          .duration(200)
           .style('stroke-opacity', 1e-6)
           .transition()
-          .duration(475)
-          .call(gridlinesX)
+          .duration(300)
+          .call(this.makeGridlinesX(x))
           .style('stroke-opacity', 0.7);
       }
+    }
+
+    // If specified, rotate the tick labels
+    if (xAxisOptions.tickLabels.rotated) {
+      d3.selectAll('g.x.axis g.tick text')
+        .style('text-anchor', 'middle')
+        .attr('dx', '-.8em')
+        .attr('dy', '.85em')
+        .attr('transform', 'rotate(-25)');
     }
 
     // If specified, add label to the X Axis
@@ -124,7 +122,7 @@ class LineGraph extends Graph {
         this.svg.append('text')
           .attr('class', 'labelX')
           .attr('transform',
-            `translate(${(this.config.width / 2)}, ${this.config.height + this.config.margin.top})`)
+            `translate(${(this.config.width / 2)}, ${this.config.height + this.config.margin.bottom})`)
           .attr('text-anchor', 'middle')
           .text(xAxisOptions.label.value);
       } else {
@@ -151,31 +149,30 @@ class LineGraph extends Graph {
         .attr('style', 'display: none;');
     }
 
+    // Create the scale for the Y Axis
+    const y = d3[this.config.axis.y.scaleType]()
+      .range([this.config.height, 0])
+      .domain([0, d3.max(data, d => _.get(d, this.keyY))]);
+
     // Create the Y Axis
-    const yAxisOptions = this.config.axis.y.options;
     const yAxis = d3.axisLeft(y)
       .ticks(yAxisOptions.ticks.number)
       .tickSizeOuter(0);
 
     // If specified, add gridlines along the Y axis
     if (yAxisOptions.gridlines) {
-      const gridlinesY = d3.axisLeft(y)
-        .ticks(yAxisOptions.ticks.number)
-        .tickFormat(yAxisOptions.ticks.format)
-        .tickSize(-this.config.width);
-
       if (d3.select('.gridY').empty()) {
         this.svg.append('g')
           .attr('class', 'gridY')
-          .call(gridlinesY);
+          .call(this.makeGridlinesY(y));
       } else {
         d3.select('.gridY')
+          .transition()
+          .duration(200)
           .style('stroke-opacity', 1e-6)
           .transition()
-          .duration(175)
-          .call(gridlinesY)
-          .transition()
-          .duration(475)
+          .duration(300)
+          .call(this.makeGridlinesY(y))
           .style('stroke-opacity', 0.7);
       }
     }
@@ -253,7 +250,7 @@ class LineGraph extends Graph {
       } else {
         d3.select('.line')
           .transition()
-          .duration(650)
+          .duration(500)
           .attr('d', line(data));
       }
 
@@ -265,7 +262,7 @@ class LineGraph extends Graph {
       } else {
         d3.select('.area')
           .transition()
-          .duration(650)
+          .duration(500)
           .attr('d', area(data));
       }
     }
