@@ -22,28 +22,105 @@
  */
 
 // Export configuration object
-const config = {
+const config = {};
+config.pageviewsVideosPerCountry = {
   width: 1000,
   height: 450,
   margin: {
     top: 30,
     right: 20,
     bottom: 40,
-    left: 50
+    left: 60
   },
   graph: {
     type: 'bar'
   },
   axis: {
     x: {
-      mapTo: 'user',
+      mapTo: 'term',
       scale: {
         type: 'scaleBand',
         format: null
       },
       options: {
         label: {
-          value: 'Users',
+          value: 'Countries',
+          visible: false
+        },
+        line: {
+          visible: false
+        },
+        ticks: {
+          number: null,
+          format: '',
+          visible: false
+        },
+        tickLabels: {
+          visible: true,
+          rotated: true
+        },
+        gridlines: false
+      }
+    },
+    y: {
+      mapTo: 'count',
+      scale: {
+        type: 'scaleLinear',
+        format: ''
+      },
+      options: {
+        label: {
+          value: 'Pageviews',
+          visible: false
+        },
+        line: {
+          visible: false
+        },
+        ticks: {
+          number: null,
+          format: '',
+          visible: false
+        },
+        tickLabels: {
+          visible: true
+        },
+        gridlines: true
+      }
+    }
+  },
+  title: {
+    visible: true,
+    value: 'Pageviews (per Country)'
+  },
+  color: {
+    scale: 'scaleOrdinal',
+    number: 20
+  },
+  tooltip: true
+};
+
+config.downloadUsers = {
+  width: 1000,
+  height: 450,
+  margin: {
+    top: 30,
+    right: 20,
+    bottom: 60,
+    left: 60
+  },
+  graph: {
+    type: 'bar'
+  },
+  axis: {
+    x: {
+      mapTo: 'term',
+      scale: {
+        type: 'scaleBand',
+        format: null
+      },
+      options: {
+        label: {
+          value: 'UserID',
           visible: true
         },
         line: {
@@ -62,8 +139,11 @@ const config = {
       }
     },
     y: {
-      mapTo: 'downloads',
-      scaleType: 'scaleLinear',
+      mapTo: 'count',
+      scale: {
+        type: 'scaleLinear',
+        format: ''
+      },
       options: {
         label: {
           value: 'Downloads',
@@ -86,11 +166,11 @@ const config = {
   },
   title: {
     visible: true,
-    value: 'Downloads per User'
+    value: 'Video Downloads (per User)'
   },
   color: {
     scale: 'scaleOrdinal',
-    number: 20
+    number: 10
   },
   tooltip: true
 };

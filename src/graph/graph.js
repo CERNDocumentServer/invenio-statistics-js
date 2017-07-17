@@ -89,12 +89,13 @@ class Graph {
 
   /**
    * Render an empty SVG element to the DOM.
-   * @return {Object} The SVG container element.
+   * @param {String} - The class of the SVG element.
+   * @return {Object} - The SVG container element.
    */
-  render() {
+  initialize(classElement) {
     return d3.select('body')
       .append('svg')
-      .attr('class', 'container')
+      .attr('class', `${classElement}`)
       .attr('width', this.config.width + this.config.margin.left + this.config.margin.right)
       .attr('height', this.config.height + this.config.margin.top + this.config.margin.bottom)
       .append('g')

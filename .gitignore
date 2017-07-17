@@ -22,3 +22,6 @@ dist/
 
 #package-loc.json
 package-loc.json
+
+# CDS data
+data-cds.js

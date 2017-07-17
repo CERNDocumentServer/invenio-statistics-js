@@ -29,13 +29,29 @@ $barhover: #a52a2a;
 
 body {
   font: 14px Roboto;
+  display: flex;
+  flex-direction: column;
+}
+
+svg {
+  flex: 0 1 auto;
+  align-self: center;
+  padding: 12px;
+  margin: 25px;
+}
+
+#toggle {
+  flex: 0 1 auto;
+  align-self: center;
+  font: 13px Roboto;
+  padding: 6px;
+  margin: 3px;
 }
 
 .axis {
 
   line {
     fill: none;
-    shape-rendering: crispEdges;
     stroke: $axiscolor;
     stroke-width: 1px;
   }
@@ -51,7 +67,6 @@ body {
   }
 
   line {
-    shape-rendering: crispEdges;
     stroke: $gridcolor;
   }
 
@@ -64,7 +79,8 @@ body {
 
 .title {
   font: Roboto;
-  font-size: 18px;
+  font-size: 17px;
+  text-decoration: underline;
 }
 
 .labelX, .labelY {
