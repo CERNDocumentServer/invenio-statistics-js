@@ -34,7 +34,6 @@ $white: #fff;
 
 .focus {
   circle {
-    // fill: none;
     r: 6;
     stroke-opacity: .75;
     stroke-width: 6px;
@@ -46,7 +45,6 @@ $white: #fff;
 body {
   display: flex;
   flex-direction: column;
-  font: 14px Roboto;
 }
 
 #toggle {
@@ -104,14 +102,16 @@ svg {
 }
 
 .title {
-  font: Roboto;
+  font-family: Roboto;
   font-size: 17px;
+  font-weight: 500;
   text-decoration: underline;
 }
 
 .labelX, .labelY {
-  font: Roboto;
+  font-family: Roboto;
   font-size: 14px;
+  font-weight: normal;
 }
 
 .d3-tip {
@@ -147,5 +147,13 @@ svg {
     left: 50%;
     margin-left: -5px;
     position: absolute;
+  }
+}
+
+.legend {
+  text.label {
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
   }
 }
