@@ -54,6 +54,14 @@ class LineGraph extends Graph {
       _.set(d, this.keyY, +_.get(d, this.keyY));
     });
 
+    // // Define clip path to focus on domain
+    this.svg.append('defs').append('clipPath')
+      .attr('id', 'clip')
+      .append('rect')
+      .attr('transform', 'translate(0, -5)')
+      .attr('width', this.config.width)
+      .attr('height', this.config.height);
+
     // Create the scale for the X axis
     const x = d3[this.config.axis.x.scale.type]();
 
@@ -237,9 +245,10 @@ class LineGraph extends Graph {
       line.curve(d3[this.config.graph.options.curveType]);
     }
 
+    let area;
     // If specified, add colored aera under the line
     if (this.config.graph.options.fillArea) {
-      const area = d3.area()
+      area = d3.area()
         .curve(d3[this.config.graph.options.curveType])
         .x(d => x(_.get(d, this.keyX)))
         .y0(this.config.height)
@@ -247,6 +256,7 @@ class LineGraph extends Graph {
 
       if (d3.select(`.${classElement}`).select('.area').empty()) {
         this.svg.append('path')
+          .data([data])
           .transition()
           .delay(400)
           .duration(500)
@@ -264,22 +274,10 @@ class LineGraph extends Graph {
     // Add the line to the SVG element
     if (d3.select(`.${classElement}`).select('.line').empty()) {
       this.svg.append('path')
+        .data([data])
         .attr('class', 'line')
         .attr('stroke', `url(#${classElement})`)
         .attr('d', line(data));
-
-      const totalLength = d3.select(`.${classElement}`).select('.line')
-        .node().getTotalLength();
-
-      // Smoothly draw the line on the SVG element
-      d3.select(`.${classElement}`).select('.line')
-        .attr('stroke-dasharray', `${totalLength} ${totalLength}`)
-        .attr('stroke-dashoffset', totalLength)
-        .transition()
-        .delay(400)
-        .duration(1750)
-        .ease(d3.easeLinear)
-        .attr('stroke-dashoffset', 0);
     } else {
       d3.select(`.${classElement}`).select('.line')
         .transition()
@@ -466,6 +464,28 @@ class LineGraph extends Graph {
       this.svg.select('.legend')
         .call(legend);
     }
+
+    function zoomed() {
+      const t = d3.event.transform;
+      const xt = t.rescaleX(x);
+      console.log('here');
+      d3.select(`.${classElement}`).select('g').select('.x.axis')
+        .call(xAxis.scale(xt));
+      d3.select(`.${classElement}`).select('.area')
+        .attr('d', area.x(d => xt(d.time)));
+      d3.select(`.${classElement}`).select('.line')
+        .attr('d', line.x(d => xt(d.time)));
+    }
+
+    // Add zoom functionality
+    const zoom = d3.zoom()
+      .scaleExtent([1, 8])
+      .translateExtent([[0, 0], [this.config.width, this.config.height]])
+      .extent([[0, 0], [this.config.width, this.config.height]])
+      .on('zoom', zoomed);
+
+    d3.select(`.${classElement}`)
+      .call(zoom);
 
     return this.svg;
   }

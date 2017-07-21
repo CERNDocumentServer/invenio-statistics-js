@@ -252,7 +252,7 @@ config.pageviewsVideosInterval1month = {
       mapTo: 'time',
       scale: {
         type: 'scaleTime',
-        format: '%d-%b-%y'
+        format: '%d %b %Y'
       },
       options: {
         label: {
@@ -326,7 +326,7 @@ config.pageviewsVideosInterval1month = {
     position: 'bottom'
   },
   circles: {
-    visible: true,
+    visible: false,
     radius: 5.5,
     color: '#1565C0'
   }

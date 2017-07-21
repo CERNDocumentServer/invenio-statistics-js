@@ -63,6 +63,7 @@ svg {
 }
 
 .line {
+  clip-path: url(#clip);
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -70,6 +71,7 @@ svg {
 }
 
 .area {
+  // clip-path: url(#clip);
   fill-opacity: .3;
 }
 
