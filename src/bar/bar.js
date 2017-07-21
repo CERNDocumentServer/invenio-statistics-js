@@ -162,7 +162,7 @@ class BarGraph extends Graph {
 
     // Create the Y Axis
     const yAxis = d3.axisLeft(y)
-      .ticks(yAxisOptions.ticks.number)
+      .ticks(yAxisOptions.ticks.number, 's')
       .tickSizeOuter(0);
 
     // Add the Y Axis to the container element
@@ -239,8 +239,9 @@ class BarGraph extends Graph {
 
     // If specified, add tooltip
     const tooltip = d3.tip()
-      .attr('class', 'd3-tip')
+      .attr('class', `${classElement} d3-tip bottom`)
       .offset([-10, 0])
+      .direction('n')
       .html(d => `
         <strong>${this.config.axis.x.options.label.value}:</strong>
         ${_.get(d, this.keyX)}</br>
@@ -248,7 +249,8 @@ class BarGraph extends Graph {
         ${_.get(d, this.keyY)}
       `);
 
-    this.svg.call(tooltip);
+    d3.select(`.${classElement}`)
+      .call(tooltip);
 
     if (bars.empty()) {
       bars

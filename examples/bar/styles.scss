@@ -33,7 +33,6 @@ $white: #fff;
 body {
   display: flex;
   flex-direction: column;
-  font: 14px Roboto;
 }
 
 svg {
@@ -46,7 +45,6 @@ svg {
 #toggle {
   align-self: center;
   flex: 0 1 auto;
-  font: 13px Roboto;
   margin: 3px;
   padding: 6px;
 }
@@ -82,14 +80,12 @@ svg {
 }
 
 .title {
-  font: Roboto;
   font-size: 17px;
   text-decoration: underline;
 }
 
 .labelX,
 .labelY {
-  font: Roboto;
   font-size: 14px;
 }
 
@@ -104,9 +100,9 @@ svg {
   pointer-events: none;
   position: absolute;
   transition: opacity 300ms linear;
-  z-index: 5;
+  z-index: 2;
 
-  &:after {
+  &.bottom:after {
     border-color: $tooltip transparent transparent;
     border-style: solid;
     border-width: 5px;
