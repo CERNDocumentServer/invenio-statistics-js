@@ -326,7 +326,7 @@ config.pageviewsVideosInterval1month = {
     position: 'bottom'
   },
   circles: {
-    visible: false,
+    visible: true,
     radius: 5.5,
     color: '#1565C0'
   }

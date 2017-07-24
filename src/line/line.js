@@ -60,9 +60,9 @@ class LineGraph extends Graph {
     this.svg.append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
-      .attr('transform', 'translate(0, -5)')
-      .attr('width', this.config.width)
-      .attr('height', this.config.height);
+      .attr('transform', 'translate(-7.5, -7.5)')
+      .attr('width', this.config.width + 15)
+      .attr('height', this.config.height + 10);
 
     // Create the scale for the X axis
     const x = d3[this.config.axis.x.scale.type]();
@@ -479,7 +479,6 @@ class LineGraph extends Graph {
 
     function zoomed() {
       altX = d3.event.transform.rescaleX(x);
-
       if (d3.event.transform.k > 1) {
         d3.select(`.${classElement}`).style('cursor', 'ew-resize');
         d3.select(`.${classElement}`).selectAll('.dot').style('cursor', 'auto');
@@ -489,14 +488,27 @@ class LineGraph extends Graph {
       d3.select(`.${classElement}`).select('.focus').select('circle')
         .attr('opacity', 0);
       d3.select(`.${classElement}`).select('g').select('.x.axis')
+        .transition()
+        .duration(75)
         .call(xAxis.scale(altX));
       d3.select(`.${classElement}`).select('.line')
+        .transition()
+        .duration(75)
         .attr('d', line.x(d => altX(d.time)));
       d3.select(`.${classElement}`).select('.area')
+        .transition()
+        .duration(75)
         .attr('d', area.x(d => altX(d.time)));
       d3.select(`.${classElement}`).selectAll('.dot')
+        .transition()
+        .duration(75)
         .attr('cx', d => altX(d.time));
       d3.select(`.${classElement}`).select('.gridX')
+        .transition()
+        .duration(75)
+        .style('stroke-opacity', 1e-6)
+        .transition()
+        .duration(75)
         .call(that.makeGridlinesX(altX))
         .style('stroke-opacity', 0.7);
     }

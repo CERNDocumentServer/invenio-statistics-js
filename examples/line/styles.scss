@@ -56,7 +56,6 @@ body {
 #toggle {
   align-self: center;
   flex: 0 1 auto;
-  font: 13px Roboto;
   margin: 5px;
   padding: 6px;
 }
@@ -110,14 +109,12 @@ svg {
 }
 
 .title {
-  font-family: Roboto;
   font-size: 17px;
   font-weight: 500;
   text-decoration: underline;
 }
 
 .labelX, .labelY {
-  font-family: Roboto;
   font-size: 14px;
   font-weight: normal;
 }
@@ -128,7 +125,6 @@ svg {
   box-shadow: -10px 10px 20px 0 $shadow;
   box-sizing: border-box;
   color: $white;
-  font-family: Roboto;
   font-size: 14px;
   font-weight: normal;
   padding: 10px;
@@ -162,7 +158,6 @@ svg {
 
 .legend {
   text.label {
-    font-family: Roboto;
     font-size: 12px;
     font-weight: normal;
   }
