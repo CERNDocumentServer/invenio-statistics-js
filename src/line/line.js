@@ -56,6 +56,14 @@ class LineGraph extends Graph {
       _.set(d, this.keyY, +_.get(d, this.keyY));
     });
 
+    // // Define clip path to focus on domain
+    this.svg.append('defs').append('clipPath')
+      .attr('id', 'clip')
+      .append('rect')
+      .attr('transform', 'translate(0, -5)')
+      .attr('width', this.config.width)
+      .attr('height', this.config.height);
+
     // Create the scale for the X axis
     const x = d3[this.config.axis.x.scale.type]();
     let altX = x;
@@ -461,7 +469,7 @@ class LineGraph extends Graph {
         .call(legend);
     }
 
-    // // Define clip path to focus on domain
+    // Define clip path to focus on domain
     this.svg.append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
