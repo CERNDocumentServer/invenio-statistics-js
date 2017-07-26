@@ -26,8 +26,6 @@ import config from './config';
 import dataCDS from '../data/data-cds';
 import { BarGraph } from '../../src/index';
 
-console.log(dataCDS);
-
 let toggle = true;
 const d1 = _.cloneDeep(dataCDS.pageviewsVideosPerCountry);
 const d2 = dataCDS.pageviewsVideosPerCountry.filter((d, i) => i % 2);

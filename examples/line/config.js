@@ -242,7 +242,7 @@ config.pageviewsVideosInterval1month = {
       mapTo: 'time',
       scale: {
         type: 'scaleTime',
-        format: '%d-%b-%y'
+        format: '%d-%b-%Y'
       },
       options: {
         label: {
@@ -253,13 +253,13 @@ config.pageviewsVideosInterval1month = {
           visible: false
         },
         ticks: {
-          number: 5,
+          number: null,
           format: '',
           visible: false
         },
         tickLabels: {
           visible: true,
-          rotated: true
+          rotated: false
         },
         gridlines: true
       }
@@ -279,7 +279,7 @@ config.pageviewsVideosInterval1month = {
           visible: false
         },
         ticks: {
-          number: 5,
+          number: null,
           format: '',
           visible: false
         },

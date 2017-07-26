@@ -45,6 +45,9 @@ class LineGraph extends Graph {
     const xAxisOptions = this.config.axis.x.options;
     const yAxisOptions = this.config.axis.y.options;
 
+    // Reference to the current class
+    const that = this;
+
     // Parse input data
     data.forEach((d) => {
       if (this.config.axis.x.scale.type === 'scaleTime') {
@@ -158,7 +161,7 @@ class LineGraph extends Graph {
 
     // Create the Y Axis
     const yAxis = d3.axisLeft(y)
-      .ticks(yAxisOptions.ticks.number)
+      .ticks(yAxisOptions.ticks.number, 's')
       .tickSizeOuter(0);
 
     // If specified, add gridlines along the Y axis
@@ -289,20 +292,42 @@ class LineGraph extends Graph {
 
     // If specified, add tooltip
     const tooltip = d3.tip()
-      .attr('class', 'd3-tip')
+      .attr('class', `${classElement} d3-tip`)
       .offset((d) => {
-        if (_.get(d, this.keyY) > (0.9 * d3.max(data, d1 => _.get(d1, this.keyY)))) {
-          return [10, 0];
+        const offset = [0, 0];
+        const out = this.isOut(x(_.get(d, this.keyX)), y(_.get(d, this.keyY)));
+        if (out.top) {
+          offset[0] = 10;
+        } else {
+          offset[0] = -10;
         }
-        return [-10, 0];
+        if (out.left) {
+          offset[0] = 5;
+          offset[1] = 10;
+        } else if (out.right) {
+          offset[0] = -5;
+          offset[1] = -10;
+        }
+        return offset;
       })
       .direction((d) => {
-        if (_.get(d, this.keyY) > (0.9 * d3.max(data, d1 => _.get(d1, this.keyY)))) {
-          d3.select('.d3-tip').attr('class', 'd3-tip top');
-          return 's';
+        let dir = '';
+        const out = this.isOut(x(_.get(d, this.keyX)), y(_.get(d, this.keyY)));
+        if (out.top) {
+          d3.select(`.${classElement}.d3-tip`).attr('class', `${classElement} d3-tip top`);
+          dir = 's';
+        } else {
+          d3.select(`.${classElement}.d3-tip`).attr('class', `${classElement} d3-tip d3-tip bottom`);
+          dir = 'n';
         }
-        d3.select('.d3-tip').attr('class', 'd3-tip bottom');
-        return 'n';
+        if (out.left) {
+          d3.select(`.${classElement}.d3-tip`).attr('class', `${classElement} d3-tip left`);
+          dir = 'e';
+        } else if (out.right) {
+          d3.select(`.${classElement}.d3-tip`).attr('class', `${classElement} d3-tip right`);
+          dir = 'w';
+        }
+        return dir;
       })
       .html(d => `
         <strong>${this.config.axis.x.options.label.value}:</strong>
@@ -311,9 +336,8 @@ class LineGraph extends Graph {
         ${_.get(d, this.keyY)}
       `);
 
-    if (d3.select('.d3-tip').empty()) {
-      this.svg.call(tooltip);
-    }
+    d3.select(`.${classElement}`)
+      .call(tooltip);
 
     const focus = d3.select(`.${classElement}`).select('g')
       .append('g')
@@ -401,7 +425,6 @@ class LineGraph extends Graph {
       }
     }
 
-    const that = this;
     function mousemove() {
       const x0 = x.invert(d3.mouse(this)[0]);
       // Check if mouse is inside the SVG element
@@ -424,6 +447,15 @@ class LineGraph extends Graph {
       .on('mousemove', mousemove);
 
     return this.svg;
+  }
+
+  // helper function to calculate position of tooltip
+  isOut(valX, valY) {
+    const out = {};
+    out.top = (valY / this.config.height) < 0.1;
+    out.left = (valX / this.config.width) < 0.1;
+    out.right = (valX / this.config.width) > 0.9;
+    return out;
   }
 }
 

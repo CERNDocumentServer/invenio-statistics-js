@@ -46,13 +46,11 @@ $white: #fff;
 body {
   display: flex;
   flex-direction: column;
-  font: 14px Roboto;
 }
 
 #toggle {
   align-self: center;
   flex: 0 1 auto;
-  font: 13px Roboto;
   margin: 5px;
   padding: 6px;
 }
@@ -104,13 +102,11 @@ svg {
 }
 
 .title {
-  font: Roboto;
   font-size: 17px;
   text-decoration: underline;
 }
 
 .labelX, .labelY {
-  font: Roboto;
   font-size: 14px;
 }
 
@@ -147,5 +143,27 @@ svg {
     left: 50%;
     margin-left: -5px;
     position: absolute;
+  }
+
+  &.left:after {
+    border-color: transparent $tooltip transparent transparent;
+    border-style: solid;
+    border-width: 5px;
+    content: '';
+    margin-top: -5px;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+  }
+
+  &.right:after {
+    border-color: transparent transparent transparent $tooltip;
+    border-style: solid;
+    border-width: 5px;
+    content: '';
+    left: 100%;
+    margin-top: -5px;
+    position: absolute;
+    top: 50%;
   }
 }
