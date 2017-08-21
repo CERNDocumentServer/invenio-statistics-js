@@ -21,50 +21,67 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+/* eslint valid-jsdoc: "error" */
+/* eslint-env es6 */
+
 import _ from 'lodash';
 import * as d3 from 'd3';
 import Graph from '../graph/graph';
 
 /**
- * Class representing a Bar Graph.
+ * Class representing a bar graph.
  * @extends Graph
  */
 class BarGraph extends Graph {
   /**
-   * Instantiate a Bar Graph.
+   * Instantiate and render a bar graph.
+   * @function
+   * @returns {void}
    */
   render() {
-    // Class context reference
+    // Keep reference to the class context
     const that = this;
 
-    // Initialize the container element
+    // Initialize the SVG container element in the DOM
     super.initialize();
 
     // Parse the current input data
     super.parseData();
 
-    // Create the horizontal axis
-    super.makeAxisX(0.1);
+    // Add the horizontal axis, passing the desired padding
+    super.makeAxisX(0.05);
 
-    // Create the vertical axis
+    // Add the vertical axis
     super.makeAxisY();
 
-    // Add title
-    super.makeTitle();
+    // If configured, add a title to the graph
+    if (this.config.title.visible) super.makeTitle();
 
-    // Add legend
-    super.makeLegend();
+    // If configured, add a legend to the graph
+    if (this.config.legend.visible) super.makeLegend();
 
-    // Add tooltip
-    super.makeTooltip();
+    // If configured, add a tooltip to the graph
+    if (this.config.tooltip.enabled) super.makeTooltip();
 
-    // Scale when resizing window
-    super.scaleOnResize(resized);
+    /**
+     * If configured, enable zooming and panning
+     * Pass the desired zoom handler function as parameter
+     */
+    if (this.config.zoom.enabled) super.enableZoom(zoomed);
 
-    // Iterate over input data
+    /**
+     * If configured, enable resizing
+     * Pass the desired resize handler function as parameter
+     */
+    if (this.config.resize.enabled) super.scaleOnResize(resized);
+
+    // Iterate over the input data array
     this.input.forEach((outer, i) => {
       // Bind data to multiple elements
-      const bars = d3.select(`.${this.classElement}`).select('g')
+      const bars = this.svg
+        .append('g')
+        .attr('class', '.igj-bars')
+        .attr('clip-path', "url('#clip')")
         .selectAll(`.igj-bar.bar_${i}`)
         .data(outer.data);
 
@@ -89,39 +106,90 @@ class BarGraph extends Graph {
       }
     });
 
-    // Handler function on window resize
+    /**
+     * Handle resize events.
+     * @private
+     * @returns {void}
+     */
     function resized() {
-      that.update(that.input);
+      that.update();
     }
 
-    // Return the SVG element containing the graph
-    return d3.select(`.${this.classElement}`).select('svg').node();
+    /**
+     * Handle zoom events.
+     * @private
+     * @returns {void}
+     */
+    function zoomed() {
+      // Rescale horizontal axis based on point of zoom
+      const el = d3.select(`.${that.classElement}`);
+      that.altX = (that.x.rangeRound([0, that.config.width * d3.event.transform.k]));
+
+      el.selectAll('.igj-bar')
+        .transition()
+        .duration(50)
+        .attr('transform', `translate(${d3.event.transform.x}, 0) scale(${d3.event.transform.k}, 1)`);
+
+      // If zoomed, transform the cursor icon except for dots and legend
+      if (d3.event.transform.k > 1) {
+        el.style('cursor', 'ew-resize');
+      } else {
+        el.style('cursor', 'auto');
+      }
+
+      // Change cursor icon over external elements of the graph
+      el.selectAll('.legendCells')
+        .style('cursor', 'pointer');
+
+      // Update the x axis
+      el.select('g').select('.igj-axisX')
+        .transition()
+        .duration(50)
+        .attr('transform', `translate(${d3.event.transform.x}, ${that.config.height})`)
+        .call(that.xAxis.scale(that.altX));
+
+      // Update the x-values of the x-gridlines
+      el.select('.igj-gridX')
+        .style('stroke-opacity', 1e-6)
+        .transition()
+        .duration(50)
+        .attr('transform', `translate(${d3.event.transform.x}, ${that.config.height})`)
+        .call(that.makeGridlinesX(that.altX))
+        .style('stroke-opacity', 0.7);
+    }
   }
 
-  update(newInput) {
-    // Re-initialize the container of the graph
+  /**
+   * Update the bar graph.
+   * Called when there is an update in either data or dimensions.
+   * @function
+   * @param {Object=} [newData={}] - New data passed to the bar graph.
+   * @returns {void}
+   */
+  update(newData = {}) {
+    // Re-initialize the container of the bar graph
     super.initialize();
 
-    // Update the input data of the graph
-    super.updateInput(newInput);
+    // If needed, update the data of the bar graph
+    if (Object.keys(newData) > 0) super.updateData(newData);
 
-    // Parse the current input data
-    super.parseData();
-
-    // Create the horizontal axis
+    // Update the horizontal axis, passing the desired padding
     super.makeAxisX(0.05);
 
-    // Create the vertical axis
+    // Update the vertical axis
     super.makeAxisY();
 
-    // Create the title
-    super.makeTitle();
+    // If configured, update the title of the graph
+    if (this.config.title.visible) super.makeTitle();
 
-    // Create the legend
-    super.makeLegend();
+    // If configured, update the legend of the graph
+    if (this.config.legend.visible) super.makeLegend();
 
+    // If configured, update the dimensions of the clip path element
+    if (this.config.zoom.enabled) super.resizeClipPath();
+
+    // Select already existing bars
     this.input.forEach((outer, i) => {
-      // Select already existing bars
       const bars = d3.select(`.${this.classElement}`).select('g')
         .selectAll(`.igj-bar.bar_${i}`)
         .data(outer.data);
@@ -137,7 +205,7 @@ class BarGraph extends Graph {
         .style('fill-opacity', 1e-6)
         .remove();
 
-      // Update selection - update existing bars
+      // Update selection - update the values for existing bars
       bars
         .transition()
         .delay(50)
@@ -148,7 +216,7 @@ class BarGraph extends Graph {
         .attr('fill', (d, j) => this.colorScale(j))
         .attr('height', d => this.config.height - this.y(_.get(d, this.keyY)));
 
-      // Enter selection - add new bars
+      // Enter selection - possibly add new bars
       bars
         .enter()
         .append('rect')

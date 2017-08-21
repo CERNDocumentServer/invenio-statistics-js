@@ -21,52 +21,73 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+/* eslint valid-jsdoc: "error" */
+/* eslint-env es6 */
+
 import _ from 'lodash';
 import * as d3 from 'd3';
 import Graph from '../graph/graph';
 
 /**
- * Class representing a Line Graph.
+ * Class representing a line graph.
  * @extends Graph
  */
 class LineGraph extends Graph {
   /**
-   * Instantiate a Line Graph.
+   * Instantiate and render a line graph.
+   * @function
+   * @returns {void}
    */
   render() {
-    // Class context reference
+    // Keep reference to the class context
     const that = this;
 
-    // Initialize the container element
+    // Initialize arrays for indexing and grouping
     super.initialize();
 
     // Parse the current input data
     super.parseData();
 
-    // Create the horizontal axis
+    // Add the horizontal axis
     super.makeAxisX();
 
-    // Create the vertical axis
+    // Add the vertical axis
     super.makeAxisY();
 
-    // Add title
-    super.makeTitle();
+    // If configured, add a title to the graph
+    if (this.config.title.visible) {
+      super.makeTitle();
+    }
 
-    // Add legend
-    super.makeLegend();
+    // If configured, add a legend to the graph
+    if (this.config.legend.visible) {
+      super.makeLegend();
+    }
 
-    // Add tooltip
-    super.makeTooltip();
+    // If configured, add a tooltip to the graph
+    if (this.config.tooltip.enabled) {
+      super.makeTooltip();
+    }
 
-    // Add zoom functionality
-    super.enableZoom(zoomed);
+    /**
+     * If configured, enable zooming and panning
+     * Pass the desired zoom handler function as parameter
+     */
+    if (this.config.zoom.enabled) {
+      super.enableZoom(zoomed);
+    }
 
-    // Scale when resizing window
-    super.scaleOnResize(resized);
+    /**
+     * If configured, enable resizing
+     * Pass the desired resize handler function as parameter
+     */
+    if (this.config.resize.enabled) {
+      super.scaleOnResize(resized);
+    }
 
     // Iterate over input data
     this.input.forEach((outer, i) => {
-      // Add a line to the SVG element
+    // Add a line to the SVG element
       if (d3.select(`.${this.classElement}`).select(`.igj-line.line_${i}`).empty()) {
         this.line = d3.line()
           .x(d => this.x(_.get(d, this.keyX)))
@@ -111,9 +132,12 @@ class LineGraph extends Graph {
         .attr('r', 6)
         .attr('stroke', () => this.colorScale(i));
 
-      // If specified, add circles to the line
-      // Bind data to multiple elements
-      const circles = this.svg.selectAll(`.igj-dot.dot_${i}`).data(outer.data);
+      /**
+        * If specified, add circle elements at the data points
+        * Bind data to multiple elements
+        */
+      const circles = this.svg.selectAll(`.igj-dot.dot_${i}`)
+        .data(outer.data);
       if (circles.empty()) {
         // Enter selection - add new circles
         circles
@@ -129,10 +153,10 @@ class LineGraph extends Graph {
           .attr('opacity', this.config.graph.options.circles.visible ? 1 : 0)
           .style('cursor', 'pointer');
       }
-
-      // Move all circle elements to the outer layer for tooltip
-      circles.moveToFront();
     });
+
+    // Move all circle elements to the outer layer for mouse hovering
+    this.svg.selectAll('.igj-dot').moveToFront();
 
     // Listen to mouseover movement on the graph
     this.svg
@@ -141,13 +165,11 @@ class LineGraph extends Graph {
       .on('mousemove', mousemove);
 
     /**
-     * Mousemove event handler function
+     * Handle mousemove events..
      * @private
+     * @returns {void}
      */
     function mousemove() {
-      // Map the x-value of the mouse movement
-      const x0 = that.altX.invert(d3.mouse(this)[0]);
-
       // Reveal the focus element
       d3.select(`.${that.classElement}`).selectAll('.igj-focus').select('circle')
         .attr('opacity', 1);
@@ -156,11 +178,26 @@ class LineGraph extends Graph {
       that.input.forEach((set, k) => {
         // Check if mouse moved inside the SVG element
         if (d3.mouse(this)[0] <= that.config.width && d3.mouse(this)[1] <= that.config.height) {
-          const idx = d3.bisector(d => _.get(d, that.keyX)).left(set.data, x0, 1);
-          const d0 = set.data[idx - 1];
-          const d1 = set.data[idx];
-          const point = x0 - _.get(d0, that.keyX) > _.get(d1, that.keyX) - x0 ? d1 : d0;
+          let point = {};
+          if (that.config.axis.x.scale.type === 'scaleTime') {
+            // Get the x-value of the current mouse position
+            const x0 = that.altX.invert(d3.mouse(this)[0]);
+            const idx = d3.bisector(d => _.get(d, that.keyX)).left(set.data, x0, 1);
+            const d0 = set.data[idx - 1];
+            const d1 = set.data[idx];
+            point = x0 - _.get(d0, that.keyX) > _.get(d1, that.keyX) - x0 ? d1 : d0;
+          } else {
+            const eachBand = that.altX.step();
+            let index = Math.floor((d3.mouse(this)[0] / eachBand));
 
+            // Make sure index is inside the domain
+            if (index < 0) {
+              index = 0;
+            } else if (index > that.input[0].data.length - 1) {
+              index = that.input[0].data.length - 1;
+            }
+            point = set.data[index];
+          }
           // Translate the focus element to the correct position
           d3.select(`.${that.classElement}`).select(`.igj-focus.focus_${k}`)
             .attr('transform', `translate(
@@ -173,11 +210,12 @@ class LineGraph extends Graph {
     /**
      * Handle zoom events.
      * @private
+     * @returns {void}
      */
     function zoomed() {
       // Rescale horizontal axis based on point of zoom
-      that.altX = d3.event.transform.rescaleX(that.x);
       const el = d3.select(`.${that.classElement}`);
+      that.altX = d3.event.transform.rescaleX(that.x);
 
       // If zoomed, transform the cursor icon except for dots and legend
       if (d3.event.transform.k > 1) {
@@ -185,7 +223,9 @@ class LineGraph extends Graph {
       } else {
         el.style('cursor', 'auto');
       }
-      el.selectAll('.igj-dot', '.legendCells')
+
+      // Change cursor icon over external elements of the graph
+      el.selectAll('.legendCells')
         .style('cursor', 'pointer');
 
       // Hide the focus element when just zoomed
@@ -195,6 +235,12 @@ class LineGraph extends Graph {
       // Update the x axis
       el.select('g').select('.igj-axisX')
         .call(that.xAxis.scale(that.altX));
+
+      // Update the x-values of the x-gridlines
+      el.select('.igj-gridX')
+        .style('stroke-opacity', 1e-6)
+        .call(that.makeGridlinesX(that.altX))
+        .style('stroke-opacity', 0.7);
 
       // Update the x-values of all lines
       el.selectAll('.igj-line')
@@ -209,39 +255,33 @@ class LineGraph extends Graph {
       // Update the x-values of all dots
       el.selectAll('.igj-dot')
         .attr('cx', d => that.altX(_.get(d, that.keyX)));
-
-      // Update the x-values of the x-gridlines
-      el.select('.igj-gridX')
-        .style('stroke-opacity', 1e-6)
-        .call(that.makeGridlinesX(that.altX))
-        .style('stroke-opacity', 0.7);
     }
 
     /**
-     * Handle container resize events.
+     * Handle resize events.
      * @private
+     * @returns {void}
      */
     function resized() {
-      that.update(that.input);
+      that.update();
     }
-
-    // Return the SVG element containing the graph
-    return d3.select(`.${this.classElement}`).select('svg').node();
   }
 
   /**
-   * Update the input data of the Line Graph.
-   * @param {Array<Object>} - The updated data.
+   * Update the line graph.
+   * Called when there is an update in either data or dimensions.
+   * @function
+   * @param {Object=} [newData={}] - New data passed to the line graph.
+   * @returns {void}
    */
-  update(newData) {
-    // Re-initialize the container of the graph
+  update(newData = {}) {
+    // Re-initialize the container of the line graph
     super.initialize();
 
-    // Update the input data of the graph
-    super.updateInput(newData);
-
-    // Parse the current input data
-    super.parseData();
+    // If needed, update the data of the line graph
+    if (Object.keys(newData) > 0) {
+      super.updateData(newData);
+    }
 
     // Create the horizontal axis
     super.makeAxisX();
@@ -255,10 +295,10 @@ class LineGraph extends Graph {
     // Create the legend
     super.makeLegend();
 
-    // Update dimension of the clip path
-    d3.select(`.${this.classElement}`).select('#clip').select('rect')
-      .attr('width', this.config.width + this.marginHorizontal)
-      .attr('height', this.config.height + this.marginVertical);
+    // If configured, update the dimensions of the clip path element
+    if (this.config.zoom.enabled) {
+      super.resizeClipPath();
+    }
 
     this.input.forEach((outer, i) => {
       // Update already existing lines
@@ -288,7 +328,7 @@ class LineGraph extends Graph {
         .selectAll(`.igj-dot.dot_${i}`)
         .data(outer.data);
 
-      // Add new circles
+      // Add new circles, based on the new data
       circles
         .enter()
         .append('circle')
@@ -302,7 +342,7 @@ class LineGraph extends Graph {
         .attr('opacity', this.config.graph.options.circles.visible ? 1 : 0)
         .style('cursor', 'pointer');
 
-      // Remove unneeded existing circles
+      // Remove unneeded existing circles, based on the new data
       circles
         .exit()
         .transition()
@@ -311,7 +351,7 @@ class LineGraph extends Graph {
         .style('fill-opacity', 1e-6)
         .remove();
 
-      // Update existing circles with new values
+      // Update existing circles values, based on the new data
       circles
         .transition()
         .delay(100)
@@ -319,14 +359,10 @@ class LineGraph extends Graph {
         .attr('cx', d => this.x(_.get(d, this.keyX)))
         .attr('cy', d => this.y(_.get(d, this.keyY)))
         .attr('r', this.config.graph.options.circles.radius);
-
-      // Move all circle elements to the outer layer for tooltip
-      circles.moveToFront();
     });
-  }
 
-  getScaleX() {
-    return this.x;
+    // Move all circle elements to the outer layer for mouse hovering
+    this.svg.selectAll('.igj-dot').moveToFront();
   }
 }
 

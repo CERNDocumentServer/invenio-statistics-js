@@ -21,17 +21,19 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-// Export configuration object
+// Export default configuration object
 const config = {};
-config.multiVideosPerCountry = {
-  margin: {
-    top: 50,
-    right: 60,
-    bottom: 70,
-    left: 60
-  },
+
+// For keyType : other
+config.other = {
   graph: {
     type: 'groupedBar'
+  },
+  margin: {
+    top: 50,
+    right: 40,
+    bottom: 70,
+    left: 60
   },
   axis: {
     x: {
@@ -49,8 +51,6 @@ config.multiVideosPerCountry = {
           visible: false
         },
         ticks: {
-          number: null,
-          format: '',
           visible: false
         },
         tickLabels: {
@@ -75,31 +75,32 @@ config.multiVideosPerCountry = {
           visible: false
         },
         ticks: {
-          number: null,
-          format: '',
           visible: false
         },
         tickLabels: {
-          visible: true
+          visible: true,
+          rotated: false
         },
         gridlines: true
       }
     }
   },
   title: {
-    visible: true,
-    value: 'Statistics per Country'
+    value: 'Statistics per Country',
+    visible: true
   },
   colorScale: 'schemeCategory20',
-  tooltip: true,
+  tooltip: {
+    enabled: true
+  },
   legend: {
     visible: true,
     position: 'bottom'
   },
   resize: {
     enabled: true,
-    breakPointX: 500,
-    breakPointY: 350
+    breakPointX: 550,
+    breakPointY: 275
   }
 };
 

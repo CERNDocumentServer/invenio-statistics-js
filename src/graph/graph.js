@@ -21,53 +21,55 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+/* eslint valid-jsdoc: "error" */
+/* eslint-env es6 */
+
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { legendColor } from 'd3-svg-legend';
-import d3Tip from 'd3-tip';
 import isOut from '../util/util';
 
 require('d3-extended')(d3);
 
-d3.tip = d3Tip;
-
-/** Class representing an abstract Graph. */
+/**
+ * Class representing a graph.
+ */
 class Graph {
   /**
-   * Create a graph.
-   * @param {Object} config - The configuration of the graph.
-   * @param {Array<Object>} - The input data.
-   * @param {String} - The class of the SVG element.
+   * Create a general purpose graph.
+   * @constructor
+   * @param {Object} input - The input data passed to the graph.
+   * @param {String} classElement - The class of the DOM element placeholder.
+   * @param {Object} config - The JSON configuration of the graph.
    */
-  constructor(config, input, classElement) {
+  constructor(input, classElement, config) {
     // Setters
     this.config = config;
     this.input = input;
     this.classElement = classElement;
 
-    // Get the keys for the X, Y axis
+    // Set the keys for the axis based on the given configuration
     this.keyX = this.config.axis.x.mapTo;
     this.keyY = this.config.axis.y.mapTo;
 
-    // Set the colorScale of the graph
+    // Set the colorScale of the graph based on the given configuration
     this.colorScale = d3.scaleOrdinal(d3[`${this.config.colorScale}`]);
 
-    // Margin constants
+    // Set the margins of the graph based on the given configuration
     this.marginHorizontal = this.config.margin.left + this.config.margin.right;
     this.marginVertical = this.config.margin.top + this.config.margin.bottom;
 
-    // Get axis configuration
+    // Set the axis options based on the given configuration
     this.xAxisOptions = this.config.axis.x.options;
     this.yAxisOptions = this.config.axis.y.options;
 
-    // Breakpoints for resizing
+    // Set the breakpoints for resizing based on the given configuration
     this.breakPointX = this.config.resize.breakPointX;
     this.breakPointY = this.config.resize.breakPointY;
   }
 
   /**
    * Get the type of the graph.
-   * @return {string} The type value.
+   * @returns {string} - The type of the instantiated graph.
    */
   getType() {
     return this.config.type;
@@ -75,7 +77,7 @@ class Graph {
 
   /**
    * Get the scale of the horizontal axis.
-   * @return {Function} - The the scale of the X axis.
+   * @returns {function} - The scale of the X axis.
    */
   getXScale() {
     return this.x;
@@ -83,7 +85,7 @@ class Graph {
 
   /**
    * Get the scale of the vertical axis.
-   * @return {Function} - The the scale of the Y axis.
+   * @returns {function} - The scale of the Y axis.
    */
   getYScale() {
     return this.y;
@@ -91,6 +93,7 @@ class Graph {
 
   /**
    * Append an empty SVG element to the DOM.
+   * @returns {void}
    */
   initialize() {
     let element = d3.select(`.${this.classElement}`);
@@ -100,42 +103,68 @@ class Graph {
       element = d3.select('body')
         .append('div')
         .attr('class', `${this.classElement}`)
-        .attr('style', 'width: 100vw; height:80vh;');
+        .attr('style', 'width: 95vw; height: 95vh;');
     }
 
-    const father = element.node().getBoundingClientRect();
+    // Get the dimensions of the parent node in the DOM
+    const parentElement = element.node().getBoundingClientRect();
 
     // Calculate the dimensions of the SVG
-    this.config.width = father.width - this.marginHorizontal;
-    this.config.height = father.height - this.marginHorizontal;
+    this.config.width = parentElement.width - this.marginHorizontal;
+    this.config.height = parentElement.height - this.marginVertical;
 
     if (element.select('svg').empty()) {
       this.svg = element
         .append('svg')
         .attr('class', `${this.classElement}`)
-        .attr('width', father.width)
-        .attr('height', father.height)
+        .attr('width', parentElement.width)
+        .attr('height', parentElement.height)
         .append('g')
         .attr('transform', `translate(${this.config.margin.left}, ${this.config.margin.top})`);
     } else {
       this.svg = element.select('svg')
-        .attr('width', father.width)
-        .attr('height', father.height);
+        .attr('width', parentElement.width)
+        .attr('height', parentElement.height);
     }
   }
 
   /**
    * Update the input data
+   * @param {object} data - the new data of the graph
+   * @returns {void}
    */
-  updateInput(newInput) {
-    this.input = newInput;
+  updateData(data) {
+    this.input = data;
+    this.parseData();
+  }
+
+  /**
+   * Update the dimensions of the clip path to match the resized graph ones
+   * @returns {void}
+   */
+  resizeClipPath() {
+    this.svg.select('#clip').select('rect')
+      .attr('width', this.config.width + this.config.margin.right)
+      .attr('height', this.config.height + this.marginVertical);
   }
 
   /**
    * Parse the input data
+   * @returns {void}
    */
-  // TODO: Parser
   parseData() {
+    const parsed = [];
+    Object.keys(this.input).forEach((k) => {
+      const obj = {};
+      obj.label = k;
+      obj.data = this.input[k].buckets;
+      parsed.push(obj);
+    });
+
+    this.input = parsed;
+
+    // If timeScale in X axis, parse miliseconds into Date
+    // Make sure for number value in Y axis
     this.input.forEach((outer) => {
       outer.data.forEach((inner) => {
         if (this.config.axis.x.scale.type === 'scaleTime') {
@@ -148,7 +177,9 @@ class Graph {
 
   /**
    * Create the X axis of the graph.
-   * @param padding {number}: optional padding.
+   * @param {number} [padding = 0] - optional padding
+   * @param {function} [x0] - optional scale for the axis
+   * @returns {void}
    */
   makeAxisX(padding = 0, x0) {
     // Create the scale for the X axis
@@ -159,54 +190,74 @@ class Graph {
         .range([0, this.config.width]);
     }
 
+    // Create the scale for the zoom on X axis
+    this.altX = this.x;
+
     // Add range and domain to the X axis
     if (this.config.axis.x.scale.type === 'scaleTime') {
+      this.x.range([0, this.config.width]);
       this.x.domain(d3.extent(this.input[0].data, d => _.get(d, this.keyX)));
-      this.x.nice((2 * this.input[0].data.length));
     } else {
       this.x.domain(this.input[0].data.map(d => _.get(d, this.keyX)));
+      this.x.rangeRound([0, this.config.width]);
       this.x.padding(padding);
     }
 
-    // Create the (horizontal) X Axis
+    // Create the X-axis (horizontal)
     this.xAxis = d3.axisBottom(this.x);
 
+    // If timescale, set the format of the ticks
     if (this.config.axis.x.scale.type === 'scaleTime') {
-      if (this.config.width > this.breakPointX) {
-        this.xAxis.ticks(this.xAxisOptions.ticks.number);
-      } else {
-        this.xAxis.ticks(d3.select(`.${this.classElement}`)
-          .selectAll('g.igj-axisX g.tick text').size() / 2);
-      }
       this.xAxis.tickFormat(d3.timeFormat(this.config.axis.x.scale.format));
-    } else {
-      this.xAxis.tickValues(
-        this.x.domain().filter((d, i) => !(i % this.xAxisOptions.ticks.number)));
+    }
+
+    // While resizing, if graph gets small enough, remove some ticks
+    if (this.config.width < this.breakPointX) {
+      if (this.config.axis.x.scale.type === 'scaleTime') {
+        this.xAxis.ticks(d3[this.config.axis.x.scale.interval]);
+      } else {
+        this.xAxis.tickValues(this.x.domain().filter((d, i) => !(i % 3)));
+      }
     }
 
     // Add the X Axis to the container element
-    let axisX = d3.select(`.${this.classElement}`).select('.igj-axisX');
+    let axisHoriz = d3.select(`.${this.classElement}`).select('.igj-horiz');
+    if (axisHoriz.empty()) {
+      axisHoriz = this.svg.append('g')
+        .attr('class', 'igj-horiz')
+        .attr('clip-path', "url('#clip')");
+    }
+    let axisX = axisHoriz.select('.igj-axisX');
     if (axisX.empty()) {
-      axisX = this.svg.append('g')
+      axisX = axisHoriz.append('g')
         .attr('class', 'igj-axisX')
         .call(this.xAxis);
     } else {
       axisX
         .transition()
         .delay(50)
-        .duration(450)
+        .duration(250)
         .call(this.xAxis);
     }
     // Place the X axis at the bottom of the graph
-    axisX.attr('transform', `translate(0, ${this.config.height})`);
+    axisX
+      .transition()
+      .delay(50)
+      .duration(250)
+      .attr('transform', `translate(0, ${this.config.height})`);
+
+    // Translate to the left to align ticks, when padding is not specified
+    if (padding === 0 && this.config.axis.x.scale.type === 'scaleBand') {
+      axisX.attr('transform', `translate(-${this.x.step() / 2}, ${this.config.height})`);
+    }
 
     // If specified, add gridlines along the X axis
     if (this.xAxisOptions.gridlines) {
-      let gridX = d3.select(`.${this.classElement}`).select('.igj-gridX');
+      let gridX = axisHoriz.select('.igj-gridX');
       if (gridX.empty()) {
-        gridX = this.svg.append('g')
+        gridX = axisHoriz.append('g')
           .attr('class', 'igj-gridX')
-          .call(this.makeGridlinesX(this.x));
+          .call(this.makeGridlinesX());
       } else {
         gridX
           .transition()
@@ -214,16 +265,21 @@ class Graph {
           .style('stroke-opacity', 1e-6)
           .transition()
           .duration(300)
-          .call(this.makeGridlinesX(this.x))
+          .call(this.makeGridlinesX())
           .style('stroke-opacity', 0.7);
       }
       // Place the X gridlines at the bottom of the graph
       gridX.attr('transform', `translate(0, ${this.config.height})`);
+
+      // Translate to the left to align ticks, when padding is not specified
+      if (padding === 0 && this.config.axis.x.scale.type === 'scaleBand') {
+        gridX.attr('transform', `translate(-${this.x.step() / 2}, ${this.config.height})`);
+      }
     }
 
     // If specified, rotate the tick labels
     if (this.xAxisOptions.tickLabels.rotated) {
-      d3.select(`.${this.classElement}`).selectAll('g.igj-axisX g.tick text')
+      axisHoriz.selectAll('g.igj-axisX g.tick text')
         .style('text-anchor', 'middle')
         .attr('dx', '-.8em')
         .attr('dy', '.85em')
@@ -232,7 +288,7 @@ class Graph {
 
     // If specified, add label to the X Axis
     if (this.xAxisOptions.label.visible) {
-      let xAxisLabel = d3.select(`.${this.classElement}`).select('.igj-labelX');
+      let xAxisLabel = this.svg.select('.igj-labelX');
       if (xAxisLabel.empty()) {
         xAxisLabel = this.svg.append('text')
           .attr('class', 'igj-labelX')
@@ -241,8 +297,8 @@ class Graph {
       }
       xAxisLabel
         .transition()
-        .delay(100)
-        .duration(250)
+        .delay(50)
+        .duration(200)
         .text(this.xAxisOptions.label.value)
         .attr('x', `${this.config.width / 2}`)
         .attr('y', `${this.config.height + (this.config.margin.bottom / 2)}`);
@@ -250,25 +306,26 @@ class Graph {
 
     // If specified, hide the X axis line
     if (!this.xAxisOptions.line.visible) {
-      d3.select(`.${this.classElement}`).selectAll('.igj-axisX path')
+      axisX.select('path')
         .attr('style', 'display: none;');
     }
 
     // If specified, hide the X axis ticks
     if (!this.xAxisOptions.ticks.visible) {
-      d3.select(`.${this.classElement}`).selectAll('.igj-axisX line')
+      axisX.selectAll('g.tick line')
         .attr('style', 'display: none;');
     }
 
     // If specified, hide the X axis tick labels
     if (!this.xAxisOptions.tickLabels.visible) {
-      d3.select(`.${this.classElement}`).selectAll('.igj-axisX g.tick text')
+      axisX.selectAll('g.tick text')
         .attr('style', 'display: none;');
     }
   }
 
   /**
    * Create the Y axis of the graph.
+   * @returns {void}
    */
   makeAxisY() {
     const maxValuesY = [];
@@ -283,51 +340,58 @@ class Graph {
       .domain([0, _.max(maxValuesY)]);
 
     // Create the Y Axis
-    this.yAxis = d3.axisLeft(this.y).tickPadding(5);
+    this.yAxis = d3.axisLeft(this.y);
+    this.yAxis.ticks(null, 's');
 
-    if (this.config.height > this.breakPointY) {
-      this.yAxis.ticks(this.yAxisOptions.ticks.number, 's');
-    } else {
-      this.yAxis.ticks(d3.select(`.${this.classElement}`)
-        .selectAll('g.igj-axisY g.tick text').size() / 2, 's');
+    if (this.config.height < this.breakPointY) {
+      const maxY = this.y.domain()[1];
+      this.yAxis.tickValues(
+        [0, Math.round(0.25 * maxY), Math.round(0.5 * maxY), Math.round(0.75 * maxY), maxY]
+      );
     }
 
     // Add the Y Axis to the container element
-    let yAxis = d3.select(`.${this.classElement}`).select('.igj-axisY');
-    if (yAxis.empty()) {
-      yAxis = this.svg.append('g')
+    let axisVert = d3.select(`.${this.classElement}`).select('.igj-vert');
+    if (axisVert.empty()) {
+      axisVert = this.svg.append('g')
+        .attr('class', 'igj-vert');
+    }
+
+    let axisY = axisVert.select('.igj-axisY');
+    if (axisY.empty()) {
+      axisY = axisVert.append('g')
         .attr('class', 'igj-axisY')
         .call(this.yAxis);
     } else {
-      yAxis
+      axisY
         .transition()
         .delay(50)
-        .duration(450)
+        .duration(250)
         .call(this.yAxis);
     }
 
     // If specified, add gridlines along the Y axis
     if (this.yAxisOptions.gridlines) {
-      let gridY = d3.select(`.${this.classElement}`).select('.igj-gridY');
+      let gridY = axisVert.select('.igj-gridY');
       if (gridY.empty()) {
-        gridY = this.svg.append('g')
+        gridY = axisVert.append('g')
           .attr('class', 'igj-gridY')
-          .call(this.makeGridlinesY(this.y));
+          .call(this.makeGridlinesY());
       } else {
-        d3.select(`.${this.classElement}`).select('.igj-gridY')
+        gridY
           .transition()
           .duration(200)
           .style('stroke-opacity', 1e-6)
           .transition()
           .duration(300)
-          .call(this.makeGridlinesY(this.y))
+          .call(this.makeGridlinesY())
           .style('stroke-opacity', 0.7);
       }
     }
 
     // If specified, rotate the tick labels
     if (this.yAxisOptions.tickLabels.rotated) {
-      d3.select(`.${this.classElement}`).selectAll('g.igj-axisY g.tick text')
+      axisVert.selectAll('g.igj-axisY g.tick text')
         .style('text-anchor', 'middle')
         .attr('dx', '-.85em')
         .attr('dy', '.25em')
@@ -336,13 +400,16 @@ class Graph {
 
     // If specified, add label to the Y Axis
     if (this.yAxisOptions.label.visible) {
-      let yAxisLabel = d3.select(`.${this.classElement}`).select('.igj-labelY');
+      let yAxisLabel = this.svg.select('.igj-labelY');
       if (yAxisLabel.empty()) {
         yAxisLabel = this.svg.append('text')
           .attr('class', 'igj-labelY')
           .text(this.yAxisOptions.label.value);
       }
       yAxisLabel
+        .transition()
+        .delay(50)
+        .duration(250)
         .attr('transform',
           `translate(${-this.config.margin.left},
           ${(this.config.height / 2)})rotate(-90)`)
@@ -352,22 +419,26 @@ class Graph {
 
     // If specified, hide the Y axis line
     if (!this.yAxisOptions.line.visible) {
-      yAxis.selectAll('path').attr('style', 'display: none;');
+      axisY.select('path')
+        .attr('style', 'display: none;');
     }
 
     // If specified, hide the Y axis ticks
     if (!this.yAxisOptions.ticks.visible) {
-      yAxis.selectAll('g.tick line').attr('style', 'display: none;');
+      axisY.selectAll('g.tick line')
+        .attr('style', 'display: none;');
     }
 
     // If specified, hide the Y axis tick labels
     if (!this.yAxisOptions.tickLabels.visible) {
-      yAxis.selectAll('g.tick text').attr('style', 'display: none;');
+      axisY.selectAll('g.tick text')
+        .attr('style', 'display: none;');
     }
   }
 
   /**
    * Create the legend of the graph.
+   * @returns {void}
    */
   makeLegend() {
     let toggleLegend = true;
@@ -383,7 +454,7 @@ class Graph {
         .range(this.input.map((d, i) => this.colorScale(i)));
 
       // Create the legend
-      const colorLegend = legendColor()
+      const colorLegend = d3.legendColor()
         .shape('path', d3.symbol().type(d3.symbolSquare).size(200)())
         .orient(this.config.legend.position === 'bottom' ? 'horizontal' : 'vertical')
         .shapePadding(this.config.legend.position === 'bottom' ? 40 : 15)
@@ -397,8 +468,7 @@ class Graph {
           toggleLegend = !toggleLegend;
           selectedElements
             .transition()
-            .duration(200)
-            .ease(d3.easeLinear)
+            .duration(250)
             .attr('style', toggleLegend ? 'opacity: 1' : 'opacity: 0.3');
         });
 
@@ -417,12 +487,18 @@ class Graph {
       // Position the legend
       if (this.config.legend.position === 'bottom') {
         this.svg.select('.igj-legend')
+          .transition()
+          .delay(50)
+          .duration(250)
           .attr('transform', `translate(
             ${(this.config.width - legendBox.width) / 2},
             ${this.config.height + (this.config.margin.bottom / 2)}
           )`);
       } else {
         this.svg.select('.igj-legend')
+          .transition()
+          .delay(50)
+          .duration(250)
           .attr('transform', `translate(
             ${this.config.width - legendBox.width},
             ${this.config.margin.top}
@@ -433,41 +509,59 @@ class Graph {
 
   /**
    * Create the title of the graph.
+   * @returns {void}
    */
   makeTitle() {
-    if (this.config.title.visible) {
-      const graphTitle = d3.select(`.${this.classElement}`).select('.igj-title');
-      if (graphTitle.empty()) {
-        this.svg.append('text')
-          .attr('x', this.config.width / 2)
-          .attr('y', -(this.config.margin.top / 1.8))
-          .attr('class', 'igj-title')
-          .attr('text-anchor', 'middle')
-          .text(this.config.title.value);
-      } else {
-        graphTitle
-          .text(this.config.title.value)
-          .transition()
-          .duration(250)
-          .attr('x', `${this.config.width / 2}`);
-      }
+    const graphTitle = d3.select(`.${this.classElement}`).select('.igj-title');
+    if (graphTitle.empty()) {
+      this.svg.append('text')
+        .attr('x', this.config.width / 2)
+        .attr('y', -(this.config.margin.top / 1.8))
+        .attr('class', 'igj-title')
+        .attr('text-anchor', 'middle')
+        .text(this.config.title.value);
+    } else {
+      graphTitle
+        .text(this.config.title.value)
+        .transition()
+        .delay(50)
+        .duration(250)
+        .attr('x', `${this.config.width / 2}`);
     }
   }
 
   /**
    * Create the tooltip the graph.
+   * @returns {void}
+   * @param {array} [keys=[]] - the keys to retrieve X Y values
+   * @param {array} [labels=[]] - the labels of the tooltip
    */
-  makeTooltip(
-    keyX = this.keyX,
-    keyY = this.keyY,
-    labelX = this.xAxisOptions.label.value,
-    labelY = this.xAxisOptions.label.value) {
+  makeTooltip(keys = [], labels = []) {
+    let keyX = this.keyX;
+    let keyY = this.keyY;
+    let labelX = this.xAxisOptions.label.value;
+    let labelY = this.yAxisOptions.label.value;
+
+    // Possibly override keys and labels for tooltip
+    if (keys.length > 0 && labels.length > 0) {
+      keyX = keys[0];
+      keyY = keys[1];
+      labelX = labels[0];
+      labelY = labels[1];
+    }
+
     this.tooltip = d3.tip()
       .attr('class', `${this.classElement} igj-tip`)
       .offset((d) => {
+        let out = {};
         const offset = [0, 0];
-        const out = isOut(this.x(_.get(d, keyX)), this.y(_.get(d, keyY)),
-          this.config.width, this.config.height);
+        if (keys.length > 0) {
+          out = isOut(this.x(d.outerKey), this.y(_.get(d, keyY)),
+            this.config.width, this.config.height);
+        } else {
+          out = isOut(this.x(_.get(d, keyX)), this.y(_.get(d, keyY)),
+            this.config.width, this.config.height);
+        }
         if (out.top) {
           offset[0] = 10;
         } else {
@@ -484,8 +578,14 @@ class Graph {
       })
       .direction((d) => {
         let dir = '';
-        const out = isOut(this.x(_.get(d, keyX)), this.y(_.get(d, keyY)),
-          this.config.width, this.config.height);
+        let out = {};
+        if (keys.length > 0) {
+          out = isOut(this.x(d.outerKey), this.y(_.get(d, keyY)),
+            this.config.width, this.config.height);
+        } else {
+          out = isOut(this.x(_.get(d, keyX)), this.y(_.get(d, keyY)),
+            this.config.width, this.config.height);
+        }
         if (out.top) {
           dir = 's';
           d3.select(`.${this.classElement}.igj-tip`)
@@ -530,22 +630,21 @@ class Graph {
 
   /**
    * Enable zoom in the graph.
+   * @param {function} f - the zoom handler function.
+   * @returns {void}
    */
   enableZoom(f) {
-    // Create the scale for the zoom on X axis
-    this.altX = this.x;
-
-    // Define clip path to focus on domain
+    // Define path to clip content when zooming
     this.svg
       .append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
       .attr('transform', 'translate(-5, -5)')
-      .attr('width', this.config.width + this.marginHorizontal)
+      .attr('width', this.config.width + this.config.margin.right)
       .attr('height', this.config.height + this.marginVertical);
 
     this.zoom = d3.zoom()
-      .scaleExtent([1, 16])
+      .scaleExtent([1, 8])
       .translateExtent([[0, 0], [this.config.width, this.config.height]])
       .extent([[0, 0], [this.config.width, this.config.height]])
       .on('zoom', f);
@@ -556,6 +655,8 @@ class Graph {
 
   /**
     * Listen to window resizing.
+    * @param {function} f - the window resize handler function.
+    * @returns {void}
     */
   scaleOnResize(f) {
     d3.select(window).on('resize', f);
@@ -563,44 +664,40 @@ class Graph {
 
   /**
    * Create the gridlines for the horizontal axis.
-   * @param {Function} xScale - The scale of the X axis.
-   * @return {Function} gridlinesX - The gridlines of the X axis.
+   * @param {function} [scale = this.x] - The X axis scale.
+   * @return {function} - The gridlines of the X axis.
    */
-  makeGridlinesX(xScale) {
-    const gridlinesX = d3.axisBottom(xScale)
+  makeGridlinesX(scale = this.x) {
+    const gridlinesX = d3.axisBottom(scale)
       .tickSize(-this.config.height)
-      .tickFormat(this.config.axis.x.options.ticks.format);
+      .tickFormat('');
 
-    if (this.config.axis.x.scale.type === 'scaleTime') {
-      if (this.config.width > this.breakPointX) {
-        gridlinesX.ticks(this.config.axis.x.options.ticks.number);
+    if (this.config.width < this.breakPointX) {
+      if (this.config.axis.x.scale.type === 'scaleTime') {
+        gridlinesX.ticks(d3[this.config.axis.x.scale.interval]);
       } else {
-        gridlinesX.ticks(d3.select(`.${this.classElement}`)
-          .selectAll('g.igj-axisX g.tick text').size() / 2);
+        gridlinesX.tickValues(scale.domain().filter((d, i) => !(i % 3)));
       }
-    } else {
-      gridlinesX.tickValues(
-        xScale.domain()
-          .filter((d, i) => !(i % this.config.axis.x.options.ticks.number)));
     }
     return gridlinesX;
   }
 
   /**
-  * Create the gridlines for the vertical axis.
-   * @param {Function} yScale - The scale of the Y axis.
-   * @return {Function} gridlinesY - The gridlines of the Y axis.
+   * Create the gridlines for the vertical axis.
+   * @param {function} [scale = this.y] - The Y axis scale.
+   * @return {function} - The gridlines of the Y axis.
    */
-  makeGridlinesY(yScale) {
-    const gridlinesY = d3.axisLeft(yScale)
+  makeGridlinesY(scale = this.y) {
+    const gridlinesY = d3.axisLeft(scale)
+      .ticks(null)
       .tickSize(-this.config.width)
-      .tickFormat(this.config.axis.y.options.ticks.format);
+      .tickFormat('');
 
-    if (this.config.height > this.breakPointY) {
-      gridlinesY.ticks(this.config.axis.y.options.ticks.number);
-    } else {
-      gridlinesY.ticks(d3.select(`.${this.classElement}`)
-        .selectAll('g.igj-axisY g.tick text').size() / 2);
+    if (this.config.height < this.breakPointY) {
+      const maxY = scale.domain()[1];
+      gridlinesY.tickValues(
+        [0, Math.round(0.25 * maxY), Math.round(0.5 * maxY), Math.round(0.75 * maxY), maxY]
+      );
     }
     return gridlinesY;
   }
